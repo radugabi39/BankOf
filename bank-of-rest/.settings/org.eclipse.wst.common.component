@@ -4,6 +4,12 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="bank-of-models-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bank-of-models/bank-of-models">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bank-of-spring-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bank-of-spring/bank-of-spring">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="bank-of-rest"/>
         <property name="java-output-path" value="/bank-of-rest/target/classes"/>
     </wb-module>
