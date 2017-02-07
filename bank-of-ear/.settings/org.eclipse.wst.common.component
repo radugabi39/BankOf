@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="bank-of-pom-0.0.1-SNAPSHOT">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
+        <dependent-module archiveName="bank-of-dao-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/bank-of-dao/bank-of-dao">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bank-of-spring-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/bank-of-spring/bank-of-spring">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bank-of-models-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/bank-of-models/bank-of-models">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bank-of-rest-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/bank-of-rest/bank-of-rest">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bank-of-web-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/bank-of-web/bank-of-web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/bank-of-pom/build/classes"/>
+        <property name="context-root" value="bank-of-pom"/>
+    </wb-module>
+</project-modules>
