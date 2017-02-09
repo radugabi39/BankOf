@@ -14,7 +14,7 @@ public class User {
 	private Long id;
 	private String firstName;
 	private String lastName;
-	
+	private String address;
 	
 	
 	public User() {
@@ -23,16 +23,17 @@ public class User {
 
 
 
-	public User(Long id, String firstName, String lastName) {
+	public User(Long id, String firstName, String lastName,String address) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.address = address;
 	}
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID",nullable = false)
 	public Long getId() {
 		return id;
@@ -45,7 +46,7 @@ public class User {
 	}
 
 
-	@Column(name="FIRSTNAME",nullable =false)
+	@Column(name="FIRSTNAME")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -57,7 +58,7 @@ public class User {
 	}
 
 
-	@Column(name="LASTNAME",nullable =false)
+	@Column(name="LASTNAME")
 	public String getLastName() {
 		return lastName;
 	}
@@ -66,6 +67,18 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+
+	@Column(name="ADDRESS")
+	public String getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

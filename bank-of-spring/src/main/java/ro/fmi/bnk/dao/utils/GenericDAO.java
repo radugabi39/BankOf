@@ -6,6 +6,6 @@ import javax.persistence.PersistenceContextType;
 
 public class GenericDAO {
 	
-	@PersistenceContext(unitName = "bankofPU", type = PersistenceContextType.TRANSACTION)
+	@PersistenceContext
 	protected EntityManager em;
 }
