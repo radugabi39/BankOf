@@ -1,7 +1,6 @@
 package ro.fmi.bnk.enitites;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,46 +8,43 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "USER")
-public class User {
+@Table(name = "Branch")
+public class Branch {
 
 	private Long id;
-	private String userName;
+	private String name;
+	private City city;
+	private String address;
 	private String email;
-	private String password;
+	private Employee manager;
 	private Date creationDate;
 	private Date modificationDate;
 	private Boolean active;
-	private Set<Customer> customers;
-	private Set<Employee> employees;
 
-	public User() {
+	public Branch() {
 		super();
 	}
 
-
-
-	public User(Long id, String userName, String email, String password, Date creationDate,
-			Date modificationDate, Boolean active, Set<Customer> customers, Set<Employee> employees) {
+	public Branch(Long id, String name, City city, String address, String email, Employee manager, Date creationDate,
+			Date modificationDate, Boolean active) {
 		super();
 		this.id = id;
-		this.userName = userName;
+		this.name = name;
+		this.city = city;
+		this.address = address;
 		this.email = email;
-		this.password = password;
+		this.manager = manager;
 		this.creationDate = creationDate;
 		this.modificationDate = modificationDate;
 		this.active = active;
-		this.customers = customers;
-		this.employees = employees;
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,16 +57,35 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name = "USERNAME", nullable = false)
-	public String getUserName() {
-		return userName;
+	@Column(name = "NAME", nullable = false)
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "EMAIL", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CITY_ID")
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	@Column(name = "ADDRESS")
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
@@ -79,16 +94,15 @@ public class User {
 		this.email = email;
 	}
 
-	@Column(name = "PASSWORD", nullable = false)
-	public String getPassword() {
-		return password;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MANAGER_ID")
+	public Employee getManager() {
+		return manager;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setManager(Employee manager) {
+		this.manager = manager;
 	}
-
-
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CREATIONDATE")
@@ -119,21 +133,4 @@ public class User {
 		this.active = active;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Customer> getCustomers() {
-		return customers;
-	}
-
-	public void setCustomers(Set<Customer> customers) {
-		this.customers = customers;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(Set<Employee> employees) {
-		this.employees = employees;
-	}
 }
