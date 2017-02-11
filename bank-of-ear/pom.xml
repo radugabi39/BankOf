@@ -32,6 +32,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>bank.of</groupId>
+			<artifactId>bank-of-dao</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>3.6.0.Final</version>
@@ -103,6 +108,10 @@
 						<jarModule>
 							<groupId>bank.of</groupId>
 							<artifactId>bank-of-models</artifactId>
+						</jarModule>
+						<jarModule>
+							<groupId>bank.of</groupId>
+							<artifactId>bank-of-dao</artifactId>
 						</jarModule>
 						<webModule>
 							<groupId>bank.of</groupId>
