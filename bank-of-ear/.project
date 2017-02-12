@@ -3,6 +3,7 @@
 	<name>bank-of-pom</name>
 	<comment></comment>
 	<projects>
+		<project>bank-of-web</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -16,8 +17,13 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.jboss.tools.cdi.core.cdibuilder</name>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
+				<dictionary>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/org.jboss.tools.cdi.core.cdibuilder.launch</value>
+				</dictionary>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
