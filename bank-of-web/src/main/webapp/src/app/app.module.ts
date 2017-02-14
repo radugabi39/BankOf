@@ -3,8 +3,9 @@ import { AppComponent } from './app.component';
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { PolymerElement } from '@vaadin/angular2-polymer';
-import { LoginComponent } from './user-authentification/login/login.component';
-import { RegisterComponent } from './user-authentification/register/register.component';
+import { LoginComponent } from './user-authentication/login/login.component';
+import { RegisterComponent } from './user-authentication/register/register.component';
+import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
 
 @NgModule({
   imports: [ BrowserModule,routing ],
@@ -19,7 +20,8 @@ import { RegisterComponent } from './user-authentification/register/register.com
    PolymerElement('paper-tab'),
       PolymerElement('iron-pages'),
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserAuthenticationComponent
     
   ],
   providers: [  ],

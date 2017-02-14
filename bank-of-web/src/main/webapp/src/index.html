@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>BankOfUI</title>
-  <base href="./">
+  <base href="/">
   <script>
     window.Polymer = {
       dom: 'shadow'
@@ -25,6 +25,10 @@
   <link rel="import" href="bower_components/paper-material/paper-material.html">
   <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout-classes.html">
   <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+
+</head>
+
+<body unresolved class="fullbleed">
   <style is="custom-style" include="iron-flex iron-positioning iron-flex-alignment">
     .paper-font-display4 {   color: #545454;
       @apply(--paper-font-display4);     font-family: 'Signika', sans-serif;
@@ -32,39 +36,10 @@
      .card-container {
       height: 100%;
     }
-    
-    paper-button.indigo {
-      background-color: #FF3B3F;
-      color: white;
-      --paper-button-raised-keyboard-focus: {
-        background-color: var(--paper-pink-a200) !important;
-        color: white !important;
-      }
-      ;
-    }
-    
-    paper-tabs,
-    paper-toolbar {
-      background-color: #F1F1F2;
-      --paper-tabs-selection-bar-color: #FF3B3F;
-    }
-    
-    paper-tab {
-      --paper-tab-ink: #ff3b3f;
-    }
-    
-    paper-card {
-      --paper-card-background-color: #F1F1F2;
-    }
-    
-    body {
-      background-color: #EFEFEF;
+        body {
+      background-color: #e9ece5;
     }
   </style>
-</head>
-
-<body unresolved class="fullbleed">
-
   <app-root>
 
   </app-root>

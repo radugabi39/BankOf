@@ -1,0 +1,22 @@
+<link rel="import" href="app/user-authentication/user-authentication.style.custom.html">
+<div class="horizontal layout center-justified card-container">
+
+  <div class="vertical layout center-justified">
+    <div style="position:absolute;top:125px; left: 50%; transform: translateX(-50%);" class="paper-font-display4">BankOf</div>
+    <paper-material elevation="3">
+      <div class="horizontal layout center-justified">
+        <paper-tabs selected="0">
+
+          <paper-tab [routerLink]="['/user/login']">LOGIN</paper-tab>
+          <paper-tab [routerLink]="['/user/register']">REGISTER</paper-tab>
+
+        </paper-tabs>
+      </div>
+      <paper-card fitContainer="true" elevation="0">
+
+        <router-outlet></router-outlet>
+
+      </paper-card>
+    </paper-material>
+  </div>
+</div>
