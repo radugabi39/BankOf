@@ -1,15 +1,73 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>BankOfUI</title>
   <base href="./">
+  <script>
+    window.Polymer = {
+      dom: 'shadow'
+    };
+  </script>
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-card/paper-card.html">
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-styles/paper-styles.html">
+  <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="bower_components/paper-tabs/paper-tab.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="bower_components/paper-material/paper-material.html">
+  <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+  <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+  <style is="custom-style" include="iron-flex iron-positioning iron-flex-alignment">
+    .paper-font-display4 {   color: #545454;
+      @apply(--paper-font-display4);     font-family: 'Signika', sans-serif;
+    }
+     .card-container {
+      height: 100%;
+    }
+    
+    paper-button.indigo {
+      background-color: #FF3B3F;
+      color: white;
+      --paper-button-raised-keyboard-focus: {
+        background-color: var(--paper-pink-a200) !important;
+        color: white !important;
+      }
+      ;
+    }
+    
+    paper-tabs,
+    paper-toolbar {
+      background-color: #F1F1F2;
+      --paper-tabs-selection-bar-color: #FF3B3F;
+    }
+    
+    paper-tab {
+      --paper-tab-ink: #ff3b3f;
+    }
+    
+    paper-card {
+      --paper-card-background-color: #F1F1F2;
+    }
+    
+    body {
+      background-color: #EFEFEF;
+    }
+  </style>
 </head>
-<body>
-  <app-root>Loading...</app-root>
+
+<body unresolved class="fullbleed">
+
+  <app-root>
+
+  </app-root>
 </body>
+
 </html>

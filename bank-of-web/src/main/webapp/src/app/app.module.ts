@@ -10,7 +10,14 @@ import { RegisterComponent } from './user-authentification/register/register.com
   imports: [ BrowserModule,routing ],
   declarations: [
     AppComponent,
-    PolymerElement('paper-input'),
+    PolymerElement('paper-input'),    
+    PolymerElement('paper-card'),
+    PolymerElement('paper-button'),
+    PolymerElement('paper-tabs'),
+    PolymerElement('paper-material'),
+   PolymerElement('paper-toolbar'),
+   PolymerElement('paper-tab'),
+      PolymerElement('iron-pages'),
     LoginComponent,
     RegisterComponent
     

@@ -1,0 +1,14 @@
+paper-card {
+   box-sizing: border-box;
+    max-width: 500px;
+    margin: 4px;
+    flex: 0 0 auto;   
+  
+    --paper-card-background-color: #F1F1F2;
+  /*FONT*/
+      font-family: 'Signika', sans-serif;
+        font-weight: 300;
+        color: #545454!important;
+        font-size: 16px;
+
+}
