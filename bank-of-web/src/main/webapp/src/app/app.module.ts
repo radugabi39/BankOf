@@ -1,3 +1,6 @@
+import { PrimaryPageModule } from './primary-page/primary-page.module';
+import { SharedModule } from './shared.module';
+import { UserAuthenticationModule } from './user-authentication/user-authentication.module';
 import { LoginService } from './user-authentication/login/login.component.service';
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -9,20 +12,9 @@ import { RegisterComponent } from './user-authentication/register/register.compo
 import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
 import { HttpModule } from '@angular/http';
 @NgModule({
-  imports: [ BrowserModule,routing,HttpModule ],
+  imports: [ BrowserModule,routing,HttpModule,UserAuthenticationModule,PrimaryPageModule ],
   declarations: [
-    AppComponent,
-    PolymerElement('paper-input'),    
-    PolymerElement('paper-card'),
-    PolymerElement('paper-button'),
-    PolymerElement('paper-tabs'),
-    PolymerElement('paper-material'),
-   PolymerElement('paper-toolbar'),
-   PolymerElement('paper-tab'),
-      PolymerElement('iron-pages'),
-    LoginComponent,
-    RegisterComponent,
-    UserAuthenticationComponent
+    AppComponent
     
   ],
   providers: [ LoginService ],

@@ -5,19 +5,22 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 
 export class LoginService {
-    private commentsUrl = 'http://localhost:8080/bank-of-rest/login';
-    constructor(private http: Http) { }
-    tryLogin(username: String, password: String): any{
 
+  constructor(private http: Http) { }
 
+  tryLogin(username: String, password: String) {
+  return  this.http.post('http://localhost:8080/bank-of-rest/login', { "username": username, "password": password })
+      .map(this.extractData);
 
+  }
+  private extractData(res: Response) {
+    let body;
 
-  this.http.post('http://localhost:8080/bank-of-rest/login', { "username": username, "password": password  })
-    .map(res => res.text())
-    .subscribe(
-      data => console.log("gata"),
-      err => console.log("error"),
-      () => console.log('Random Quote Complete')
-    );
+    // check if empty, before call json
+    if (res.text()) {
+        body = res.json();
     }
+
+    return body || {};
+}
 }

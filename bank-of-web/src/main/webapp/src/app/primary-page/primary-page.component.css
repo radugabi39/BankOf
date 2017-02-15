@@ -1,0 +1,17 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+paper-scroll-header-panel {
+  height: 100%;
+} app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: #fff;
+       background-image: url(assets/images/logoBanner.jpg);
+ background-size: 100% 140%;
+ background-repeat:no-repeat;
+
+    }
