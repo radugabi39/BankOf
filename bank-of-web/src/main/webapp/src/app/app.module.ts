@@ -1,3 +1,4 @@
+import { LoginService } from './user-authentication/login/login.component.service';
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -6,9 +7,9 @@ import { PolymerElement } from '@vaadin/angular2-polymer';
 import { LoginComponent } from './user-authentication/login/login.component';
 import { RegisterComponent } from './user-authentication/register/register.component';
 import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
-
+import { HttpModule } from '@angular/http';
 @NgModule({
-  imports: [ BrowserModule,routing ],
+  imports: [ BrowserModule,routing,HttpModule ],
   declarations: [
     AppComponent,
     PolymerElement('paper-input'),    
@@ -24,7 +25,7 @@ import { UserAuthenticationComponent } from './user-authentication/user-authenti
     UserAuthenticationComponent
     
   ],
-  providers: [  ],
+  providers: [ LoginService ],
   bootstrap: [ AppComponent ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

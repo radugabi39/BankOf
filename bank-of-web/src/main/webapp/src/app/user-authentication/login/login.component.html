@@ -1,7 +1,7 @@
       <div class="card-content">
-        <paper-input label="Email"></paper-input>
-        <paper-input type="password" label="Password"></paper-input>
+        <paper-input label="Email" [(value)]="email" ngDefaultControl></paper-input>
+        <paper-input type="password" [(value)]="password" label="Password" ngDefaultControl></paper-input>
       </div>
       <div class="card-actions">
-        <paper-button raised class="custom indigo">Login</paper-button>
+        <paper-button raised class="custom indigo" (click)="tryLogin()">Login</paper-button>
       </div>
