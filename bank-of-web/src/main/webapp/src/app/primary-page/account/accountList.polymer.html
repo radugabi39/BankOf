@@ -1,0 +1,82 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-list/iron-list.html">
+<dom-module id="account-list">
+  <template>
+    <div flex>
+      <paper-card elevation="2" style="margin-top:15px;width: 100%">
+        <div class="card-content ">
+          <div class="container flex-horizontal">
+            <div class="flexchild">Account Number</div>
+            <div class="flexchild">Name</div>
+            <div class="flexchild">Currency</div>
+            <div class="flexchild">Amount</div>
+            <div class="flexchild">Type</div>
+          </div>
+        </div>
+
+      </paper-card>
+    </div>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <style is="custom-style">
+      .flex-horizontal {
+        @apply(--layout-horizontal);
+      }
+      
+      .flexchild {
+        @apply(--layout-flex);
+        border-left: 1px solid #545454;
+        line-width: 10px;
+        text-align: center;
+      }
+      
+      #accountItems>.flexchild {
+        text-align: left;     
+        @apply(--layout-flex);
+        border-left: 1px solid #545454;  
+         padding: 0px 0px 0px 10px;
+      }
+      
+      .flex {
+        @apply(--layout-horizontal);
+      }
+    </style>
+
+    <iron-list id="list" items="{{items}}" as="item" style="height:300px">
+
+      <template>
+        <paper-card elevation="2" style="margin-top:5px">
+          <div class="card-content ">
+            <div id="accountItems" class="container flex-horizontal">
+              <div class="flexchild">[[item.number]]</div>
+              <div class="flexchild">[[item.name]]</div>
+              <div class="flexchild">[[item.currency]]</div>
+              <div class="flexchild">[[item.amount]]</div>
+              <div class="flexchild">[[item.type]]</div>
+            </div>
+          </div>
+
+        </paper-card>
+      </template>
+    </iron-list>
+
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      Polymer({
+        'is': 'account-list',
+        'properties': {
+          'items': {
+            'type': Array,
+            'value': []
+          }
+
+        }
+      });
+    })();
+  </script>
+</dom-module>

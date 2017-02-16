@@ -1,3 +1,7 @@
+import { AccountComponent } from './primary-page/account/account.component';
+import { CardComponent } from './primary-page/card/card.component';
+import { TransactionComponent } from './primary-page/transaction/transaction.component';
+import { ContactComponent } from './primary-page/contact/contact.component';
 import { PrimaryPageComponent } from './primary-page/primary-page.component';
 import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,7 +17,12 @@ const appRoutes: Routes = [
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
         ] },
-     { path: 'primaryPage', component: PrimaryPageComponent },
+     { path: 'primaryPage', component: PrimaryPageComponent,children:[
+            { path: 'account', component: AccountComponent },
+            { path: 'card', component: CardComponent },
+            { path: 'transaction', component: TransactionComponent },
+            { path: 'contact', component: ContactComponent }
+        ] },
  
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

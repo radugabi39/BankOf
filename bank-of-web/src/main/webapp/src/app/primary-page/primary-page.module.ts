@@ -1,11 +1,16 @@
+import { routing } from './../app.routing';
 import { PolymerElement } from '@vaadin/angular2-polymer';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimaryPageComponent } from './primary-page.component';
+import { ContactComponent } from './contact/contact.component';
+import { AccountComponent } from './account/account.component';
+import { CardComponent } from './card/card.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,routing
   ],
   declarations: [PrimaryPageComponent,
     PolymerElement('paper-input'),    
@@ -17,7 +22,13 @@ import { PrimaryPageComponent } from './primary-page.component';
      PolymerElement('paper-scroll-header-panel'),
      PolymerElement('paper-icon-button'),
        PolymerElement('app-header'),
-       PolymerElement('app-toolbar')
+       PolymerElement('app-toolbar'),
+       PolymerElement('iron-list'),
+       
+       ContactComponent,
+       AccountComponent,
+       CardComponent,
+       TransactionComponent
      ],schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PrimaryPageModule { }

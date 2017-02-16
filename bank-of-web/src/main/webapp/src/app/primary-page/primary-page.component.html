@@ -1,23 +1,23 @@
 <link rel="import" href="app/primary-page/primary-page.style.custom.html">
-  <app-header effects="waterfall resize-title blend-background parallax-background" condenses reveals>
-    <app-toolbar>
-      <paper-icon-button icon="arrow-back"></paper-icon-button>
+<div>
+<app-header effects="waterfall resize-title blend-background parallax-background" condenses reveals>
+  <app-toolbar>
+    <paper-icon-button icon="arrow-back"></paper-icon-button>
 
-      <paper-icon-button icon="create"></paper-icon-button>
-      <paper-icon-button icon="more-vert"></paper-icon-button>
-    </app-toolbar>
-    <app-toolbar class="middle"></app-toolbar>
-    <app-toolbar class="bottom">
+    <paper-icon-button icon="create"></paper-icon-button>
+    <paper-icon-button icon="more-vert"></paper-icon-button>
+  </app-toolbar>
+  <app-toolbar class="middle"></app-toolbar>
 
-    </app-toolbar>
-    <paper-tabs selected="0" sticky>
-      <paper-tab>Accounts</paper-tab>
-      <paper-tab>Cards</paper-tab>
-      <paper-tab>Transactions</paper-tab>
-        <paper-tab>Contact</paper-tab>
-    </paper-tabs>
-  </app-header>
-
-  <paper-fab icon="star"></paper-fab>
-
-  <sample-content size="100"></sample-content>
+  <paper-tabs >
+    <paper-tab [routerLink]="['/primaryPage/account']">Accounts</paper-tab>
+    <paper-tab [routerLink]="['/primaryPage/card']">Cards</paper-tab>
+    <paper-tab [routerLink]="['/primaryPage/transaction']">Transactions</paper-tab>
+    <paper-tab [routerLink]="['/primaryPage/contact']">Contact</paper-tab>
+  </paper-tabs>
+  <router-outlet></router-outlet>
+</app-header>
+<div class="primaryPageContent"></div>
+</div>
+<paper-fab icon="star"></paper-fab>
+<sample-content size="100"></sample-content>
