@@ -10,8 +10,7 @@ paper-scroll-header-panel {
       left: 0;
       width: 100%;
       color: #fff;
-       background-image: url(assets/images/logoBanner.jpg);
- background-size: 100% 140%;
+       background-image: url(assets/images/logoBanner.png);
  background-repeat:no-repeat;
 
     }
