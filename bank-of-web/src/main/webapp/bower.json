@@ -30,6 +30,7 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.7",
     "iron-pages": "PolymerElements/iron-pages#^1.0.8",
     "paper-scroll-header-panel": "PolymerElements/paper-scroll-header-panel#^1.0.16",
-    "iron-list": "PolymerElements/iron-list#^1.4.1"
+    "iron-list": "PolymerElements/iron-list#^1.4.1",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0"
   }
 }

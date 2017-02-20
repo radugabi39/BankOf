@@ -1,3 +1,4 @@
+import { AccountService } from './account/account.component.service';
 import { routing } from './../app.routing';
 import { PolymerElement } from '@vaadin/angular2-polymer';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -10,25 +11,26 @@ import { TransactionComponent } from './transaction/transaction.component';
 
 @NgModule({
   imports: [
-    CommonModule,routing
+    CommonModule, routing
   ],
   declarations: [PrimaryPageComponent,
-    PolymerElement('paper-input'),    
+    PolymerElement('paper-input'),
     PolymerElement('paper-card'),
     PolymerElement('paper-button'),
     PolymerElement('paper-tabs'),
     PolymerElement('paper-tab'),
     PolymerElement('paper-toolbar'),
-     PolymerElement('paper-scroll-header-panel'),
-     PolymerElement('paper-icon-button'),
-       PolymerElement('app-header'),
-       PolymerElement('app-toolbar'),
-       PolymerElement('iron-list'),
-       
-       ContactComponent,
-       AccountComponent,
-       CardComponent,
-       TransactionComponent
-     ],schemas:[CUSTOM_ELEMENTS_SCHEMA]
+    PolymerElement('paper-scroll-header-panel'),
+    PolymerElement('paper-icon-button'),
+    PolymerElement('app-header'),
+    PolymerElement('app-toolbar'),
+    PolymerElement('iron-list'),
+    PolymerElement('paper-dialog'),
+
+    ContactComponent,
+    AccountComponent,
+    CardComponent,
+    TransactionComponent
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService]
 })
 export class PrimaryPageModule { }

@@ -7,10 +7,11 @@
         <div class="card-content ">
           <div class="container flex-horizontal">
             <div class="flexchild">Account Number</div>
-            <div class="flexchild">Name</div>
+            <div class="flexchild">Balance</div>
             <div class="flexchild">Currency</div>
-            <div class="flexchild">Amount</div>
+            <div class="flexchild">Status</div>
             <div class="flexchild">Type</div>
+            <div class="flexchild">Actions</div>
           </div>
         </div>
 
@@ -34,10 +35,10 @@
       }
       
       #accountItems>.flexchild {
-        text-align: left;     
+        text-align: left;
         @apply(--layout-flex);
-        border-left: 1px solid #545454;  
-         padding: 0px 0px 0px 10px;
+        border-left: 1px solid #545454;
+        padding: 0px 0px 0px 10px;
       }
       
       .flex {
@@ -52,10 +53,14 @@
           <div class="card-content ">
             <div id="accountItems" class="container flex-horizontal">
               <div class="flexchild">[[item.number]]</div>
-              <div class="flexchild">[[item.name]]</div>
+              <div class="flexchild">[[item.balance]]</div>
               <div class="flexchild">[[item.currency]]</div>
-              <div class="flexchild">[[item.amount]]</div>
+              <div class="flexchild">[[item.status]]</div>
               <div class="flexchild">[[item.type]]</div>
+              <div class="flexchild">
+                <paper-icon-button on-tap="openDetails" icon="pageview"></paper-icon-button>
+                <paper-icon-button on-tap="refreshAction" icon="refresh"></paper-icon-button>
+              </div>
             </div>
           </div>
 
@@ -73,8 +78,12 @@
           'items': {
             'type': Array,
             'value': []
-          }
+          },
 
+        }, openDetails: function (ev) {
+           this.fire('openDetails',ev.model.__data__.item);
+        }, refreshAction: function (ev) {
+          this.fire('refresh',ev.model.__data__.item);
         }
       });
     })();

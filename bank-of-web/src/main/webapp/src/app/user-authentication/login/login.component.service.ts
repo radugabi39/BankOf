@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
-
-
 export class LoginService {
 
   constructor(private http: Http) { }

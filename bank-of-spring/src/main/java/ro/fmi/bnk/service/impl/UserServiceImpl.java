@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ro.fmi.bnk.dao.user.UserDAO;
+import ro.fmi.bnk.dao.repo.UserDAO;
 import ro.fmi.bnk.enitites.User;
 import ro.fmi.bnk.service.UserService;
 

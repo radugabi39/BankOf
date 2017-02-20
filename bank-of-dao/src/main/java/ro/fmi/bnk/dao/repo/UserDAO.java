@@ -1,4 +1,4 @@
-package ro.fmi.bnk.dao.user;
+package ro.fmi.bnk.dao.repo;
 
 import java.util.List;
 

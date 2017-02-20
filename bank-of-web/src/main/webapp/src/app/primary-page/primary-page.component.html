@@ -15,9 +15,11 @@
     <paper-tab [routerLink]="['/primaryPage/transaction']">Transactions</paper-tab>
     <paper-tab [routerLink]="['/primaryPage/contact']">Contact</paper-tab>
   </paper-tabs>
-  <router-outlet></router-outlet>
+
 </app-header>
-<div class="primaryPageContent"></div>
+
+<div class="primaryPageContent">  <router-outlet></router-outlet></div>
+
 </div>
 <paper-fab icon="star"></paper-fab>
 <sample-content size="100"></sample-content>

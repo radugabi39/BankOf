@@ -7,7 +7,7 @@
   } 
   app-header {
         position: fixed;
-        height: 150px;
+        height: 170px;
         top: 0;
         left: 0;
         width: 100%;
@@ -15,12 +15,11 @@
         background-image: url(assets/images/logoBanner.png);
         background-repeat:no-repeat;
       }
-primaryPageContent{
+.primaryPageContent{
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    top: 151px;
-    display: none;
+    top: 190px;
     overflow: auto;
 }

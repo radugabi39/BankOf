@@ -30,13 +30,16 @@ public class Account {
 	private Date creationDate;
 	private Date modificationDate;
 	private Boolean active;
+	private Currency currency;
+	//Savings 
+	private BigDecimal limitAmount;
 
 	public Account() {
 		super();
 	}
 	public Account(Long id, BigDecimal balance, Integer interestRate, Boolean overDraft, AccountStatus accountStatus,
 			AccountType accountType, String accountNo, Customer customer, Date creationDate, Date modificationDate,
-			Boolean active) {
+			Boolean active,Currency currency,BigDecimal limitAmount) {
 		super();
 		this.id = id;
 		this.balance = balance;
@@ -49,6 +52,8 @@ public class Account {
 		this.creationDate = creationDate;
 		this.modificationDate = modificationDate;
 		this.active = active;
+		this.currency = currency;
+		this.setLimitAmount(limitAmount);
 	}
 
 	@Id
@@ -155,5 +160,21 @@ public class Account {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CURRENCY_ID")
+	public Currency getCurrency() {
+		return currency;
+	}
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+	@Column(name = "LIMITAMOUNT")
+	public BigDecimal getLimitAmount() {
+		return limitAmount;
+	}
+	public void setLimitAmount(BigDecimal limitAmount) {
+		this.limitAmount = limitAmount;
 	}
 }

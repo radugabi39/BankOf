@@ -5,3 +5,13 @@
         font-size: 16px;
   }
 
+#accountDetails{
+  min-height: 800px;
+  min-width: 1000px;
+}
+
+#accountDetails .buttons{
+  position: absolute;
+  bottom: 0px;
+  right:0px
+}

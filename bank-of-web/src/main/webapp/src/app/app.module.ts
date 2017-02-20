@@ -1,3 +1,4 @@
+import { GlobalService } from './global.functions';
 import { PrimaryPageModule } from './primary-page/primary-page.module';
 import { SharedModule } from './shared.module';
 import { UserAuthenticationModule } from './user-authentication/user-authentication.module';
@@ -17,7 +18,7 @@ import { HttpModule } from '@angular/http';
     AppComponent
     
   ],
-  providers: [ LoginService ],
+  providers: [ LoginService,GlobalService ],
   bootstrap: [ AppComponent ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

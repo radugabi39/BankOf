@@ -1,1 +1,17 @@
-<account-list [items]="items"></account-list>
+<account-list [items]="items" (refresh)="refreshAccount($event)" (openDetails)="openDetailsDialog($event)"></account-list>
+
+<paper-dialog *ngIf="openAccount" id="accountDetails" modal [(opened)]="openDialogTrigger">
+  <paper-input [value]="openAccount.number" disabled label="Account Number"></paper-input>
+  <paper-input [value]="openAccount.balance" disabled label="Balance"></paper-input>
+  <paper-input [value]="openAccount.currency" disabled label="Currency"></paper-input>
+  <paper-input [value]="openAccount.status" disabled label="Status"></paper-input>
+  <paper-input [value]="openAccount.type" disabled label="Type"></paper-input>
+
+
+  <span *ngIf="balanceModel">Income: {{balanceModel.income}}</span>
+  <span *ngIf="balanceModel">Outcome: {{balanceModel.outcome}}</span>
+
+  <div class="buttons">
+    <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+  </div>
+</paper-dialog>

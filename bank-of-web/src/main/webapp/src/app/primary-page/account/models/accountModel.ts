@@ -1,17 +1,26 @@
+
+	
 export class Account {
-    private name: string;
-    private number:Number;
-    private currency:string;
-    private amount:Number;
-    private type:string;
+
+     number: string;
+     currency: string;
+     balance: Number;
+     type: string;
+     overDraft: Boolean;
+     status: string;
 
 
+	
+    constructor( number: string, currency: string, balance: Number, type: string, overDraft: Boolean, status: string) {
+        this.number = number;
+        this.currency = currency;
+        this.balance = balance;
+        this.type = type;
+        this.overDraft = overDraft;
+        this.status = status;
+    }
 
-	constructor(name: string,number:Number, currency:string, amount:Number, type:string) {
-        this.name=name;
-        this.number=number;
-        this.currency=currency;
-        this.amount=amount;
-        this.type=type;
-	}
+    static fromJSONArray(array: Array<Object>): Account[] {
+        return array["data"].map(obj => new Account(obj['accountNo'], obj['currency'], obj['balance'], obj['type'], obj['overdraft'], obj['status']));
+    }
 }

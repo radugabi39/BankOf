@@ -30,25 +30,37 @@
   <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
   <link rel="import" href="bower_components/iron-list/iron-list.html">
   <link rel="import" href="app/primary-page/account/accountList.polymer.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
 
-  
 
-  
-  
+
+
 
 </head>
 
 <body unresolved class="fullbleed">
   <style is="custom-style" include="iron-flex iron-positioning iron-flex-alignment">
-    .paper-font-display4 {   color: #545454;
-      @apply(--paper-font-display4);     font-family: 'Signika', sans-serif;
+    .paper-font-display4 {
+      color: #545454;
+      @apply(--paper-font-display4);
+      font-family: 'Signika', sans-serif;
     }
-     .card-container {
+    
+    .card-container {
       height: 100%;
     }
-        body {
+    
+    body {
       background-color: #e9ece5;
-    }   
+    }
+    
+    paper-input {
+      --paper-input-container-disabled: {
+        opacity: 0.88;
+      }
+      ;
+    }
   </style>
   <app-root>
 

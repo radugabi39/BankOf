@@ -3,7 +3,6 @@
 	<name>bank-of-pom</name>
 	<comment></comment>
 	<projects>
-		<project>bank-of-web</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

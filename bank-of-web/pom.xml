@@ -27,6 +27,10 @@
 						
 					</webResources>
 						 <warSourceExcludes>node_modules/**</warSourceExcludes>
+						 	 <warSourceExcludes>node/**</warSourceExcludes>
+						  <warSourceExcludes>src/main/webapp/node_modules/**</warSourceExcludes>
+						  	 <warSourceExcludes>**/node_modules/**</warSourceExcludes>
+						  	 	 <warSourceExcludes>/node_modules/**</warSourceExcludes>
 				</configuration>
 			</plugin>
 

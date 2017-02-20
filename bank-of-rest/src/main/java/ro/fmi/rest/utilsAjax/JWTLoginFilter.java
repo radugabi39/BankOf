@@ -48,7 +48,7 @@ this.userBean=userBean;
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication)
             throws IOException, ServletException{
-        String name = authentication.getName();
+        String name = ((UserContext) authentication.getPrincipal()).getUsername();
         tokenAuthenticationService.addAuthentication(response,name);
     }
 }

@@ -1,4 +1,4 @@
-package ro.fmi.bnk.rest.user;
+package ro.fmi.bnk.rest.controller;
 
 import java.util.List;
 
