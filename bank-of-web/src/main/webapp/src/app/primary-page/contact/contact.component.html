@@ -1,3 +1,42 @@
-<p>
-  contact works!
-</p>
+<div class="vertical layout center-justified">
+  <div class="horizontal layout">
+    <div class="paper-font-headline" style="min-width: 100px;padding-top:25px">Subject: </div>
+    <paper-input [(value)]="subject"></paper-input>
+  </div>
+  <div class="horizontal layout" style="margin-top: 20px">
+    <div class="paper-font-headline" style="min-width: 100px">Body: </div>
+    <textarea rows="10" cols="100" pInputTextarea>{{body}}</textarea>
+  </div>
+  <div class="horizontal layout" style="margin-top: 20px">
+    <paper-button class="custom indigo" raised>Send</paper-button>
+  </div>
+</div>
+
+
+<div style="position:absolute;top:25px;right:25px">
+  <div class="paper-font-headline">
+    Give us a call. <br /> <br /> General Service <br /></div>
+  <div class="paper-font-body1">
+    0313151231 <br /> Monday–Friday 6am–9pm ET <br /> Saturday–Sunday 9am–5pm ET <br /> <br /></div>
+  <div class="paper-font-headline">
+    Online & Mobile Banking <br /></div>
+  <div class="paper-font-body1">
+    0313983377 <br /> Monday–Friday 8am–9pm ET <br /> Saturday–Sunday 9am–5pm ET <br /> <br /></div>
+  <div class="paper-font-headline">
+    Business <br /></div>
+  <div class="paper-font-body1">
+    0357341222 <br /> Monday–Friday 7am–7pm ET <br /> Saturday 9am–5pm ET <br /></div>
+  <div (click)="openLocationDialog()" class="horizontal layout">
+    <paper-icon-button icon="maps:place" style="width:100px;height: 100px"></paper-icon-button>
+    <div class="paper-font-headline" style="padding-top:30px">LOCATIONS</div>
+  </div>
+
+</div>
+
+
+<paper-dialog *ngIf="openDialogTrigger" id="locationDialog" modal [(opened)]="openDialogTrigger">
+  <p-gmap *ngIf="resetMap" [options]="options" [style]="{'width':'900px','height':'520px','margin': '0px','position':'absolute','right':'20px','left':'20px','top':'20px'}"></p-gmap>
+    <div class="buttons" style="position:absolute;bottom: 10px;right:10px">
+      <paper-button class="custom indigo" (click)="closeDialog()" autofocus raised>Close</paper-button>
+    </div>
+</paper-dialog>

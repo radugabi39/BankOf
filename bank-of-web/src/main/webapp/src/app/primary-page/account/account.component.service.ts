@@ -27,4 +27,9 @@ export class AccountService {
     return this.http.get(url + 'account/getInOutcomeFromLastMonths/'+accNo+'/'+months, { headers: this.globalService.headers })
       .map(res => BalanceModel.fromJSONObj(this.globalService.extractData(res)));
   }
+
+    getAccountsNo() {
+    return this.http.get(url + 'account/getAccountsNo/', { headers: this.globalService.headers })
+      .map(this.globalService.extractData);
+  }
 }

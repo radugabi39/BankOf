@@ -62,4 +62,19 @@ public class AccountRest {
 		}
 		return toReturn;
 	}
+	
+	@RequestMapping(value = "/getAccountsNo", method = RequestMethod.GET,produces = "application/json")
+	@ResponseBody
+	public GenericListResponse<String> getAccountsNo() {
+		String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+		GenericListResponse<String> toReturn = new GenericListResponse<String>();
+		try {
+			toReturn.setData(accountBean.getAccountsNo(userName));
+			toReturn.setStatus("OK");
+		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
 }

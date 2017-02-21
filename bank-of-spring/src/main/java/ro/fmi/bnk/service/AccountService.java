@@ -7,10 +7,12 @@ import ro.fmi.bnk.models.InOutComeModel;
 
 public interface AccountService {
 	
-	public List<AccountModel> getAccounts(String userName);
+	List<AccountModel> getAccounts(String userName);
 
 	List<AccountModel> getAccountByNo(String accNo);
 
 	InOutComeModel getInOutcomeFromLastMonths(int months, String accNo);
+
+	List<String> getAccountsNo(String userName);
 
 }

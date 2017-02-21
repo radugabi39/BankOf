@@ -27,9 +27,9 @@ public class AccountDAO extends GenericDAO {
 				+ " where u.userName=:userName");
 		q.setParameter("userName", userName);
 		List<AccountModel> toReturn = q.getResultList();
-		return toReturn;
-		
+		return toReturn;		
 	}
+	
 	public List<AccountModel> getAccountByNo(String accNo) {
 		Query q = em.createQuery("select new ro.fmi.bnk.models.AccountModel(acc.accountNo,cur.name,acc.balance,accType.name,acc.overDraft,accStat.name) from Account acc "
 				+ " INNER JOIN acc.currency cur"
@@ -64,6 +64,16 @@ public class AccountDAO extends GenericDAO {
 		
 		return new InOutComeModel(income.get(0),outcome.get(0));
 		
+	}
+	
+	public List<String> getAccountsNo(String userName) {
+		Query q = em.createQuery("select acc.accountNo from Account acc "
+				+ " INNER JOIN acc.customer cust"
+				+ " INNER JOIN cust.user u"
+				+ " where u.userName=:userName");
+		q.setParameter("userName", userName);
+		List<String> toReturn = q.getResultList();
+		return toReturn;		
 	}
 	
 }

@@ -36,6 +36,10 @@ public class AccountServiceImpl implements AccountService{
 		return accountDAO.getInOutcomeFromLastMonths(months,accNo);
 
 	}
+	
+	@Override
+	public List<String> getAccountsNo(String userName) {
+		return accountDAO.getAccountsNo(userName);
 
-
+	}
 }

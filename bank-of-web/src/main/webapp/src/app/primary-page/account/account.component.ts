@@ -17,6 +17,7 @@ export class AccountComponent implements OnInit {
   openAccount: Account;
   openDialogTrigger: Boolean = false;
   balanceModel: BalanceModel;
+  sliderValue: Number = 1;
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
@@ -62,7 +63,19 @@ export class AccountComponent implements OnInit {
     );
 
   }
-
+  recalculateIncome() {
+    if (this.sliderValue != 0) {
+      this.accountService.getInOutcomeFromLastMonths(this.sliderValue, this.openAccount.number).subscribe(
+        data => {
+          this.balanceModel = data;
+        },
+        err => console.log("error"),
+        () => console.log('Random Quote Complete')
+      );
+    } else {
+      this.balanceModel=null;
+    }
+  }
   deepClone(oldArray: Object[]) {
     let newArray: any = [];
     oldArray.forEach((item) => {
