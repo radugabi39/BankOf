@@ -1,0 +1,49 @@
+<div class="vertical layout center-justified" style="padding-top: 30px;">
+  <div class="horizontal layout center-justified">
+    <p-steps [model]="items" [readonly]="true" styleClass="steps-custom" [(activeIndex)]="transIndex"></p-steps>
+  </div>
+  <div class="horizontal layout center-justified">
+    <paper-card *ngIf="firstPage && donePage==false">
+      <div class="horizontal layout">
+        <p style="width:250px;">My Accounts: </p>
+        <p-dropdown [options]="accounts" (onChange)="accountChanged($event)" [(ngModel)]="selItem" placeholder="Select an account" [style]="{'width':'150px'}" ngDefaultControl></p-dropdown>
+      </div>
+      <div class="horizontal layout">
+        <p style="width:250px;padding-top:25px;">Destination Account: </p>
+        <paper-input [(value)]="destinationAcc"></paper-input>
+      </div>
+      <div class="horizontal layout">
+        <p style="width:250px;padding-top:25px;">Transaction Description: </p>
+        <paper-input [(value)]="transactionDescr"></paper-input>
+      </div>
+      <div class="horizontal layout">
+        <p style="width:250px;padding-top:25px;" type="number">Amount: </p>
+        <paper-input [(value)]="amount"></paper-input>
+      </div>
+    </paper-card>
+    <paper-card *ngIf="!firstPage && donePage==false">
+      <p>
+        You are about to transfer {{amount}} from your account ({{selItem}}) to {{destinationAcc}}.</p>
+      <p>
+        Description: {{transactionDescr}}
+      </p>
+      <p>
+        Please make sure this information are correct before proceed.
+      </p>
+
+    </paper-card>
+
+        <paper-card *ngIf="donePage">
+      <p>
+        Transaction status: {{status}}
+      </p>
+
+    </paper-card>
+  </div>
+  <div class="horizontal layout center-justified">
+    <paper-button *ngIf="firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="next()">Next</paper-button>
+    <paper-button *ngIf="!firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="back()">Back</paper-button>
+    <paper-button *ngIf="!firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="finish()">Finish</paper-button>
+      <paper-button *ngIf="donePage" style="width:50px" class="custom indigo" raised (click)="done()">Done</paper-button>
+  </div>
+</div>

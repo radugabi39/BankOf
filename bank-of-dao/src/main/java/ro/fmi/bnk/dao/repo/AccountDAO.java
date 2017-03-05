@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import ro.fmi.bnk.dao.utils.GenericDAO;
+import ro.fmi.bnk.enitites.Account;
 import ro.fmi.bnk.models.AccountModel;
 import ro.fmi.bnk.models.InOutComeModel;
 
@@ -41,6 +42,7 @@ public class AccountDAO extends GenericDAO {
 		return toReturn;
 		
 	}
+	
 	
 	public InOutComeModel getInOutcomeFromLastMonths(int months,String accNo) {
 		Calendar cal = Calendar.getInstance();
@@ -76,4 +78,25 @@ public class AccountDAO extends GenericDAO {
 		return toReturn;		
 	}
 	
+	public List<String> getActiveAccounts(String userName) {
+		Query q = em.createQuery("select acc.accountNo from Account acc "
+				+ " INNER JOIN acc.customer cust"
+				+ " INNER JOIN cust.user u"
+				+ " INNER JOIN acc.accountStatus accStat"
+				+ " where u.userName=:userName  and acc.active=1 and accStat.name='OPEN'");
+		q.setParameter("userName", userName);
+		List<String> toReturn = q.getResultList();
+		return toReturn;		
+	}
+	public List<Account> getAccountENTByNo(String accNo) {
+		Query q = em.createQuery("select acc from Account acc "
+				+ " INNER JOIN acc.currency cur"
+				+ " INNER JOIN acc.accountType accType"
+				+ " INNER JOIN acc.accountStatus accStat"
+				+ " where acc.accountNo=:accNo");
+		q.setParameter("accNo", accNo);
+		List<Account> toReturn = q.getResultList();
+		return toReturn;
+		
+	}
 }

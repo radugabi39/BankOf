@@ -1,5 +1,5 @@
 import { AccountComponent } from './primary-page/account/account.component';
-import { CardComponent } from './primary-page/card/card.component';
+import { PayComponent } from './primary-page/pay/pay.component';
 import { TransactionComponent } from './primary-page/transaction/transaction.component';
 import { ContactComponent } from './primary-page/contact/contact.component';
 import { PrimaryPageComponent } from './primary-page/primary-page.component';
@@ -19,7 +19,7 @@ const appRoutes: Routes = [
         ] },
      { path: 'primaryPage', component: PrimaryPageComponent,children:[
             { path: 'account', component: AccountComponent },
-            { path: 'card', component: CardComponent },
+            { path: 'pay', component: PayComponent },
             { path: 'transaction', component: TransactionComponent },
             { path: 'contact', component: ContactComponent }
         ] },

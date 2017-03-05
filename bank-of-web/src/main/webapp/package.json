@@ -21,7 +21,6 @@
     "@angular/platform-browser": "2.2.1",
     "@angular/platform-browser-dynamic": "2.2.1",
     "@angular/router": "3.2.1",
-    "@types/google-maps": "^3.2.0",
     "@vaadin/angular2-polymer": "^1.0.0",
     "bower": "latest",
     "core-js": "^2.4.1",

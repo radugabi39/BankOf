@@ -23,6 +23,7 @@ export class AccountService {
     return this.http.get(url + 'account/getAccountByNo/'+accNo, { headers: this.globalService.headers })
       .map(res => Account.fromJSONArray(this.globalService.extractData(res)));
   }
+  
    getInOutcomeFromLastMonths(months:Number,accNo:String) {
     return this.http.get(url + 'account/getInOutcomeFromLastMonths/'+accNo+'/'+months, { headers: this.globalService.headers })
       .map(res => BalanceModel.fromJSONObj(this.globalService.extractData(res)));
@@ -32,4 +33,9 @@ export class AccountService {
     return this.http.get(url + 'account/getAccountsNo/', { headers: this.globalService.headers })
       .map(this.globalService.extractData);
   }
+    getActiveAccounts() {
+    return this.http.get(url + 'account/getActiveAccounts/', { headers: this.globalService.headers })
+      .map(this.globalService.extractData);
+  }
+  
 }

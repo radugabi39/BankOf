@@ -48,6 +48,22 @@ public class AccountRest {
 		}
 		return toReturn;
 	}
+
+	
+	@RequestMapping(value = "/getActiveAccounts", method = RequestMethod.GET,produces = "application/json")
+	@ResponseBody
+	public GenericListResponse<String> getActiveAccounts() {
+		String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+		GenericListResponse<String> toReturn = new GenericListResponse<String>();
+		try {
+			toReturn.setData(accountBean.getActiveAccounts(userName));
+			toReturn.setStatus("OK");
+		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
 	
 	@RequestMapping(value = "/getInOutcomeFromLastMonths/{accNo}/{months}", method = RequestMethod.GET,produces = "application/json")
 	@ResponseBody

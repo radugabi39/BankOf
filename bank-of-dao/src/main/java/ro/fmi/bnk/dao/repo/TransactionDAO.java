@@ -23,5 +23,6 @@ public class TransactionDAO extends GenericDAO {
 		List<TransactionTableModel> toReturn = q.getResultList();
 		return toReturn;
 	}
+	
 
 }

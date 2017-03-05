@@ -14,5 +14,7 @@ public interface AccountService {
 	InOutComeModel getInOutcomeFromLastMonths(int months, String accNo);
 
 	List<String> getAccountsNo(String userName);
-
+	
+	List<String> getActiveAccounts(String userName);
+	
 }
