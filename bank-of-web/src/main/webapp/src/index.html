@@ -17,6 +17,8 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="import" href="bower_components/app-layout/app-layout.html">
   <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/paper-item/paper-icon-item.html">
   <link rel="import" href="bower_components/paper-card/paper-card.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
   <link rel="import" href="bower_components/paper-styles/paper-styles.html">
@@ -30,13 +32,16 @@
   <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
   <link rel="import" href="bower_components/iron-list/iron-list.html">
   <link rel="import" href="app/primary-page/account/accountList.polymer.html">
+  <link rel="import" href="app/primary-page/pay/pay.polymer.html">
   <link rel="import" href="bower_components/iron-icons/iron-icons.html">
-    <link rel="import" href="bower_components/iron-icons/maps-icons.html">
+  <link rel="import" href="bower_components/iron-icons/maps-icons.html">
   <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
   <link rel="import" href="bower_components/paper-slider/paper-slider.html">
   <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
-    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-<script src="http://maps.google.com/maps/api/js?key=AIzaSyALez2UJ-jFP4dTzgA9InS62QoFu24THMI&v=3.20"></script>
+  <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="bower_components/app-layout/app-layout.html">
+  <link rel="import" href="bower_components/iron-icons/maps-icons.html">
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyALez2UJ-jFP4dTzgA9InS62QoFu24THMI&v=3.20"></script>
 
 
 
@@ -49,9 +54,11 @@
       @apply(--paper-font-display4);
       font-family: 'Signika', sans-serif;
     }
-      google-map {
-    height: 600px;
-  }
+    
+    google-map {
+      height: 600px;
+    }
+    
     .paper-font-body1 {
       color: #545454;
       font-family: 'Signika', sans-serif;

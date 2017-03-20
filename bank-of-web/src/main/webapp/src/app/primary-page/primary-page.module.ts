@@ -32,7 +32,8 @@ import { GMapModule } from 'primeng/primeng';
     PolymerElement('paper-slider'),
     PolymerElement('paper-listbox'),
     PolymerElement('paper-dropdown-menu'),
-
+  PolymerElement('paper-item'),
+  PolymerElement('paper-icon-item'),
     ContactComponent,
     AccountComponent,
     PayComponent,

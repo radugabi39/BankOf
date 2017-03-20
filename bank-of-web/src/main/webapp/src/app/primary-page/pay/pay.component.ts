@@ -22,7 +22,8 @@ export class PayComponent implements OnInit {
   private firstPage: Boolean = true;
   private donePage: Boolean = false;
   private status: String;
-
+  private showTransf: Boolean = true;
+  private showBi: Boolean = false;
   ngOnInit() {
     this.items = [
       { label: 'Payment info' },
@@ -45,11 +46,23 @@ export class PayComponent implements OnInit {
     this.destinationAcc = "";
     this.selItem = "";
     this.transactionDescr = "";
-        this.status = "";
+    this.status = "";
     this.amount = null;
     this.firstPage = true;
     this.donePage = false;
     this.transIndex = 0;
+  }
+  showTransfer() {
+    if (this.showTransf == false) {
+      this.showBi = false;
+      this.showTransf = true;
+    }
+  }
+  showBills() {
+    if (this.showBi == false) {
+      this.showBi = true;
+      this.showTransf = false;
+    }
   }
   next() {
     this.firstPage = false;
