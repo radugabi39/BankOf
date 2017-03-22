@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { PayService } from './pay.component.service';
 import { AccountService } from './../account/account.component.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { StepsModule, MenuItem, SelectItem } from 'primeng/primeng';
+import { StepsModule, MenuItem, SelectItem ,CalendarModule} from 'primeng/primeng';
 @Component({
   selector: 'app-pay',
   templateUrl: './pay.component.html',
@@ -24,7 +24,16 @@ export class PayComponent implements OnInit {
   private status: String;
   private showTransf: Boolean = true;
   private showBi: Boolean = false;
-  ngOnInit() {
+  private  monthlyDate: Date;
+  private monthlyPay:String="one";   private provider:String="";  private en: any;
+  ngOnInit() {   this.en = {
+            firstDayOfWeek: 0,
+            dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"],
+            monthNames: [ "","","","","","","","","","","","", ],
+            monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+        };
     this.items = [
       { label: 'Payment info' },
       { label: 'Payment details' }
@@ -57,12 +66,14 @@ export class PayComponent implements OnInit {
       this.showBi = false;
       this.showTransf = true;
     }
+    this.done()
   }
   showBills() {
     if (this.showBi == false) {
       this.showBi = true;
       this.showTransf = false;
     }
+    this.done()
   }
   next() {
     this.firstPage = false;

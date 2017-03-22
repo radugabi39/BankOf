@@ -9,15 +9,19 @@ public class TransferInputModel {
 	private String fromAccount;
 	private String destAccount;
 	private String transDescription;
+	private String provider;
+	private Integer dateToPay;
 	public TransferInputModel() {
 		super();
 		}
-	public TransferInputModel(BigDecimal amount, String fromAccount, String destAccount, String transDescription) {
+	public TransferInputModel(BigDecimal amount, String fromAccount, String destAccount, String transDescription, String provider, Integer dateToPay) {
 		super();
 		this.amount = amount;
 		this.fromAccount = fromAccount;
 		this.destAccount = destAccount;
-		this.transDescription = transDescription;
+		this.transDescription = transDescription;	
+		this.setProvider(provider);
+		this.setDateToPay(dateToPay);
 	}
 
 	public BigDecimal getAmount() {
@@ -50,6 +54,18 @@ public class TransferInputModel {
 
 	public void setTransDescription(String transDescription) {
 		this.transDescription = transDescription;
+	}
+	public Integer getDateToPay() {
+		return dateToPay;
+	}
+	public void setDateToPay(Integer dateToPay) {
+		this.dateToPay = dateToPay;
+	}
+	public String getProvider() {
+		return provider;
+	}
+	public void setProvider(String provider) {
+		this.provider = provider;
 	}
 	
 }

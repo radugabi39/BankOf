@@ -1,3 +1,4 @@
+import { Card } from './models/cardModel';
 import { BalanceModel } from './models/balance.model';
 import { AccountService } from './account.component.service';
 import { ViewChild, Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
@@ -9,7 +10,7 @@ import { Account } from './models/accountModel';
 })
 export class AccountComponent implements OnInit {
 
-  items: Array<Account> = new Array<Account>();
+  items: Array<Account> = new Array<Account>(); cardItems: Array<Card> = new Array<Card>();
   @Output()
   refresh: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -17,7 +18,8 @@ export class AccountComponent implements OnInit {
   openAccount: Account;
   openDialogTrigger: Boolean = false;
   balanceModel: BalanceModel;
-  sliderValue: Number = 1;
+  sliderValue: Number = 1; private showAc: Boolean = true;
+  private showCa: Boolean = false;
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
@@ -28,7 +30,14 @@ export class AccountComponent implements OnInit {
       err => console.log("error"),
       () => console.log('Random Quote Complete')
     );
-
+    
+        this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'ad','type-image')); 
+            this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
+                this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','type-image')); 
+                    this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
+                        this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
+                            this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
+                            
   }
   refreshAccount(data) {
     let acc: Account = data.detail;
@@ -73,7 +82,7 @@ export class AccountComponent implements OnInit {
         () => console.log('Random Quote Complete')
       );
     } else {
-      this.balanceModel=null;
+      this.balanceModel = null;
     }
   }
   deepClone(oldArray: Object[]) {
@@ -82,5 +91,19 @@ export class AccountComponent implements OnInit {
       newArray.push(Object.assign({}, item));
     });
     return newArray;
+  }
+  showAccounts() {
+    if (this.showAc == false) {
+      this.showCa = false;
+      this.showAc = true;
+    }
+
+  }
+  showCards() {
+    if (this.showCa == false) {
+      this.showCa = true;
+      this.showAc = false;
+    }
+
   }
 }

@@ -10,11 +10,12 @@ import { ContactComponent } from './contact/contact.component';
 import { AccountComponent } from './account/account.component';
 import { PayComponent } from './pay/pay.component';
 import { TransactionComponent } from './transaction/transaction.component';
-import { DataTableModule, SharedModule, ListboxModule, StepsModule, InputTextareaModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, ListboxModule, StepsModule, InputTextareaModule, DropdownModule,CalendarModule } from 'primeng/primeng';
 import { GMapModule } from 'primeng/primeng';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   imports: [
-    CommonModule, routing, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule
+    CommonModule, routing, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule,CalendarModule
   ],
   declarations: [PrimaryPageComponent,
     PolymerElement('paper-input'),
@@ -32,12 +33,14 @@ import { GMapModule } from 'primeng/primeng';
     PolymerElement('paper-slider'),
     PolymerElement('paper-listbox'),
     PolymerElement('paper-dropdown-menu'),
-  PolymerElement('paper-item'),
-  PolymerElement('paper-icon-item'),
+    PolymerElement('paper-item'),
+    PolymerElement('paper-icon-item'), PolymerElement('paper-radio-button'),
+    PolymerElement('paper-radio-group'), PolymerElement('gold-cc-cvc-input'), PolymerElement('gold-cc-input'),
     ContactComponent,
     AccountComponent,
     PayComponent,
-    TransactionComponent
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService,PayService]
+    TransactionComponent,
+    ProfileComponent
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService]
 })
 export class PrimaryPageModule { }

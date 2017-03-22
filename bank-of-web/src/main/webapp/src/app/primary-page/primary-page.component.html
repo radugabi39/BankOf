@@ -1,14 +1,11 @@
 <link rel="import" href="app/primary-page/primary-page.style.custom.html">
 <div>
 <app-header effects="waterfall resize-title blend-background parallax-background" condenses reveals>
-  <app-toolbar>
-    <paper-icon-button icon="arrow-back"></paper-icon-button>
+  <app-toolbar class="right">
 
-    <paper-icon-button icon="create"></paper-icon-button>
-    <paper-icon-button icon="more-vert"></paper-icon-button>
   </app-toolbar>
-  <app-toolbar class="middle"></app-toolbar>
-
+    <paper-icon-button [routerLink]="['/primaryPage/profile']" id="profileIcon"></paper-icon-button>
+  <app-toolbar class="middle"> </app-toolbar>
   <paper-tabs >
     <paper-tab [routerLink]="['/primaryPage/account']">Accounts</paper-tab>
     <paper-tab [routerLink]="['/primaryPage/pay']">Pay and Transfer</paper-tab>

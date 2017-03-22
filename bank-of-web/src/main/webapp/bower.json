@@ -37,6 +37,9 @@
     "google-map": "GoogleWebComponents/google-map#^1.2.0",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.5.0",
     "vaadin-split-layout": "^1.0.0",
-    "paper-item": "PolymerElements/paper-item#^1.2.1"
+    "paper-item": "PolymerElements/paper-item#^1.2.1",
+    "paper-radio-group": "PolymerElements/paper-radio-group#^1.2.1",
+    "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^1.0.9",
+    "gold-cc-input": "PolymerElements/gold-cc-input#^1.0.7"
   }
 }

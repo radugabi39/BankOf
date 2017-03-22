@@ -1,3 +1,4 @@
+import { ProfileComponent } from './primary-page/profile/profile.component';
 import { AccountComponent } from './primary-page/account/account.component';
 import { PayComponent } from './primary-page/pay/pay.component';
 import { TransactionComponent } from './primary-page/transaction/transaction.component';
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
             { path: 'account', component: AccountComponent },
             { path: 'pay', component: PayComponent },
             { path: 'transaction', component: TransactionComponent },
-            { path: 'contact', component: ContactComponent }
+            { path: 'contact', component: ContactComponent },
+            { path: 'profile', component: ProfileComponent }
         ] },
  
     // otherwise redirect to home

@@ -1,0 +1,132 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-list/iron-list.html">
+<dom-module id="card-list">
+  <template>
+    <div flex>
+
+    </div>
+    <style>
+       :host {
+        display: block;
+      }
+    </style>
+    <style is="custom-style">
+
+
+
+  paper-card.rate { @apply(--layout-horizontal); }
+  .rate-image {
+    width: 100px;
+    height: 170px;
+    background: url(assets/images/visa.png);
+    background-size: cover;
+  }
+  .rate-content {
+    @apply(--layout-flex);
+    float: left;
+  }
+  .rate-header { @apply(--paper-font-headline); }
+  .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+  paper-icon-button.rate-icon {
+    --iron-icon-fill-color: white;
+    --iron-icon-stroke-color: var(--paper-grey-600);
+  }
+
+
+
+
+
+
+      .flex-horizontal {
+        @apply(--layout-horizontal);
+      }
+      
+      .flexchild {
+        @apply(--layout-flex);
+        line-width: 10px;
+        text-align: center;
+      }
+      
+      .rate2-content {
+        @apply(--layout-flex);
+        float: left;
+      }
+      
+      .flex {
+        @apply(--layout-horizontal);
+      }
+      
+      paper-card.customCard {
+        @apply(--layout-horizontal);
+      }
+      
+      .type-image {
+        width: 100px;
+        height: 170px;
+        background-image: url(assets/images/visa.png);
+        background-size: cover;
+      }
+      
+      paper-input-container {
+        padding-top: 11px;
+        padding-bottom: 0px;
+      }
+      
+      gold-cc-cvc-input #container {
+        padding-top: 11px;
+        padding-bottom: 0px;
+      }
+    </style>
+
+    <iron-list id="list" items="{{items}}" as="item" style="height:100%" grid>
+
+      <template>
+       <paper-card class="rate">
+  <div class="rate-content">
+   <div class="card-content">
+              <paper-input label="Holder Name" value="[[item.holderName]]"></paper-input>
+
+
+              <div class="container flex-horizontal">
+                <div class="flexchild">
+                  <paper-input label="Expiry date" value="[[item.expiryDate]]"></paper-input>
+                </div>
+                <div class="flexchild">
+                  <paper-input label="Linked account" value="[[item.accountLinked]]"></paper-input>
+                </div>
+              </div>
+              <div class="container flex-horizontal">
+                <div class="flexchild">
+                  <gold-cc-input label="Visa" value="[[item.number]]"></gold-cc-input>
+                </div>
+                <div class="flexchild">
+                  <gold-cc-cvc-input required card-type="amex" value="[[item.cvc]]"></gold-cc-cvc-input></div>
+                </div>
+
+
+
+              </div>
+
+  </div>
+  <div class$="[[item.type]]"></div>
+</paper-card>
+      </template>
+    </iron-list>
+
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      Polymer({
+        'is': 'card-list',
+        'properties': {
+          'items': {
+            'type': Array,
+            'value': []
+          },
+
+        }
+      });
+    })();
+  </script>
+</dom-module>

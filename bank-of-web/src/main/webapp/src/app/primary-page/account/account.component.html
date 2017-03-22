@@ -1,5 +1,18 @@
-<account-list [items]="items" (refresh)="refreshAccount($event)" (openDetails)="openDetailsDialog($event)"></account-list>
+<app-drawer opened persistent="true">
+  <div role="listbox">
+    <paper-icon-item (click)="showAccounts()">
+      <iron-icon icon="inbox" item-icon></iron-icon>
+      Accounts
+    </paper-icon-item>
+    <paper-icon-item (click)="showCards()">
+      <iron-icon icon="star" item-icon></iron-icon>
+      Cards
+    </paper-icon-item>
 
+  </div>
+</app-drawer>
+<account-list *ngIf="showAc" [items]="items" (refresh)="refreshAccount($event)" (openDetails)="openDetailsDialog($event)"></account-list>
+<card-list *ngIf="showCa" [items]="cardItems"></card-list>
 <paper-dialog *ngIf="openAccount" id="accountDetails" modal [(opened)]="openDialogTrigger">
   <paper-input [value]="openAccount.number" disabled label="Account Number"></paper-input>
   <paper-input [value]="openAccount.balance" disabled label="Balance"></paper-input>
