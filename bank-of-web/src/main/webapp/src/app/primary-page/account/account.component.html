@@ -11,7 +11,8 @@
 
   </div>
 </app-drawer>
-<account-list *ngIf="showAc" [items]="items" (refresh)="refreshAccount($event)" (openDetails)="openDetailsDialog($event)"></account-list>
+<account-list *ngIf="showAc" [items]="items" (refresh)="refreshAccount($event)" (settingsAccount)="settingsAccount($event)"
+  (openDetails)="openDetailsDialog($event)"></account-list>
 <card-list *ngIf="showCa" [items]="cardItems"></card-list>
 <paper-dialog *ngIf="openAccount" id="accountDetails" modal [(opened)]="openDialogTrigger">
   <paper-input [value]="openAccount.number" disabled label="Account Number"></paper-input>
@@ -19,8 +20,11 @@
   <paper-input [value]="openAccount.currency" disabled label="Currency"></paper-input>
   <paper-input [value]="openAccount.status" disabled label="Status"></paper-input>
   <paper-input [value]="openAccount.type" disabled label="Type"></paper-input>
-  <div  class="paper-font-headline">Stats for last months</div>
-    <div class="paper-font-headline">{{sliderValue}} months: <paper-slider [(value)]="sliderValue" (change)="recalculateIncome()" pin snaps max="5"  max-markers="5" step="1"></paper-slider></div>
+  <div class="paper-font-headline">Stats for last months</div>
+  <div class="paper-font-headline">{{sliderValue}} months:
+    <paper-slider [(value)]="sliderValue" (change)="recalculateIncome()" pin snaps max="5" max-markers="5"
+      step="1"></paper-slider>
+  </div>
 
   <div *ngIf="balanceModel" class="paper-font-headline">Income: {{balanceModel.income}}</div>
   <div *ngIf="balanceModel" class="paper-font-headline">Outcome: {{balanceModel.outcome}}</div>
@@ -28,5 +32,16 @@
 
   <div class="buttons">
     <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+  </div>
+</paper-dialog>
+
+<paper-dialog id="accountSettingsDetails" modal [(opened)]="openSettingsDialogTrigger">
+  <paper-input label="Limit"></paper-input>
+  <paper-toggle-button checked></paper-toggle-button>
+  <div class="buttons">
+    <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+  </div>
+  <div class="buttons">
+    <paper-button class="custom indigo" dialog-confirm autofocus raised>Save changes</paper-button>
   </div>
 </paper-dialog>

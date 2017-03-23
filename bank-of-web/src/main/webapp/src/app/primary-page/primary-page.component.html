@@ -6,13 +6,18 @@
   </app-toolbar>
     <paper-icon-button [routerLink]="['/primaryPage/profile']" id="profileIcon"></paper-icon-button>
   <app-toolbar class="middle"> </app-toolbar>
-  <paper-tabs >
+  <paper-tabs *ngIf="customer">
     <paper-tab [routerLink]="['/primaryPage/account']">Accounts</paper-tab>
     <paper-tab [routerLink]="['/primaryPage/pay']">Pay and Transfer</paper-tab>
     <paper-tab [routerLink]="['/primaryPage/transaction']">Transactions</paper-tab>
     <paper-tab [routerLink]="['/primaryPage/contact']">Contact</paper-tab>
   </paper-tabs>
-
+  <paper-tabs *ngIf="!customer">
+    <paper-tab [routerLink]="['/primaryPage/adminUser']">User Admin</paper-tab>
+    <paper-tab [routerLink]="['/primaryPage/adminAccount']">Account Admin</paper-tab>
+    <paper-tab [routerLink]="['/primaryPage/adminTransaction']">Transaction Admin</paper-tab>
+    <paper-tab [routerLink]="['/primaryPage/adminInbox']">Inbox</paper-tab>
+  </paper-tabs>
 </app-header>
 
 <div class="primaryPageContent">  <router-outlet></router-outlet></div>

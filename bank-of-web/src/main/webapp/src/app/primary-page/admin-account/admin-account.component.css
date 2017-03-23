@@ -1,0 +1,10 @@
+#dialogAccountDetails{
+  min-height: 800px;
+  min-width: 1000px;
+}
+
+#dialogAccountDetails .buttons{
+  position: absolute;
+  bottom: 0px;
+  right:0px
+}

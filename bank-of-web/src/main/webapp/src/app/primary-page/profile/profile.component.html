@@ -1,37 +1,59 @@
-<div class="vertical layout center-justified">
-  <div class="horizontal layout" >
-    <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Firstname: </div>
-    <paper-input [(value)]="obj.firstName" disabled></paper-input>
+<div class="horizontal layout">
+  <div class="vertical layout center-justified">
+    <p-lightbox type="content">
+      <a href="#">
+        <paper-icon-button src="assets/images/me.jpg" id="profileThumb"></paper-icon-button>
+      </a>
+      <paper-icon-button src="assets/images/me.jpg" id="profileBig"></paper-icon-button>
+
+
+    </p-lightbox>
+    <p-fileUpload name="myfile[]" url="http://localhost:3000/upload" multiple="multiple" accept="image/*" auto="auto"></p-fileUpload>
   </div>
-  <div class="horizontal layout" style="margin-top: 20px">
-    <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Lastname: </div>
-    <paper-input [(value)]="obj.lastName" disabled></paper-input>
-  </div>
-  <div class="horizontal layout" style="margin-top: 20px">
-    <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Phone: </div>
-    <paper-input [(value)]="obj.phone" ></paper-input>
-  </div>
-  <div class="horizontal layout" style="margin-top: 20px">
-    <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Address: </div>
-    <paper-input [(value)]="obj.address"></paper-input>
-  </div>
-  <div class="horizontal layout" style="margin-top: 20px">
-    <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">CNP: </div>
-    <paper-input [(value)]="obj.CNP" disabled></paper-input>
-  </div>
+  <div class="vertical layout center-justified">
+    <div class="horizontal layout">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Firstname: </div>
+      <paper-input [(value)]="obj.firstName" disabled></paper-input>
+    </div>
     <div class="horizontal layout" style="margin-top: 20px">
-    <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Email: </div>
-    <paper-input [(value)]="obj.email" disabled><iron-icon icon="mail" prefix></iron-icon></paper-input>
-  </div>
-  <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Lastname: </div>
+      <paper-input [(value)]="obj.lastName" disabled></paper-input>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Phone: </div>
+      <paper-input [(value)]="obj.phone"></paper-input>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Address: </div>
+      <paper-input [(value)]="obj.address"></paper-input>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">CNP: </div>
+      <paper-input [(value)]="obj.CNP" disabled></paper-input>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Email: </div>
+      <paper-input [(value)]="obj.email" disabled>
+        <iron-icon icon="mail" prefix></iron-icon>
+      </paper-input>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
       <paper-button class="custom indigo" raised>Save changes</paper-button>
-    <paper-button class="custom indigo" raised>Change password</paper-button>
+      <paper-button class="custom indigo" raised (click)="openDetailsDialog($event)">Change password</paper-button>
+    </div>
   </div>
 </div>
 
 
-
-
-
-
-
+<paper-dialog id="accountDetails" modal [(opened)]="openDialogTrigger">
+  <paper-input label="Current password" type="password"></paper-input>
+  <paper-input label="New password" type="password"></paper-input>
+  <paper-input label="Repeat new password" type="password"></paper-input>
+    <div class="buttons">
+    <paper-button class="custom indigo" dialog-confirm autofocus raised>Change</paper-button>
+  </div>
+  
+  <div class="buttons">
+    <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+  </div>
+</paper-dialog>

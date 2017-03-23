@@ -20,9 +20,10 @@ export class AccountComponent implements OnInit {
   balanceModel: BalanceModel;
   sliderValue: Number = 1; private showAc: Boolean = true;
   private showCa: Boolean = false;
+  openSettingsDialogTrigger:Boolean=false;
   constructor(private accountService: AccountService) { }
 
-  ngOnInit() {
+  ngOnInit() {        this.items.push(new Account("23","23",12,"23",true,"23"));      this.items.push(new Account("23","23",12,"23",true,"23"));
     this.accountService.getAccounts().subscribe(
       data => {
         this.items = data;
@@ -54,6 +55,12 @@ export class AccountComponent implements OnInit {
       err => console.log("error"),
       () => console.log('Random Quote Complete')
     );
+
+  }
+
+  settingsAccount(data) {
+    let acc: Account = data.detail;
+this.openSettingsDialogTrigger=true;
 
   }
 

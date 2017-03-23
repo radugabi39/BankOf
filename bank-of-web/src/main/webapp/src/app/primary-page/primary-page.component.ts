@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrimaryPageComponent implements OnInit {
 
+  private customer:Boolean=false;
   constructor() { }
 
   ngOnInit() {

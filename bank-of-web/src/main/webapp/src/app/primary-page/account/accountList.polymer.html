@@ -60,6 +60,7 @@
               <div class="flexchild">
                 <paper-icon-button on-tap="openDetails" icon="pageview"></paper-icon-button>
                 <paper-icon-button on-tap="refreshAction" icon="refresh"></paper-icon-button>
+                <paper-icon-button on-tap="settingsAccount" icon="settings"></paper-icon-button>
               </div>
             </div>
           </div>
@@ -84,6 +85,8 @@
            this.fire('openDetails',ev.model.__data__.item);
         }, refreshAction: function (ev) {
           this.fire('refresh',ev.model.__data__.item);
+        }, settingsAccount: function (ev) {
+          this.fire('settingsAccount',ev.model.__data__.item);
         }
       });
     })();

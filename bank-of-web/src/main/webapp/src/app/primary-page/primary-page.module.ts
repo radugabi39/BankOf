@@ -10,12 +10,16 @@ import { ContactComponent } from './contact/contact.component';
 import { AccountComponent } from './account/account.component';
 import { PayComponent } from './pay/pay.component';
 import { TransactionComponent } from './transaction/transaction.component';
-import { DataTableModule, SharedModule, ListboxModule, StepsModule, InputTextareaModule, DropdownModule,CalendarModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, ListboxModule, StepsModule, InputTextareaModule, DropdownModule,CalendarModule,LightboxModule, FileUploadModule } from 'primeng/primeng';
 import { GMapModule } from 'primeng/primeng';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminAccountComponent } from './admin-account/admin-account.component';
+import { AdminTransactionComponent } from './admin-transaction/admin-transaction.component';
+import { AdminInboxComponent } from './admin-inbox/admin-inbox.component';
 @NgModule({
   imports: [
-    CommonModule, routing, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule,CalendarModule
+    CommonModule, routing, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule,CalendarModule ,LightboxModule, FileUploadModule
   ],
   declarations: [PrimaryPageComponent,
     PolymerElement('paper-input'),
@@ -35,12 +39,16 @@ import { ProfileComponent } from './profile/profile.component';
     PolymerElement('paper-dropdown-menu'),
     PolymerElement('paper-item'),
     PolymerElement('paper-icon-item'), PolymerElement('paper-radio-button'),
-    PolymerElement('paper-radio-group'), PolymerElement('gold-cc-cvc-input'), PolymerElement('gold-cc-input'),
+    PolymerElement('paper-radio-group'), PolymerElement('gold-cc-cvc-input'), PolymerElement('gold-cc-input'), PolymerElement('paper-toggle-button'),
     ContactComponent,
     AccountComponent,
     PayComponent,
     TransactionComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminUserComponent,
+    AdminAccountComponent,
+    AdminTransactionComponent,
+    AdminInboxComponent
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService]
 })
 export class PrimaryPageModule { }

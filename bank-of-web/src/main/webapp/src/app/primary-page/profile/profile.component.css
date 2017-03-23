@@ -1,0 +1,25 @@
+
+#profileThumb{
+     background-size:contain;
+     background-repeat:no-repeat;
+     width: 80px;
+     height: 160px;
+
+}
+
+#profileBig{
+     background-size:contain;
+     background-repeat:no-repeat;
+     width: 480px;
+     height: 680px;
+
+}#accountDetails{
+  min-height: 400px;
+  min-width: 500px;
+}
+
+#accountDetails .buttons{
+  position: absolute;
+  bottom: 0px;
+  right:0px
+}

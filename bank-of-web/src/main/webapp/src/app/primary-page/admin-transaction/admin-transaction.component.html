@@ -1,0 +1,21 @@
+<div class="horizontal layout center-justified">
+  <paper-input [value]="accNoToSearch" label="Account number to search for transaction"></paper-input>
+  <paper-button class="custom indigo" raised (click)="search()">Search</paper-button>
+</div>
+
+<div *ngIf="dialogTransactionGridDetailsTrigger" class="horizontal layout center-justified">
+  <p-dataTable [value]="tableData">
+    <p-column field="fromAccount" header="From Account"></p-column>
+    <p-column field="toAccount" header="To Account"></p-column>
+    <p-column field="date" header="Date"></p-column>
+    <p-column field="description" header="Description"></p-column>
+    <p-column field="transactionStatus" header="Transaction Status"></p-column>
+    <p-column field="transactionType" header="Transaction Type"></p-column>
+    <p-column field="amount" header="Amount"></p-column>
+    <p-column header="Actions">
+      <template let-col let-trans="rowData" pTemplate="body">
+        <paper-icon-button icon="pageview" (click)="testFunc(trans)"></paper-icon-button>
+      </template>
+    </p-column>
+  </p-dataTable>
+</div>
