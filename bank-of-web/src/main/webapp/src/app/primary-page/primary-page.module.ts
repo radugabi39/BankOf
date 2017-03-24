@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { ContactService } from './contact/contact.component.service';
 import { PayService } from './pay/pay.component.service';
 import { TransactionService } from './transaction/transaction.component.service';
 import { AccountService } from './account/account.component.service';
@@ -17,9 +19,10 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminTransactionComponent } from './admin-transaction/admin-transaction.component';
 import { AdminInboxComponent } from './admin-inbox/admin-inbox.component';
+import { FormsModule } from "@angular/forms";
 @NgModule({
   imports: [
-    CommonModule, routing, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule,CalendarModule ,LightboxModule, FileUploadModule
+    CommonModule, routing,BrowserModule ,FormsModule, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule,CalendarModule ,LightboxModule, FileUploadModule
   ],
   declarations: [PrimaryPageComponent,
     PolymerElement('paper-input'),
@@ -49,6 +52,6 @@ import { AdminInboxComponent } from './admin-inbox/admin-inbox.component';
     AdminAccountComponent,
     AdminTransactionComponent,
     AdminInboxComponent
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService]
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService]
 })
 export class PrimaryPageModule { }

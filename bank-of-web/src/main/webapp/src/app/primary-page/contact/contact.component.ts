@@ -1,3 +1,4 @@
+import { ContactService } from './contact.component.service';
 import { Component, OnInit } from '@angular/core';
 import { InputTextarea } from 'primeng/primeng';
 @Component({
@@ -6,13 +7,13 @@ import { InputTextarea } from 'primeng/primeng';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  body: String = "";
+  body: String = "tests";
   subject: String = "";
   openDialogTrigger: Boolean = false; 
   options: any; 
   resetMap: Boolean = false;
 
-  constructor() { }
+  constructor(private contactService:ContactService) { }
 
   ngOnInit() {
     this.options = {
@@ -30,5 +31,15 @@ export class ContactComponent implements OnInit {
   closeDialog() {
     this.openDialogTrigger = false;
     this.resetMap = false;
+  }
+
+    sendEmail() {
+        this.contactService.sendEmail(this.subject,this.body).subscribe(
+      data => {
+        var c=1
+      },
+      err => console.log("error"),
+      () => console.log('Random Quote Complete')
+    );
   }
 }

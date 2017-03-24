@@ -28,4 +28,14 @@ public class UserDAO extends GenericDAO {
 		}
 		return null;
 	}
+	
+	public User getUserByUsername(String userName) {
+		Query q = em.createQuery("select u from User u where u.userName=:userName");
+		q.setParameter("userName", userName);
+		List<User> toReturn = q.getResultList();
+		if (toReturn != null && toReturn.size() > 0) {
+			return toReturn.get(0);
+		}
+		return null;
+	}
 }
