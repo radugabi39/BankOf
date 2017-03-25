@@ -35,13 +35,12 @@
   </div>
 </paper-dialog>
 
-<paper-dialog id="accountSettingsDetails" modal [(opened)]="openSettingsDialogTrigger">
-  <paper-input label="Limit"></paper-input>
-  <paper-toggle-button checked></paper-toggle-button>
+<paper-dialog *ngIf="selectedAccToSave" id="accountSettingsDetails" modal [(opened)]="openSettingsDialogTrigger">
+  <paper-input label="Limit" [(value)]="selectedAccToSave.limit"></paper-input>
+  <paper-toggle-button checked [(active)]="selectedAccToSave.smsAlert"></paper-toggle-button>
+
   <div class="buttons">
     <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
-  </div>
-  <div class="buttons">
-    <paper-button class="custom indigo" dialog-confirm autofocus raised>Save changes</paper-button>
+    <paper-button class="custom indigo" dialog-confirm autofocus raised (click)=saveAccount($event)>Save changes</paper-button>
   </div>
 </paper-dialog>

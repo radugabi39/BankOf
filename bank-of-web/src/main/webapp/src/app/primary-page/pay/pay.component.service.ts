@@ -12,8 +12,8 @@ export class PayService {
 
   }
 
-    tryTransfer(amount:Number,fromAccount:String,destAcc:String,transDescription:String) {
-    return this.http.post(url + 'transaction/tryTransfer/',{"amount":amount,"fromAccount":fromAccount,"destAccount":destAcc,"transDescription":transDescription,}, { headers: this.globalService.headers })
+    tryTransfer(amount:Number,destAcc:String,fromAccount:String,transDescription:String,dateToPay:Date,provider:String) {
+    return this.http.post(url + 'transaction/tryTransfer/',{"amount":amount,"fromAccount":fromAccount,"destAccount":destAcc,"transDescription":transDescription,"dateToPay":dateToPay,"provider":provider,}, { headers: this.globalService.headers })
       .map(this.globalService.extractData);
   }
 }

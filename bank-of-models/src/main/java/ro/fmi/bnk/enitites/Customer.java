@@ -31,6 +31,7 @@ public class Customer {
 	private Date modificationDate;
 	private Boolean active;
 	private User user;
+	private Person person;
 	private Set<Account> accounts;
 
 	public Customer() {
@@ -38,7 +39,7 @@ public class Customer {
 	}
 
 	public Customer(Long id, String address1, String address2, String postalCode, String phone, Date creationDate,
-			Date modificationDate, CustomerType customerType, City city, Boolean active, User user,
+			Date modificationDate, CustomerType customerType, City city, Boolean active, User user, Person person,
 			Set<Account> accounts) {
 		super();
 		this.id = id;
@@ -52,6 +53,7 @@ public class Customer {
 		this.city = city;
 		this.active = active;
 		this.user = user;
+		this.setPerson(person);
 		this.accounts = accounts;
 	}
 
@@ -160,6 +162,17 @@ public class Customer {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PERSON_ID")
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	public Set<Account> getAccounts() {
 		return accounts;
@@ -168,4 +181,5 @@ public class Customer {
 	public void setAccounts(Set<Account> accounts) {
 		this.accounts = accounts;
 	}
+
 }

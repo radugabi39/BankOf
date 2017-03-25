@@ -39,16 +39,16 @@ public class TransactionServiceImpl implements TransactionService {
 	@Transactional
 	public String tryTransaction(TransferInputModel inpModel) {
 		try {
-			Account myAcc = accountDAO.getAccountENTByNo(inpModel.getFromAccount()).get(0);
-			if (inpModel.getDateToPay() != null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
+			Account myAcc = accountDAO.getAccountENTByNo(inpModel.getFromAccount());
+			if (myAcc.getBalance()!= null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
 				return "No funds";
 			}
-			if (inpModel != null && !inpModel.equals("")) {
+			if (inpModel.getDateToPay() != null && !inpModel.getDateToPay().equals("")) {
 				//SCHEDULE
 				return "OK";
 			} else {
 				String accNoF="";
-				if(inpModel.getProvider()!=null){
+				if(inpModel.getProvider()!=null && !inpModel.getProvider().equals("")){
 					if(inpModel.getProvider().equals("voda")){
 						accNoF=vodaNo;
 					}else 	if(inpModel.getProvider().equals("rds")){
@@ -59,7 +59,7 @@ public class TransactionServiceImpl implements TransactionService {
 				}else {
 					accNoF=inpModel.getDestAccount();
 				}
-				Account destAcc = accountDAO.getAccountENTByNo(inpModel.getDestAccount()).get(0);
+				Account destAcc = accountDAO.getAccountENTByNo(inpModel.getDestAccount());
 				if (!destAcc.getAccountStatus().getName().equals("OPEN")) {
 					return "Destination account is not active";
 				}

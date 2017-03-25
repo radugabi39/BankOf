@@ -33,13 +33,13 @@ public class Account {
 	private Currency currency;
 	//Savings 
 	private BigDecimal limitAmount;
-
+	private boolean smsAlert;
 	public Account() {
 		super();
 	}
 	public Account(Long id, BigDecimal balance, Integer interestRate, Boolean overDraft, AccountStatus accountStatus,
 			AccountType accountType, String accountNo, Customer customer, Date creationDate, Date modificationDate,
-			Boolean active,Currency currency,BigDecimal limitAmount) {
+			Boolean active,Currency currency,BigDecimal limitAmount,boolean smsAlert) {
 		super();
 		this.id = id;
 		this.balance = balance;
@@ -53,7 +53,8 @@ public class Account {
 		this.modificationDate = modificationDate;
 		this.active = active;
 		this.currency = currency;
-		this.setLimitAmount(limitAmount);
+		this.limitAmount = limitAmount;
+		this.setSmsAlert(smsAlert);
 	}
 
 	@Id
@@ -176,5 +177,13 @@ public class Account {
 	}
 	public void setLimitAmount(BigDecimal limitAmount) {
 		this.limitAmount = limitAmount;
+	}
+	
+	@Column(name = "SMSALERT")
+	public boolean isSmsAlert() {
+		return smsAlert;
+	}
+	public void setSmsAlert(boolean smsAlert) {
+		this.smsAlert = smsAlert;
 	}
 }

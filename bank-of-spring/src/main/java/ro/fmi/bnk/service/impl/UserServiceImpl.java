@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import ro.fmi.bnk.dao.repo.UserDAO;
 import ro.fmi.bnk.enitites.User;
+import ro.fmi.bnk.models.PasswordModel;
+import ro.fmi.bnk.models.UserModel;
 import ro.fmi.bnk.service.UserService;
 
 @Service("userService")
@@ -26,5 +28,20 @@ public class UserServiceImpl implements UserService{
 		return userDAO.checkUser(userName,password);
 		
 	}
+	@Override
+	public UserModel getCurrentUserData(String userName) {
+		return userDAO.getCurrentUserData(userName);
+	}
+	@Override
+	public void saveUserData(UserModel inpModel,String username) {
+		userDAO.saveUserData(inpModel,username);
+		
+	}
+	@Override
+	public String changePassword(PasswordModel inpModel,String username) {
+		return userDAO.changePassword(inpModel,username);
+		
+	}
+	
 
 }

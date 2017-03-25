@@ -83,7 +83,14 @@ export class PayComponent implements OnInit {
     this.firstPage = true;
     this.transIndex = 0;
   } finish() {
-    this.payService.tryTransfer(this.amount, this.destinationAcc, this.selItem, this.transactionDescr).subscribe(
+    if(this.monthlyPay=="one"){
+      this.monthlyDate=null;
+    }
+    if(this.showTransf==true){
+        this.monthlyDate=null;
+        this.provider=null;
+    }
+    this.payService.tryTransfer(this.amount, this.destinationAcc, this.selItem, this.transactionDescr,this.monthlyDate,this.provider).subscribe(
       data => {
         this.donePage = true;
         this.status = data["data"];

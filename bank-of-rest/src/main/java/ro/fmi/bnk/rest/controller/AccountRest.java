@@ -3,13 +3,16 @@ package ro.fmi.bnk.rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ro.fmi.bnk.models.AccountModel;
+import ro.fmi.bnk.models.AccountSaveModel;
 import ro.fmi.bnk.models.InOutComeModel;
+import ro.fmi.bnk.models.TransferInputModel;
 import ro.fmi.bnk.rest.utils.GenericListResponse;
 import ro.fmi.bnk.rest.utils.GenericResponse;
 import ro.fmi.bnk.service.AccountService;
@@ -88,6 +91,22 @@ public class AccountRest {
 			toReturn.setData(accountBean.getAccountsNo(userName));
 			toReturn.setStatus("OK");
 		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
+	
+	@RequestMapping(value = "/saveAccount", method = RequestMethod.POST,produces = "application/json")
+	@ResponseBody
+	public GenericResponse<Boolean> saveAccount(@RequestBody AccountSaveModel inpModel) {
+		GenericResponse<Boolean> toReturn = new GenericResponse<Boolean>();
+		try {
+			accountBean.saveAccount(inpModel);
+			toReturn.setStatus("OK");
+
+		} catch (Exception e) {
+
 			toReturn.setStatus("Exception Occured");
 			toReturn.setMessage(e.getMessage());
 		}

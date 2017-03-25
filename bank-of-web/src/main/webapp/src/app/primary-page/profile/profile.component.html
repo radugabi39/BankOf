@@ -1,4 +1,4 @@
-<div class="horizontal layout">
+<div *ngIf="obj" class="horizontal layout">
   <div class="vertical layout center-justified">
     <p-lightbox type="content">
       <a href="#">
@@ -38,7 +38,7 @@
       </paper-input>
     </div>
     <div class="horizontal layout" style="margin-top: 20px">
-      <paper-button class="custom indigo" raised>Save changes</paper-button>
+      <paper-button class="custom indigo" raised (click)="saveUserData()">Save changes</paper-button>
       <paper-button class="custom indigo" raised (click)="openDetailsDialog($event)">Change password</paper-button>
     </div>
   </div>
@@ -46,14 +46,12 @@
 
 
 <paper-dialog id="accountDetails" modal [(opened)]="openDialogTrigger">
-  <paper-input label="Current password" type="password"></paper-input>
-  <paper-input label="New password" type="password"></paper-input>
-  <paper-input label="Repeat new password" type="password"></paper-input>
+  <paper-input label="Current password" type="password" [(value)]="currPass"></paper-input>
+  <paper-input label="New password" type="password" [(value)]="newPass"></paper-input>
+  <paper-input label="Repeat new password" type="password" [(value)]="repPass"></paper-input>
+  <p style="color:red">{{message}}</p>
     <div class="buttons">
-    <paper-button class="custom indigo" dialog-confirm autofocus raised>Change</paper-button>
-  </div>
-  
-  <div class="buttons">
+    <paper-button class="custom indigo"  autofocus raised (click)="changePass()">Change</paper-button>
     <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
   </div>
 </paper-dialog>

@@ -1,6 +1,7 @@
 package ro.fmi.bnk.models;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class TransferInputModel {
 
@@ -10,11 +11,11 @@ public class TransferInputModel {
 	private String destAccount;
 	private String transDescription;
 	private String provider;
-	private Integer dateToPay;
+	private Date dateToPay;
 	public TransferInputModel() {
 		super();
 		}
-	public TransferInputModel(BigDecimal amount, String fromAccount, String destAccount, String transDescription, String provider, Integer dateToPay) {
+	public TransferInputModel(BigDecimal amount, String fromAccount, String destAccount, String transDescription, String provider, Date dateToPay) {
 		super();
 		this.amount = amount;
 		this.fromAccount = fromAccount;
@@ -55,10 +56,10 @@ public class TransferInputModel {
 	public void setTransDescription(String transDescription) {
 		this.transDescription = transDescription;
 	}
-	public Integer getDateToPay() {
+	public Date getDateToPay() {
 		return dateToPay;
 	}
-	public void setDateToPay(Integer dateToPay) {
+	public void setDateToPay(Date dateToPay) {
 		this.dateToPay = dateToPay;
 	}
 	public String getProvider() {

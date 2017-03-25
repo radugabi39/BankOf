@@ -9,6 +9,7 @@ import ro.fmi.bnk.dao.repo.AccountDAO;
 import ro.fmi.bnk.dao.repo.UserDAO;
 import ro.fmi.bnk.enitites.User;
 import ro.fmi.bnk.models.AccountModel;
+import ro.fmi.bnk.models.AccountSaveModel;
 import ro.fmi.bnk.models.InOutComeModel;
 import ro.fmi.bnk.service.AccountService;
 import ro.fmi.bnk.service.UserService;
@@ -47,5 +48,11 @@ public class AccountServiceImpl implements AccountService{
 	public List<String> getAccountsNo(String userName) {
 		return accountDAO.getAccountsNo(userName);
 
+	}
+
+	@Override
+	public void saveAccount(AccountSaveModel inpModel) {
+		accountDAO.saveAccount(inpModel);
+		
 	}
 }

@@ -10,9 +10,11 @@ public class AccountModel {
 	private String type;
 	private Boolean overdraft;
 	private String status;
-
+	private BigDecimal limit;
+	private Boolean smsAlert;
+	
 	public AccountModel(String accountNo, String currency, BigDecimal balance, String type, Boolean overdraft,
-			String status) {
+			String status,BigDecimal limit,Boolean smsAlert) {
 		super();
 		this.accountNo = accountNo;
 		this.currency = currency;
@@ -20,6 +22,9 @@ public class AccountModel {
 		this.type = type;
 		this.overdraft = overdraft;
 		this.status = status;
+		this.limit = limit;
+		this.smsAlert = smsAlert;
+
 	}
 
 	public String getAccountNo() {
@@ -68,6 +73,22 @@ public class AccountModel {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public BigDecimal getLimit() {
+		return limit;
+	}
+
+	public void setLimit(BigDecimal limit) {
+		this.limit = limit;
+	}
+
+	public Boolean getSmsAlert() {
+		return smsAlert;
+	}
+
+	public void setSmsAlert(Boolean smsAlert) {
+		this.smsAlert = smsAlert;
 	}
 
 }

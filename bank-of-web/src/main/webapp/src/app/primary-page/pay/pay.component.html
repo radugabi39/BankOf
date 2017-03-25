@@ -56,8 +56,14 @@
       </div>
     </paper-card>
     <paper-card *ngIf="!firstPage && donePage==false">
-      <p>
+      <p *ngIf="showTransf">
         You are about to transfer {{amount}} from your account ({{selItem}}) to {{destinationAcc}}.</p>
+
+          <p *ngIf=" showBi && monthlyPay=='one'">
+        You are about to pay {{amount}} from your account ({{selItem}}) to {{provider}}.</p>
+
+          <p *ngIf=" showBi && monthlyPay=='monthly'">
+        You are about to transfer {{amount}} from your account ({{selItem}}) to {{provider}} each {{monthlyDate}} of month.</p>
       <p>
         Description: {{transactionDescr}}
       </p>

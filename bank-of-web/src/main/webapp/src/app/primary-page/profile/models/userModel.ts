@@ -1,6 +1,6 @@
 
 	
-export class User {
+export class UserModel {
 
      firstName: string;
      lastName: string;
@@ -23,7 +23,8 @@ export class User {
                 this.country = country;
     }
 
-    static fromJSONArray(array: Array<Object>): User[] {
-        return array["data"].map(obj => new User(obj['firstName'], obj['lastName'], obj['phone'], obj['address'], obj['CNP'], obj['email'], obj['city'], obj['country']));
+    static fromJSONObj(inp: Array<Object>): UserModel {
+        let obj=inp["data"];
+        return new UserModel(obj['firstName'], obj['lastName'], obj['phone'], obj['address'], obj['CNP'], obj['email'], obj['city'], obj['country']);
     }
 }

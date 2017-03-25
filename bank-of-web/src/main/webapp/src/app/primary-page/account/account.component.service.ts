@@ -1,3 +1,4 @@
+import { CardModel } from './models/cardModel';
 import { BalanceModel } from './models/balance.model';
 import { GlobalService } from './../../global.functions';
 import { Account } from './models/accountModel';
@@ -36,6 +37,16 @@ export class AccountService {
     getActiveAccounts() {
     return this.http.get(url + 'account/getActiveAccounts/', { headers: this.globalService.headers })
       .map(this.globalService.extractData);
+  }
+
+      getCards() {
+    return this.http.get(url + 'card/getCards/', { headers: this.globalService.headers })
+       .map(res => CardModel.fromJSONArray(this.globalService.extractData(res)));
+  }
+
+        saveAccount(accNo:String,limit:Number,smsAlert:Boolean) {
+    return this.http.post(url + 'account/saveAccount/',{"accNo":accNo,"limit":limit,"smsAlert":smsAlert}, { headers: this.globalService.headers })
+        .map(this.globalService.extractData);
   }
   
 }

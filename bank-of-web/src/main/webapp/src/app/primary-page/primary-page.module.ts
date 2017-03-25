@@ -1,3 +1,4 @@
+import { ProfileService } from './profile/profile.component.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ContactService } from './contact/contact.component.service';
 import { PayService } from './pay/pay.component.service';
@@ -52,6 +53,6 @@ import { FormsModule } from "@angular/forms";
     AdminAccountComponent,
     AdminTransactionComponent,
     AdminInboxComponent
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService]
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService,ProfileService]
 })
 export class PrimaryPageModule { }

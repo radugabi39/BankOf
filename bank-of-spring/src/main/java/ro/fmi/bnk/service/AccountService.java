@@ -3,6 +3,7 @@ package ro.fmi.bnk.service;
 import java.util.List;
 
 import ro.fmi.bnk.models.AccountModel;
+import ro.fmi.bnk.models.AccountSaveModel;
 import ro.fmi.bnk.models.InOutComeModel;
 
 public interface AccountService {
@@ -17,4 +18,5 @@ public interface AccountService {
 	
 	List<String> getActiveAccounts(String userName);
 	
+	void saveAccount(AccountSaveModel inpModel);
 }

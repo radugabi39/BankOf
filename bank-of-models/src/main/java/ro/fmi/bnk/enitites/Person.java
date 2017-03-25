@@ -24,29 +24,28 @@ public class Person {
 	private String lastName;
 	private SexEnum sex;
 	private Date dob;
-	private Customer customer;
 	private Title title;
 	private Date creationDate;
 	private Date modificationDate;
 	private Boolean active;
-
+	private String CNP;
 	public Person() {
 		super();
 	}
 
-	public Person(Long id, String firstName, String lastName, SexEnum sex, Date dob, Customer customer, Title title,
-			Date creationDate, Date modificationDate, Boolean active) {
+	public Person(Long id, String firstName, String lastName, SexEnum sex, Date dob,  Title title,
+			Date creationDate, Date modificationDate, Boolean active, String CNP) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.sex = sex;
 		this.dob = dob;
-		this.customer = customer;
 		this.title = title;
 		this.creationDate = creationDate;
 		this.modificationDate = modificationDate;
 		this.active = active;
+		this.CNP = CNP;
 	}
 
 	@Id
@@ -97,15 +96,7 @@ public class Person {
 		this.dob = dob;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CUSTOMER_ID")
-	public Customer getCustomer() {
-		return customer;
-	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TITLE_ID")
@@ -144,6 +135,14 @@ public class Person {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	@Column(name = "CNP")
+	public String getCNP() {
+		return CNP;
+	}
+
+	public void setCNP(String cNP) {
+		CNP = cNP;
 	}
 
 }

@@ -21,9 +21,10 @@ export class AccountComponent implements OnInit {
   sliderValue: Number = 1; private showAc: Boolean = true;
   private showCa: Boolean = false;
   openSettingsDialogTrigger:Boolean=false;
+  selectedAccToSave: Account;
   constructor(private accountService: AccountService) { }
 
-  ngOnInit() {        this.items.push(new Account("23","23",12,"23",true,"23"));      this.items.push(new Account("23","23",12,"23",true,"23"));
+  ngOnInit() {        
     this.accountService.getAccounts().subscribe(
       data => {
         this.items = data;
@@ -32,12 +33,7 @@ export class AccountComponent implements OnInit {
       () => console.log('Random Quote Complete')
     );
     
-        this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'ad','type-image')); 
-            this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
-                this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','type-image')); 
-                    this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
-                        this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
-                            this.cardItems.push(new Card('Random Quote Complete', new Date(), 33, 'Random Quote Complete', 'Random Quote Complete','123')); 
+       
                             
   }
   refreshAccount(data) {
@@ -59,11 +55,20 @@ export class AccountComponent implements OnInit {
   }
 
   settingsAccount(data) {
-    let acc: Account = data.detail;
+    this.selectedAccToSave = data.detail;
 this.openSettingsDialogTrigger=true;
 
-  }
 
+  }
+saveAccount(data){
+    this.accountService.saveAccount(this.selectedAccToSave.number,this.selectedAccToSave.limit,this.selectedAccToSave.smsAlert).subscribe(
+      data => {
+          this.openSettingsDialogTrigger=false;
+      },
+      err => console.log("error"),
+      () => console.log('Random Quote Complete')
+    );
+}
 
   openDetailsDialog(data) {
     let acc: Account = data.detail;
@@ -111,6 +116,13 @@ this.openSettingsDialogTrigger=true;
       this.showCa = true;
       this.showAc = false;
     }
-
+    this.accountService.getCards().subscribe(
+      data => {
+        this.cardItems = data;
+      },
+      err => console.log("error"),
+      () => console.log('Random Quote Complete')
+    );
+    
   }
 }
