@@ -34,7 +34,45 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<TransactionTableModel> getTransactionsByAccNo(String accNo) {
 		return transactionDAO.getTransactionsByAccNo(accNo);
 	}
-
+	@Override
+	public List<TransactionTableModel> getAdminTransactionsByAccNo(String accNo) {
+		return transactionDAO.getAdminTransactionsByAccNo(accNo);
+	}
+	
+	@Override	
+	@Transactional
+	public String reverseTransaction(TransactionTableModel inpModel) {
+		try {
+			Account myAcc = accountDAO.getAccountENTByNo(inpModel.getToAccount());
+			if (myAcc.getBalance()!= null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
+				return "No funds";
+			}
+ 
+				String accNoF="";
+			
+				Account destAcc = accountDAO.getAccountENTByNo(inpModel.getFromAccount());
+				if (!destAcc.getAccountStatus().getName().equals("OPEN")) {
+					return "Destination account is not active";
+				}
+				myAcc.setBalance(myAcc.getBalance().subtract(inpModel.getAmount()));
+				destAcc.setBalance(destAcc.getBalance().add(inpModel.getAmount()));
+				Transaction newTrans = new Transaction();
+				newTrans.setAccount(myAcc);
+				newTrans.setDescription("Reversed transaction");
+				newTrans.setDestinationAccount(destAcc);
+				newTrans.setAmount(inpModel.getAmount());
+				newTrans.setTransactionType(transactionDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
+				newTrans.setTransactionStatus(transactionDAO.getEntityByName(TransactionStatus.class, "SUCCESS"));
+				newTrans.setCreationDate(new Date());
+				transactionDAO.persist(destAcc);
+				transactionDAO.persist(myAcc);
+				transactionDAO.persist(newTrans);
+				return "OK";
+			
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
 	@Override
 	@Transactional
 	public String tryTransaction(TransferInputModel inpModel) {

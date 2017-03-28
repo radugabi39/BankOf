@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Service;
 
 import ro.fmi.bnk.dao.repo.UserDAO;
@@ -17,7 +18,8 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserDAO userDAO;
-	
+	@Autowired
+	private MailSender mailSender;
 	@Override
 	public List<User> getAllUsers() {
 		return userDAO.getAllUsers();
@@ -42,6 +44,13 @@ public class UserServiceImpl implements UserService{
 		return userDAO.changePassword(inpModel,username);
 		
 	}
-	
-
+	@Override
+	public UserModel getUserDataByCNP(String cnp) {
+		return userDAO.getUserDataByCNP(cnp);
+	}
+	@Override
+	public void saveUserDataAdm(UserModel inpModel) {
+		userDAO.saveUserDataAdm(inpModel);
+		
+	}
 }

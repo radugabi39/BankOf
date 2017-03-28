@@ -18,4 +18,8 @@ public interface UserService {
 	void saveUserData(UserModel inpModel, String username);
 
 	String changePassword(PasswordModel inpModel, String username);
+
+	UserModel getUserDataByCNP(String cnp);
+
+	void saveUserDataAdm(UserModel inpModel);
 } 

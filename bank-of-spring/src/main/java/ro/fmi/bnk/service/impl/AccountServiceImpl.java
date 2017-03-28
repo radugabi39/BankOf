@@ -55,4 +55,16 @@ public class AccountServiceImpl implements AccountService{
 		accountDAO.saveAccount(inpModel);
 		
 	}
+	
+	@Override
+	public void saveAccountDetails(AccountModel inpModel) {
+		accountDAO.saveAccountDetails(inpModel);
+		
+	}
+	
+	@Override
+	public void inactivateAccount(String accNo) {
+		accountDAO.inactivateAccount(accNo);
+		
+	}
 }

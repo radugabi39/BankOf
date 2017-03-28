@@ -12,6 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import ro.fmi.bnk.dao.utils.GenericDAO;
 import ro.fmi.bnk.enitites.Account;
+import ro.fmi.bnk.enitites.AccountStatus;
+import ro.fmi.bnk.enitites.AccountType;
+import ro.fmi.bnk.enitites.Currency;
 import ro.fmi.bnk.models.AccountModel;
 import ro.fmi.bnk.models.AccountSaveModel;
 import ro.fmi.bnk.models.InOutComeModel;
@@ -110,6 +113,28 @@ public class AccountDAO extends GenericDAO {
 		Account toModify = getAccountENTByNo(inpModel.getAccNo());
 		toModify.setSmsAlert(inpModel.getSmsAlert());
 		toModify.setLimitAmount(inpModel.getLimit());
+		em.persist(toModify);		
+	}
+	
+	@Transactional
+	public void saveAccountDetails(AccountModel inpModel) {
+		Account toModify = getAccountENTByNo(inpModel.getAccountNo());
+		AccountStatus as= getEntityByName(AccountStatus.class, inpModel.getStatus());
+		AccountType at= getEntityByName(AccountType.class, inpModel.getType());
+		Currency curr= getEntityByName(Currency.class, inpModel.getCurrency());
+		toModify.setLimitAmount(inpModel.getLimit());
+		toModify.setBalance(inpModel.getBalance());
+		toModify.setOverDraft(inpModel.getOverdraft());
+		toModify.setCurrency(curr);
+		toModify.setAccountStatus(as);
+		toModify.setAccountType(at);
+		em.persist(toModify);		
+	}
+	
+	@Transactional
+	public void inactivateAccount(String accNo) {
+		Account toModify = getAccountENTByNo(accNo);
+		toModify.setActive(false);
 		em.persist(toModify);		
 	}
 }

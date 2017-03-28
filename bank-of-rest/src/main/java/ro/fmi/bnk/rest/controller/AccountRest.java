@@ -23,10 +23,10 @@ public class AccountRest {
 	@Autowired
 	private AccountService accountBean;
 
-	@RequestMapping(value = "/getAccounts", method = RequestMethod.GET,produces = "application/json")
+	@RequestMapping(value = "/getAccounts", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public GenericListResponse<AccountModel> getAccounts() {
-		String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		GenericListResponse<AccountModel> toReturn = new GenericListResponse<AccountModel>();
 		try {
 			toReturn.setData(accountBean.getAccounts(userName));
@@ -37,8 +37,8 @@ public class AccountRest {
 		}
 		return toReturn;
 	}
-	
-	@RequestMapping(value = "/getAccountByNo/{accNo}", method = RequestMethod.GET,produces = "application/json")
+
+	@RequestMapping(value = "/getAccountByNo/{accNo}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public GenericListResponse<AccountModel> getAccountByNo(@PathVariable String accNo) {
 		GenericListResponse<AccountModel> toReturn = new GenericListResponse<AccountModel>();
@@ -52,11 +52,10 @@ public class AccountRest {
 		return toReturn;
 	}
 
-	
-	@RequestMapping(value = "/getActiveAccounts", method = RequestMethod.GET,produces = "application/json")
+	@RequestMapping(value = "/getActiveAccounts", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public GenericListResponse<String> getActiveAccounts() {
-		String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		GenericListResponse<String> toReturn = new GenericListResponse<String>();
 		try {
 			toReturn.setData(accountBean.getActiveAccounts(userName));
@@ -67,10 +66,11 @@ public class AccountRest {
 		}
 		return toReturn;
 	}
-	
-	@RequestMapping(value = "/getInOutcomeFromLastMonths/{accNo}/{months}", method = RequestMethod.GET,produces = "application/json")
+
+	@RequestMapping(value = "/getInOutcomeFromLastMonths/{accNo}/{months}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public GenericResponse<InOutComeModel> getInOutcomeFromLastMonths(@PathVariable String accNo,@PathVariable int months) {
+	public GenericResponse<InOutComeModel> getInOutcomeFromLastMonths(@PathVariable String accNo,
+			@PathVariable int months) {
 		GenericResponse<InOutComeModel> toReturn = new GenericResponse<InOutComeModel>();
 		try {
 			toReturn.setData(accountBean.getInOutcomeFromLastMonths(months, accNo));
@@ -81,11 +81,11 @@ public class AccountRest {
 		}
 		return toReturn;
 	}
-	
-	@RequestMapping(value = "/getAccountsNo", method = RequestMethod.GET,produces = "application/json")
+
+	@RequestMapping(value = "/getAccountsNo", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public GenericListResponse<String> getAccountsNo() {
-		String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		GenericListResponse<String> toReturn = new GenericListResponse<String>();
 		try {
 			toReturn.setData(accountBean.getAccountsNo(userName));
@@ -96,8 +96,8 @@ public class AccountRest {
 		}
 		return toReturn;
 	}
-	
-	@RequestMapping(value = "/saveAccount", method = RequestMethod.POST,produces = "application/json")
+
+	@RequestMapping(value = "/saveAccount", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public GenericResponse<Boolean> saveAccount(@RequestBody AccountSaveModel inpModel) {
 		GenericResponse<Boolean> toReturn = new GenericResponse<Boolean>();
@@ -111,5 +111,37 @@ public class AccountRest {
 			toReturn.setMessage(e.getMessage());
 		}
 		return toReturn;
+	}
+
+	@RequestMapping(value = "/saveAccountDetails", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public GenericResponse<Boolean> saveAccountDetails(@RequestBody AccountModel inpModel) {
+		GenericResponse<Boolean> toReturn = new GenericResponse<Boolean>();
+		try {
+			accountBean.saveAccountDetails(inpModel);
+			toReturn.setData(true);
+		} catch (Exception e) {
+
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+
+	}
+	
+	@RequestMapping(value = "/removeAccount", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public GenericResponse<Boolean> removeAccount(@RequestBody String accNo) {
+		GenericResponse<Boolean> toReturn = new GenericResponse<Boolean>();
+		try {
+			accountBean.inactivateAccount(accNo);
+			toReturn.setData(true);
+		} catch (Exception e) {
+
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+
 	}
 }

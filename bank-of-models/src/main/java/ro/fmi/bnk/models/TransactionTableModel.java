@@ -12,6 +12,11 @@ public class TransactionTableModel {
 	private String transactionStatus;
 	private String transactionType;
 	private BigDecimal amount;
+	private Long id;
+
+	public TransactionTableModel() {
+		super();
+	}
 
 	public TransactionTableModel(String fromAccount, String toAccount, Date date, String description,
 			String transactionStatus, String transactionType, BigDecimal amount) {
@@ -23,6 +28,19 @@ public class TransactionTableModel {
 		this.transactionStatus = transactionStatus;
 		this.transactionType = transactionType;
 		this.setAmount(amount);
+	}
+
+	public TransactionTableModel(String fromAccount, String toAccount, Date date, String description,
+			String transactionStatus, String transactionType, BigDecimal amount, Long id) {
+		super();
+		this.fromAccount = fromAccount;
+		this.toAccount = toAccount;
+		this.date = date;
+		this.description = description;
+		this.transactionStatus = transactionStatus;
+		this.transactionType = transactionType;
+		this.setAmount(amount);
+		this.id = id;
 	}
 
 	public String getFromAccount() {
@@ -79,6 +97,14 @@ public class TransactionTableModel {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

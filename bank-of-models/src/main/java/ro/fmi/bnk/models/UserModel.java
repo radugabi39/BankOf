@@ -6,7 +6,7 @@ public class UserModel {
 	private String lastName;
 	private String phone;
 	private String address;
-	private String CNP;
+	private String cnp;
 	private String email;
 	private String city;
 	private String country;
@@ -14,14 +14,14 @@ public class UserModel {
 	public UserModel() {
 		super();
 	}
-	public UserModel(String firstName, String lastName, String phone, String address, String CNP, String email,
+	public UserModel(String firstName, String lastName, String phone, String address, String cnp, String email,
 			String city, String country) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.address = address;
-		this.CNP = CNP;
+		this.cnp = cnp;
 		this.email = email;
 		this.city = city;
 		this.country = country;
@@ -50,11 +50,11 @@ public class UserModel {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getCNP() {
-		return CNP;
+	public String getCnp() {
+		return cnp;
 	}
-	public void setCNP(String CNP) {
-		this.CNP = CNP;
+	public void setCnp(String cnp) {
+		this.cnp = cnp;
 	}
 	public String getEmail() {
 		return email;

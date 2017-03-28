@@ -12,7 +12,9 @@ public class AccountModel {
 	private String status;
 	private BigDecimal limit;
 	private Boolean smsAlert;
-	
+	public AccountModel(){
+		super();
+	}
 	public AccountModel(String accountNo, String currency, BigDecimal balance, String type, Boolean overdraft,
 			String status,BigDecimal limit,Boolean smsAlert) {
 		super();

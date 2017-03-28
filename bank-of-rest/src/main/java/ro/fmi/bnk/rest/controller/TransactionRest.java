@@ -49,4 +49,32 @@ public class TransactionRest {
 		}
 		return toReturn;
 	}
+	@RequestMapping(value = "/getAdminTransactionsByAccNo/{accNo}", method = RequestMethod.GET,produces = "application/json")
+	@ResponseBody
+	public GenericListResponse<TransactionTableModel> getAdminTransactionsByAccNo(@PathVariable String accNo) {
+		GenericListResponse<TransactionTableModel> toReturn = new GenericListResponse<TransactionTableModel>();
+		try {
+			toReturn.setData(transactionBean.getAdminTransactionsByAccNo(accNo));
+			toReturn.setStatus("OK");
+		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
+	
+	
+	@RequestMapping(value = "/reverseTransaction", method = RequestMethod.POST,produces = "application/json")
+	@ResponseBody
+	public GenericResponse<String> tryTransfer(@RequestBody TransactionTableModel inpModel) {
+		GenericResponse<String> toReturn = new GenericResponse<String>();
+		try {
+			toReturn.setData(transactionBean.reverseTransaction(inpModel));
+			toReturn.setStatus("OK");
+		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
 }

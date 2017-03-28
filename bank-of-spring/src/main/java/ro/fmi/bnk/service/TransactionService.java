@@ -9,4 +9,7 @@ public interface TransactionService {
 
 	List<TransactionTableModel> getTransactionsByAccNo(String accNo);
 	String tryTransaction(TransferInputModel inpModel);
+	List<TransactionTableModel> getAdminTransactionsByAccNo(String accNo);
+
+	String reverseTransaction(TransactionTableModel inp);
 }

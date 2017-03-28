@@ -24,5 +24,17 @@ public class TransactionDAO extends GenericDAO {
 		return toReturn;
 	}
 	
+	public List<TransactionTableModel> getAdminTransactionsByAccNo(String accNo) {
+		Query q = em.createQuery("select new ro.fmi.bnk.models.TransactionTableModel(fa.accountNo,da.accountNo,tr.creationDate,tr.description,ts.name,tt.name,tr.amount,tr.id) from Transaction tr"
+				+ " INNER JOIN tr.account fa"
+				+ " INNER JOIN tr.destinationAccount da"
+				+ " INNER JOIN tr.transactionStatus ts"
+				+ " INNER JOIN tr.transactionType tt"
+				+ " where da.accountNo=:accNo or fa.accountNo=:accNo");
+		q.setParameter("accNo", accNo);
+		List<TransactionTableModel> toReturn = q.getResultList();
+		return toReturn;
+	}
+	
 
 }

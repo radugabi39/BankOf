@@ -19,4 +19,8 @@ public interface AccountService {
 	List<String> getActiveAccounts(String userName);
 	
 	void saveAccount(AccountSaveModel inpModel);
+
+	void saveAccountDetails(AccountModel inpModel);
+
+	void inactivateAccount(String accNo);
 }
