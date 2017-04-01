@@ -3,14 +3,26 @@ package ro.fmi.bnk.models;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TransferInputModel {
 
-
+	@XmlElement(name = "amount")
 	private BigDecimal amount;
+	@XmlElement(name = "fromAccount")
 	private String fromAccount;
+	@XmlElement(name = "destAccount")
 	private String destAccount;
+	@XmlElement(name = "transDescription")
 	private String transDescription;
+	@XmlTransient
 	private String provider;
+	@XmlTransient
 	private Date dateToPay;
 	public TransferInputModel() {
 		super();

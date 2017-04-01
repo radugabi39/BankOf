@@ -1,5 +1,5 @@
 import { ProfileService } from './profile.component.service';
-import { User } from './models/userModel';
+import {  UserModel } from './models/userModel';
 import { Component, OnInit } from '@angular/core';
 import { Lightbox, LightboxModule } from 'primeng/primeng';
 @Component({
@@ -9,7 +9,7 @@ import { Lightbox, LightboxModule } from 'primeng/primeng';
 })
 export class ProfileComponent implements OnInit {
 
-  private obj: User;
+  private obj: UserModel;
   constructor(private profileService: ProfileService) { }
   private images: any[] = []; openDialogTrigger: Boolean = false;
   private currPass: String;

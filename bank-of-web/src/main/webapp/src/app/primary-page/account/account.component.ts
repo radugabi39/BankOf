@@ -1,4 +1,4 @@
-import { Card } from './models/cardModel';
+import { CardModel } from './models/cardModel';
 import { BalanceModel } from './models/balance.model';
 import { AccountService } from './account.component.service';
 import { ViewChild, Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
@@ -10,7 +10,7 @@ import { Account } from './models/accountModel';
 })
 export class AccountComponent implements OnInit {
 
-  items: Array<Account> = new Array<Account>(); cardItems: Array<Card> = new Array<Card>();
+  items: Array<Account> = new Array<Account>(); cardItems: Array<CardModel> = new Array<CardModel>();
   @Output()
   refresh: EventEmitter<any> = new EventEmitter();
   @Output()

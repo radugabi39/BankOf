@@ -1,8 +1,10 @@
+import { SchedulerModel } from './models/schedulerModel';
+import { TransactionTableModel } from './../transaction/model/transactionTableModel';
 import { Router } from '@angular/router';
 import { PayService } from './pay.component.service';
 import { AccountService } from './../account/account.component.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { StepsModule, MenuItem, SelectItem ,CalendarModule} from 'primeng/primeng';
+import { StepsModule, MenuItem, SelectItem, CalendarModule } from 'primeng/primeng';
 @Component({
   selector: 'app-pay',
   templateUrl: './pay.component.html',
@@ -24,16 +26,19 @@ export class PayComponent implements OnInit {
   private status: String;
   private showTransf: Boolean = true;
   private showBi: Boolean = false;
-  private  monthlyDate: Date;
-  private monthlyPay:String="one";   private provider:String="";  private en: any;
-  ngOnInit() {   this.en = {
-            firstDayOfWeek: 0,
-            dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"],
-            monthNames: [ "","","","","","","","","","","","", ],
-            monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
-        };
+  private showSched: Boolean = false;
+  private monthlyDate: Date;
+  private monthlyPay: String = "one"; private provider: String = ""; private en: any;
+  private tableData: SchedulerModel[];
+  ngOnInit() {
+  this.en = {
+    firstDayOfWeek: 0,
+    dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    monthNames: ["", "", "", "", "", "", "", "", "", "", "", "",],
+    monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  };
     this.items = [
       { label: 'Payment info' },
       { label: 'Payment details' }
@@ -65,6 +70,7 @@ export class PayComponent implements OnInit {
     if (this.showTransf == false) {
       this.showBi = false;
       this.showTransf = true;
+      this.showSched = false;
     }
     this.done()
   }
@@ -72,40 +78,69 @@ export class PayComponent implements OnInit {
     if (this.showBi == false) {
       this.showBi = true;
       this.showTransf = false;
+      this.showSched = false;
     }
     this.done()
   }
-  next() {
-    this.firstPage = false;
-    this.transIndex = 1;
-  }
-  back() {
-    this.firstPage = true;
-    this.transIndex = 0;
-  } finish() {
-    if(this.monthlyPay=="one"){
-      this.monthlyDate=null;
-    }
-    if(this.showTransf==true){
-        this.monthlyDate=null;
-        this.provider=null;
-    }
-    this.payService.tryTransfer(this.amount, this.destinationAcc, this.selItem, this.transactionDescr,this.monthlyDate,this.provider).subscribe(
-      data => {
-        this.donePage = true;
-        this.status = data["data"];
-      },
-      err => {
-        this.donePage = true;
-        this.status = "Error while transfering";
-        console.log("error")
-      },
-      () =>
-        console.log('Random Quote Complete')
-    );;
-  }
+  showSchedules() {
+    if (this.showSched == false) {
 
-  accountChanged(event) {
-    this.selItem = event.value;
+      this.payService.getSchedulers().subscribe(
+        data => {
+        this.showSched = true;
+          this.showBi = false;
+          this.showTransf = false;
+          this.tableData = data; 
+          this.done()
+        },
+        err => console.log("error"),
+        () => console.log('Random Quote Complete')
+      );
+    }
+
+  
+
+}
+inactivateSchedule(sc:SchedulerModel){
+        this.payService.inactiveSchedule(sc.id).subscribe(
+        data => {
+    sc["active"]=false;
+        },
+        err => console.log("error"),
+        () => console.log('Random Quote Complete')
+      );
+}
+next() {
+  this.firstPage = false;
+  this.transIndex = 1;
+}
+back() {
+  this.firstPage = true;
+  this.transIndex = 0;
+} finish() {
+  if (this.monthlyPay == "one") {
+    this.monthlyDate = null;
   }
+  if (this.showTransf == true) {
+    this.monthlyDate = null;
+    this.provider = null;
+  }
+  this.payService.tryTransfer(this.amount, this.destinationAcc, this.selItem, this.transactionDescr, this.monthlyDate, this.provider).subscribe(
+    data => {
+      this.donePage = true;
+      this.status = data["data"];
+    },
+    err => {
+      this.donePage = true;
+      this.status = "Error while transfering";
+      console.log("error")
+    },
+    () =>
+      console.log('Random Quote Complete')
+  );;
+}
+
+accountChanged(event) {
+  this.selItem = event.value;
+}
 }

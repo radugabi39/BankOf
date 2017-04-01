@@ -1,11 +1,15 @@
 package ro.fmi.bnk.service.impl;
 
+import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Schedule;
 import javax.transaction.Transactional;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,10 +19,16 @@ import ro.fmi.bnk.dao.repo.AccountDAO;
 import ro.fmi.bnk.dao.repo.TransactionDAO;
 import ro.fmi.bnk.enitites.Account;
 import ro.fmi.bnk.enitites.Scheduler;
+import ro.fmi.bnk.enitites.Task;
+import ro.fmi.bnk.enitites.TaskStatus;
+import ro.fmi.bnk.enitites.TaskType;
 import ro.fmi.bnk.enitites.Transaction;
 import ro.fmi.bnk.enitites.TransactionStatus;
 import ro.fmi.bnk.enitites.TransactionType;
+import ro.fmi.bnk.models.AccountSaveModel;
 import ro.fmi.bnk.models.SchedulerModel;
+import ro.fmi.bnk.models.TaskStatusEnum;
+import ro.fmi.bnk.models.TaskTypeEnum;
 import ro.fmi.bnk.models.TransactionTableModel;
 import ro.fmi.bnk.models.TransferInputModel;
 import ro.fmi.bnk.service.TransactionService;
@@ -130,10 +140,38 @@ public class TransactionServiceImpl implements TransactionService {
 				newTrans.setTransactionType(transactionDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
 				newTrans.setTransactionStatus(transactionDAO.getEntityByName(TransactionStatus.class, "SUCCESS"));
 				newTrans.setCreationDate(new Date());
+				if(myAcc.getLimitAmount().compareTo(inpModel.getAmount())==-1){
+					String xmlString = "";
+
+					try {
+						JAXBContext context = JAXBContext.newInstance(TransferInputModel.class);
+
+						Marshaller m = context.createMarshaller();
+
+						m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+						StringWriter sw = new StringWriter();
+						m.marshal(inpModel, sw);
+						xmlString = sw.toString();
+						Task newT= new Task();
+						TaskStatus ts= transactionDAO.getEntityByName(TaskStatus.class, TaskStatusEnum.PENDING.toString());
+						TaskType tt= transactionDAO.getEntityByName(TaskType.class, TaskTypeEnum.TRANSFER_HIGH_AMOUNT.toString());
+						newT.setActive(true);
+						newT.setDescription("High amount transfer");
+						newT.setTaskStatus(ts);
+						newT.setTaskType(tt);
+						newT.setTransactionModifications(xmlString);
+						transactionDAO.persist(newT);
+					} catch (JAXBException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return "transaction need to be approved";
+				}else{
 				transactionDAO.persist(destAcc);
 				transactionDAO.persist(myAcc);
 				transactionDAO.persist(newTrans);
-				return "OK";
+				return "OK";}
 			}
 		} catch (Exception e) {
 			return e.getMessage();

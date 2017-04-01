@@ -22,5 +22,7 @@ export class GlobalService {
 
     createAuthorizationHeader() {
         this.headers.append('Authorization', jwtKEY);
+        this.headers.append('Accept', 'application/json');
+        this.headers.append('Content-Type', 'application/json');
     }
 }

@@ -1,3 +1,7 @@
+import { AdminInboxService } from './admin-inbox/admin-inbox.component.service';
+import { AdminTransactionService } from './admin-transaction/admin-transaction.component.service';
+import { AdminAccountService } from './admin-account/admin-account.component.service';
+import { AdminUserService } from './admin-user/admin-user.component.service';
 import { ProfileService } from './profile/profile.component.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ContactService } from './contact/contact.component.service';
@@ -53,6 +57,6 @@ import { FormsModule } from "@angular/forms";
     AdminAccountComponent,
     AdminTransactionComponent,
     AdminInboxComponent
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService,ProfileService]
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService,ProfileService,AdminUserService,AdminAccountService,AdminTransactionService,AdminInboxService]
 })
 export class PrimaryPageModule { }

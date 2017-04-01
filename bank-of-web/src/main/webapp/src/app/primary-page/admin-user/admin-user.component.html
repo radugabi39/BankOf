@@ -1,9 +1,9 @@
 <div class="horizontal layout center-justified">
-  <paper-input style="width:200px" [value]="cnpToSearch" label="CNP to search"></paper-input>
+  <paper-input style="width:200px" [(value)]="cnpToSearch" label="CNP to search"></paper-input>
   <paper-button class="custom indigo" raised (click)="search()">Search</paper-button>
 </div>
 
-<paper-dialog id="dialogUserDetails" modal [(opened)]="dialogUserDetailsTrigger">
+<paper-dialog *ngIf="obj" id="dialogUserDetails" modal [(opened)]="dialogUserDetailsTrigger">
 <div class="vertical layout center-justified">
     <div class="horizontal layout">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Firstname: </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="horizontal layout" style="margin-top: 20px">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">CNP: </div>
-      <paper-input [(value)]="obj.CNP" ></paper-input>
+      <paper-input [(value)]="obj.cnp" disabled ></paper-input>
     </div>
     <div class="horizontal layout" style="margin-top: 20px">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Email: </div>
@@ -33,15 +33,17 @@
     </div>
         <div class="horizontal layout" style="margin-top: 20px">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Country: </div>
-      <paper-input [(value)]="obj.country" ></paper-input>
+      <custom-dropdown [items]="countryItems" [(selected)]="obj.country"  (selectedItem)="setCountry($event)"></custom-dropdown> 
     </div>
     <div class="horizontal layout" style="margin-top: 20px">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">City: </div>
-      <paper-input [(value)]="obj.city" ></paper-input>
+          <custom-dropdown [items]="cityItems" [(selected)]="obj.city" (selectedItem)="setCity($event)"></custom-dropdown> 
     </div>
+
+
     <div class="horizontal layout" style="margin-top: 20px">
-      <paper-button class="custom indigo" raised>Save changes</paper-button>
-      <paper-button class="custom indigo" raised >Reset password</paper-button>
+      <paper-button class="custom indigo" raised (click)="saveChanges()">Save changes</paper-button>
+      <paper-button class="custom indigo" raised (click)="resetPassword()">Reset password</paper-button>
          <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
     </div>
   </div>

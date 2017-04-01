@@ -8,11 +8,14 @@
       <iron-icon icon="star" item-icon></iron-icon>
       Pay Bills
     </paper-icon-item>
-
+    <paper-icon-item (click)="showSchedules()">
+      <iron-icon icon="star" item-icon></iron-icon>
+     Schedules
+    </paper-icon-item>
   </div>
 </app-drawer>
 
-<div class="vertical layout center-justified" style="padding-top: 30px;">
+<div *ngIf="!showSched "class="vertical layout center-justified" style="padding-top: 30px;">
   <div class="horizontal layout center-justified">
     <p-steps [model]="items" [readonly]="true" styleClass="steps-custom" [(activeIndex)]="transIndex"></p-steps>
   </div>
@@ -86,4 +89,22 @@
     <paper-button *ngIf="!firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="finish()">Finish</paper-button>
     <paper-button *ngIf="donePage" style="width:50px" class="custom indigo" raised (click)="done()">Done</paper-button>
   </div>
+</div>
+
+<div *ngIf="showSched "class="vertical layout center-justified" style="padding-top: 30px;">
+<div class="horizontal layout center-justified">
+
+  <p-dataTable [value]="tableData">
+    <p-column field="fromAccount" header="From Account"></p-column>
+    <p-column field="toAccount" header="To Account"></p-column>
+    <p-column field="nextPayment" header="Next payment"></p-column>
+
+       <p-column field="amount" header="Amount"></p-column>
+   <p-column field="" header="Actions">
+      <template let-col let-sc="rowData" pTemplate="body">
+        <paper-icon-button *ngIf="sc.active==true" icon="pageview" (click)="inactivateSchedule(sc)"></paper-icon-button>
+      </template></p-column>
+  </p-dataTable>
+</div>
+
 </div>

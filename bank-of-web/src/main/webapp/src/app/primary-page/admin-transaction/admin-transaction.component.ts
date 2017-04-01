@@ -1,3 +1,4 @@
+import { AdminTransactionService } from './admin-transaction.component.service';
 import { TransactionTableModel } from './../transaction/model/transactionTableModel';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,23 +8,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-transaction.component.css']
 })
 export class AdminTransactionComponent implements OnInit {
-    tableData: TransactionTableModel[];
- private dialogTransactionGridDetailsTrigger:boolean=false;
-  constructor() { }
+  tableData: TransactionTableModel[];
+  private accNoToSearch: String;
+  private dialogTransactionGridDetailsTrigger: boolean = false;
+  constructor(private adminTransactionService: AdminTransactionService) { }
 
   ngOnInit() {
-    this.tableData=[];
-    this.tableData.push(new TransactionTableModel("fr","toacc",new Date(),"descr","transstatus","transtype",123));
-    this.tableData.push(new TransactionTableModel("fr","toacc",new Date(),"descr","transstatus","transtype",123));
-  }
-search(data){
-this.dialogTransactionGridDetailsTrigger=true;
-  // after search wait 1 sec with background image
-}
 
-  
-testFunc(data){
-this.dialogTransactionGridDetailsTrigger=true;
-  // after search wait 1 sec with background image
-}
+  }
+  search(data) {
+
+    this.adminTransactionService.getAdminTransactionsByAccNo(this.accNoToSearch).subscribe(
+      data => {
+            this.tableData = data;
+        this.dialogTransactionGridDetailsTrigger = true;
+      },
+      err => console.log("error"),
+      () => console.log('Random Quote Complete')
+    );
+  }
+
+
+  reverseTransaction(data) {
+
+    this.adminTransactionService.reverseTransaction(    data).subscribe(
+      data => {
+
+      },
+      err => console.log("error"),
+      () => console.log('Random Quote Complete')
+    );
+    // after search wait 1 sec with background image
+  }
 }

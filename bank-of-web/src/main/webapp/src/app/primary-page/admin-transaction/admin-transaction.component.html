@@ -1,5 +1,5 @@
 <div class="horizontal layout center-justified">
-  <paper-input [value]="accNoToSearch" label="Account number to search for transaction"></paper-input>
+  <paper-input [(value)]="accNoToSearch" label="Account number to search for transaction"></paper-input>
   <paper-button class="custom indigo" raised (click)="search()">Search</paper-button>
 </div>
 
@@ -14,7 +14,7 @@
     <p-column field="amount" header="Amount"></p-column>
     <p-column header="Actions">
       <template let-col let-trans="rowData" pTemplate="body">
-        <paper-icon-button icon="pageview" (click)="testFunc(trans)"></paper-icon-button>
+        <paper-icon-button *ngIf="trans.transactionStatus=='SUCCESS'" icon="pageview" (click)="reverseTransaction(trans)"></paper-icon-button>
       </template>
     </p-column>
   </p-dataTable>

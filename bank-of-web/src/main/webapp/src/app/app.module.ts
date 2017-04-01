@@ -12,6 +12,7 @@ import { LoginComponent } from './user-authentication/login/login.component';
 import { RegisterComponent } from './user-authentication/register/register.component';
 import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
 import { HttpModule } from '@angular/http';
+
 @NgModule({
   imports: [ BrowserModule,FormsModule ,routing,HttpModule,UserAuthenticationModule,PrimaryPageModule ],
   declarations: [

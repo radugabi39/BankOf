@@ -25,9 +25,11 @@ public class Task {
 	private TaskType taskType;
 	private String transactionModifications;
 	private Boolean active;
-
+	private User claimedByUser;
+	public Task() {
+		super();}
 	public Task(Long id, String name, String description, Date creationDate, Date modificationDate,
-			TaskStatus taskStatus, TaskType taskType, String transactionModifications, Boolean active) {
+			TaskStatus taskStatus, TaskType taskType, String transactionModifications, Boolean active,User claimedByUser) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,6 +40,7 @@ public class Task {
 		this.taskType = taskType;
 		this.transactionModifications = transactionModifications;
 		this.active = active;
+		this.setClaimedByUser(claimedByUser);
 	}
 
 	@Id
@@ -121,6 +124,14 @@ public class Task {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CLAIMEDBYUSER_ID")
+	public User getClaimedByUser() {
+		return claimedByUser;
 	}
+	public void setClaimedByUser(User claimedByUser) {
+		this.claimedByUser = claimedByUser;
+	}
+	
 
 }

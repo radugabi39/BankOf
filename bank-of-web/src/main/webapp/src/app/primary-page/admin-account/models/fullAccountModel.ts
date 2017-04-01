@@ -2,26 +2,27 @@
 	
 export class FullAccount {
 
-     number: string;
+     accountNo: string;
      currency: string;
      balance: Number;
      type: string;
-     overDraft: Boolean;
+     overdraft: Boolean;
      status: string;
-     limitAmount:Number;
+     limit:Number;
 
 	
-    constructor( number: string, currency: string, balance: Number, type: string, overDraft: Boolean, status: string,limitAmount:Number) {
-        this.number = number;
+    constructor( accountNo: string, currency: string, balance: Number, type: string, overdraft: Boolean, status: string,limit:Number) {
+        this.accountNo = accountNo;
         this.currency = currency;
         this.balance = balance;
         this.type = type;
-        this.overDraft = overDraft;
+        this.overdraft = overdraft;
         this.status = status;
-        this.limitAmount = limitAmount;
+        this.limit = limit;
     }
 
-    static fromJSONArray(array: Array<Object>): FullAccount[] {
-        return array["data"].map(obj => new FullAccount(obj['accountNo'], obj['currency'], obj['balance'], obj['type'], obj['overdraft'], obj['status'], obj['limitAmount']));
+    static fromJSONObj(inp: Array<Object>): FullAccount {
+        let obj = inp["data"][0];
+      return new FullAccount(obj['accountNo'], obj['currency'], obj['balance'], obj['type'], obj['overdraft'], obj['status'], obj['limit'])
     }
 }

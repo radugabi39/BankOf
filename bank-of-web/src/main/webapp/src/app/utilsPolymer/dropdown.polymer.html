@@ -1,0 +1,42 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-list/iron-list.html">
+<dom-module id="custom-dropdown">
+  <template>
+    <paper-dropdown-menu>
+      <paper-listbox class="dropdown-content" attr-for-selected="label" selected="{{selected}}" on-iron-select="_itemSelected">
+        <template is="dom-repeat" items="{{items}}">
+          <paper-item label="{{item}}">{{item}}</paper-item>
+        </template>
+      </paper-listbox>
+    </paper-dropdown-menu>
+
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      Polymer({
+        'is': 'custom-dropdown',
+        'properties': {
+          'items': {
+            'type': Array,
+            'value': [],
+            'notify': true
+          },
+          'selected': {
+            'type': String,
+            'notify': true
+          }
+        }, _itemSelected: function (e) {
+          var selectedItem = e.target.selectedItem;
+          if (selectedItem) {
+            this.fire('selectedItem', selectedItem.innerText);
+
+          }
+        },
+        publish: {
+          selected: null
+        }
+      });
+    })();
+  </script>
+</dom-module>

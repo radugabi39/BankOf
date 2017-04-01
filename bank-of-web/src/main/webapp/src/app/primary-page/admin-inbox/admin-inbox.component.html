@@ -1,3 +1,20 @@
-<p>
-  admin-inbox works!
-</p>
+<div class="vertical layout center-justified" style="padding-top: 30px;">
+<div class="horizontal layout center-justified">
+
+  <p-dataTable [value]="tableData">
+    <p-column field="description" header="Description"></p-column>
+    <p-column field="creationDate" header="Creation Date"></p-column>
+    <p-column field="taskStatus" header="Task Status"></p-column>
+
+       <p-column field="taskType" header="Task Type"></p-column>
+   <p-column field="" header="Actions">
+      <template let-col let-sc="rowData" pTemplate="body">
+        <paper-icon-button *ngIf="sc.taskStatus=='PENDING'" icon="pageview" (click)="claimTask(sc)"></paper-icon-button>
+         <paper-icon-button *ngIf="sc.taskStatus=='CLAIMED'" icon="search" (click)="approveTask(sc)"></paper-icon-button>
+      </template>
+      </p-column>
+  </p-dataTable>
+</div>
+
+</div>
+
