@@ -21,6 +21,10 @@ export class AdminInboxService {
         return this.http.get(url + 'task/getPendingTasks/' , { headers: this.globalService.headers })
             .map(res => TaskModel.fromJSONArray(this.globalService.extractData(res)));
     }
+        getUserName() {
+        return this.http.get(url + 'user/getUserName/' , { headers: this.globalService.headers })
+            .map(this.globalService.extractData);
+    }
     claimTask(id:Number) {
         return this.http.post(url + 'task/claimTask/',id , { headers: this.globalService.headers })
             .map(this.globalService.extractData);
@@ -30,5 +34,8 @@ export class AdminInboxService {
             .map(this.globalService.extractData);
     }
 
+    getKey(){
+      return  this.globalService.getKey();
+    }
   
 }

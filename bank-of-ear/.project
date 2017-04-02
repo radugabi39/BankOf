@@ -3,6 +3,7 @@
 	<name>bank-of-pom</name>
 	<comment></comment>
 	<projects>
+		<project>bank-of-spring</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

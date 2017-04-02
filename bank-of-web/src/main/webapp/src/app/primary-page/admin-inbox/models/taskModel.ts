@@ -21,4 +21,7 @@ taskType:String;
     static fromJSONArray(array: Array<Object>): TaskModel[] {
         return array["data"].map(obj => new TaskModel(obj['id'], obj['description'], obj['creationDate'], obj['taskStatus'], obj['taskType']));
     }
+        static fromJSONArrayWS(array: Array<Object>): TaskModel[] {
+        return array.map(obj => new TaskModel(obj['id'], obj['description'], obj['creationDate'], obj['taskStatus'], obj['taskType']));
+    }
 }

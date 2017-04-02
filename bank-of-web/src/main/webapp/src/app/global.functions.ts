@@ -1,4 +1,4 @@
-import { jwtKEY } from './global';
+import { key } from './global';
 import { Injectable } from "@angular/core";
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -21,8 +21,12 @@ export class GlobalService {
     }
 
     createAuthorizationHeader() {
-        this.headers.append('Authorization', jwtKEY);
+          this.headers=new Headers();
+        this.headers.append('Authorization', key());
         this.headers.append('Accept', 'application/json');
         this.headers.append('Content-Type', 'application/json');
+    }
+    getKey():string{
+        return key();
     }
 }

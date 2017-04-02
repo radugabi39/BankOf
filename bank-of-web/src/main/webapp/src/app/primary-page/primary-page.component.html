@@ -4,7 +4,15 @@
   <app-toolbar class="right">
 
   </app-toolbar>
-    <paper-icon-button [routerLink]="['/primaryPage/profile']" id="profileIcon"></paper-icon-button>
+    
+<paper-menu-button id="menuIcon">
+  <paper-icon-button  class="dropdown-trigger" id="profileIcon" [style.background-image]="'url(http://localhost:8080/img/' + profileImage + ')'"></paper-icon-button>
+  <paper-menu class="dropdown-content">
+     <paper-item  [routerLink]="['/primaryPage/profile']">View Profile</paper-item>
+    <paper-item  [routerLink]="['/user/login']" (click)=logout()>Log out</paper-item>
+
+  </paper-menu>
+</paper-menu-button>
   <app-toolbar class="middle"> </app-toolbar>
   <paper-tabs *ngIf="customer">
     <paper-tab [routerLink]="['/primaryPage/account']">Accounts</paper-tab>

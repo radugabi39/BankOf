@@ -28,12 +28,16 @@ public class TokenAuthenticationService {
 
     public Authentication getAuthentication(HttpServletRequest request)
     {
+    	
         String token = request.getHeader(headerString);
+        if(request.getPathInfo().equals("/reloadTasks")){
+        	token = request.getParameter("token");
+        }
         if(token != null)
         {
             String username = Jwts.parser()
                         .setSigningKey(secret)
-                        .parseClaimsJws("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpYm1Vc2VyIiwiZXhwIjoxNDkxOTExNjk3fQ.3-KYnf4O2YAsEt0ZcsUS5SzKkivLN353oZv7SpWK-uDpgY1LshgtH92WsSp2frdHNZfhoxJFK-_Oi8l1fm8gGw")
+                        .parseClaimsJws(token)
                         .getBody()
                         .getSubject();
             if(username != null) 

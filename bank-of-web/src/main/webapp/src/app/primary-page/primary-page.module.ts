@@ -1,3 +1,4 @@
+import { PrimaryPageService } from './primary-page.component.service';
 import { AdminInboxService } from './admin-inbox/admin-inbox.component.service';
 import { AdminTransactionService } from './admin-transaction/admin-transaction.component.service';
 import { AdminAccountService } from './admin-account/admin-account.component.service';
@@ -46,6 +47,7 @@ import { FormsModule } from "@angular/forms";
     PolymerElement('paper-listbox'),
     PolymerElement('paper-dropdown-menu'),
     PolymerElement('paper-item'),
+        PolymerElement('paper-menu-button'),
     PolymerElement('paper-icon-item'), PolymerElement('paper-radio-button'),
     PolymerElement('paper-radio-group'), PolymerElement('gold-cc-cvc-input'), PolymerElement('gold-cc-input'), PolymerElement('paper-toggle-button'),
     ContactComponent,
@@ -57,6 +59,6 @@ import { FormsModule } from "@angular/forms";
     AdminAccountComponent,
     AdminTransactionComponent,
     AdminInboxComponent
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService,ProfileService,AdminUserService,AdminAccountService,AdminTransactionService,AdminInboxService]
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService,ProfileService,AdminUserService,AdminAccountService,AdminTransactionService,AdminInboxService,PrimaryPageService]
 })
 export class PrimaryPageModule { }

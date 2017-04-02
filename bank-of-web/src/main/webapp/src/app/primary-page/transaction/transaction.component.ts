@@ -11,6 +11,7 @@ import { SelectItem } from 'primeng/primeng'
 })
 export class TransactionComponent implements OnInit {
   accounts: SelectItem[];
+  accNoSelected:String;
   tableData: TransactionTableModel[];
   constructor(private transactionService: TransactionService, private accountService: AccountService) { }
 
@@ -29,6 +30,7 @@ export class TransactionComponent implements OnInit {
 
   }
   accountChanged(event) {
+    this.accNoSelected=event.value;
     this.transactionService.getTransactionsByAccNo(event.value).subscribe(
       data => {
         this.tableData = data;
@@ -36,5 +38,18 @@ export class TransactionComponent implements OnInit {
       err => console.log("error"),
       () => console.log('Random Quote Complete')
     );
+  }  downloadFile(data){
+    var blob = new Blob([(<any>data)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    var url= window.URL.createObjectURL(blob);
+    window.open(url);
+    console.log();
+}
+  downloadExcell(){
+        this.transactionService.downloadExcell(this.accNoSelected).subscribe(
+ data => 
+ this.downloadFile(data)),//console.log(data),
+                  error =>
+                   console.log("Error downloading the file."),
+                  () => console.log('Completed file download.');
   }
 }

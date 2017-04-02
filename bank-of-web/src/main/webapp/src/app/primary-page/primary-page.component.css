@@ -23,15 +23,24 @@
     top: 190px;
     overflow: auto;
 }
-
-#profileIcon{
-     position: fixed;
+#menuIcon{
+           position: fixed;
      top:20px;
      right:20px;
-     background-image: url(assets/images/me.jpg); 
+}
+#profileIcon{
+
+
      background-size:contain;
      background-repeat:no-repeat;
      width: 80px;
      height: 80px;
      border-radius: 50%;
+}
+
+paper-item{
+              font-family: 'Signika', sans-serif;
+        font-weight: 300;
+        color: #545454;
+        font-size: 16px;
 }

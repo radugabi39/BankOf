@@ -12,7 +12,7 @@ public class CounterHandler extends TextWebSocketHandler {
 
     // This will send only to one client(most recently connected)
     public void counterIncrementedCallback(int counter) {
-        System.out.println("Trying to send:" + counter);
+//        System.out.println("Trying to send:" + counter);
         if (session != null && session.isOpen()) {
             try {
                 System.out.println("Now sending:" + counter);
@@ -21,7 +21,7 @@ public class CounterHandler extends TextWebSocketHandler {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Don't have open session to send:" + counter);
+//            System.out.println("Don't have open session to send:" + counter);
         }
     }
 

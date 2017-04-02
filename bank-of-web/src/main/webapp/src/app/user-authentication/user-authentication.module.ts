@@ -1,3 +1,6 @@
+import { FormsModule } from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import { GlobalService } from './../global.functions';
 import { routing } from './../app.routing';
 import { PolymerElement } from '@vaadin/angular2-polymer';
 import { SharedModule } from './../shared.module';
@@ -18,6 +21,6 @@ import { UserAuthenticationComponent } from './user-authentication.component';
     PolymerElement('paper-tabs'),
     PolymerElement('paper-tab'),
     ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],providers:[GlobalService]
 })
 export class UserAuthenticationModule { }

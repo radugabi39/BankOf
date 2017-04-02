@@ -17,11 +17,11 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableScheduling
 public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
-    CounterHandler counterHandler;
+    TaskSocket taskSocket;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(counterHandler, "/counter").setAllowedOrigins("*");
+        registry.addHandler(taskSocket, "/reloadTasks").setAllowedOrigins("*");
     }
 
 }

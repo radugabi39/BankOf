@@ -10,12 +10,12 @@ public class UserModel {
 	private String email;
 	private String city;
 	private String country;
-	
+	private String imageURL;
 	public UserModel() {
 		super();
 	}
 	public UserModel(String firstName, String lastName, String phone, String address, String cnp, String email,
-			String city, String country) {
+			String city, String country, String imageURL) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -25,6 +25,8 @@ public class UserModel {
 		this.email = email;
 		this.city = city;
 		this.country = country;
+		this.setImageURL(imageURL);
+		
 	}
 	public String getFirstName() {
 		return firstName;
@@ -73,5 +75,11 @@ public class UserModel {
 	}
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 }

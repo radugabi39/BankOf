@@ -1,8 +1,14 @@
 package ro.fmi.bnk.rest.controller;
 
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 
 import ro.fmi.bnk.enitites.User;
 import ro.fmi.bnk.models.PasswordModel;
@@ -125,4 +136,54 @@ public class UserRest {
 		}
 		return toReturn;
 	}
+	
+	@RequestMapping(value = "/getProfileImage", method = RequestMethod.GET)
+	@ResponseBody
+	public GenericResponse<String> getProfileImage() {
+		GenericResponse<String> toReturn = new GenericResponse<String>();
+		String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+		try {
+			toReturn.setData(utilsService.getProfileImage(userName));
+			toReturn.setStatus("OK");
+		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
+	@RequestMapping(value = "/getUserName", method = RequestMethod.GET)
+	@ResponseBody
+	public GenericResponse<String> getUserName() {
+		GenericResponse<String> toReturn = new GenericResponse<String>();
+		String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+		try {
+			toReturn.setData(userName);
+			toReturn.setStatus("OK");
+		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
+	 @RequestMapping(value = "/uploadProfileImage", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	    public GenericResponse<String> uploadProfileImage(HttpServletRequest request, HttpServletResponse response) throws IOException
+	    {
+			GenericResponse<String> toReturn = new GenericResponse<String>();
+			String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			//		     HttpServletRequest originalRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+//		     MultipartHttpServletRequest multiPartRequest = new DefaultMultipartHttpServletRequest(originalRequest);
+		       Iterator<String> iterator = multipartRequest.getFileNames();
+		     
+		     MultipartFile file = multipartRequest.getFile(iterator.next());
+		     utilsService.savePictureToDisk(file, userName);
+			try {
+				
+			} catch (Exception e) {
+				toReturn.setStatus("Exception Occured");
+				toReturn.setMessage(e.getMessage());
+			}
+			return toReturn;
+
+	    }
 }

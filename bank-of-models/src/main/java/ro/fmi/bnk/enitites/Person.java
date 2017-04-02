@@ -29,12 +29,13 @@ public class Person {
 	private Date modificationDate;
 	private Boolean active;
 	private String CNP;
+	private String imageURL;
 	public Person() {
 		super();
 	}
 
 	public Person(Long id, String firstName, String lastName, SexEnum sex, Date dob,  Title title,
-			Date creationDate, Date modificationDate, Boolean active, String CNP) {
+			Date creationDate, Date modificationDate, Boolean active, String CNP,String imageURL) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -46,7 +47,10 @@ public class Person {
 		this.modificationDate = modificationDate;
 		this.active = active;
 		this.CNP = CNP;
+		this.imageURL = imageURL;
 	}
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -143,6 +147,14 @@ public class Person {
 
 	public void setCNP(String cNP) {
 		CNP = cNP;
+	}
+	@Column(name = "IMAGEURL")
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 }

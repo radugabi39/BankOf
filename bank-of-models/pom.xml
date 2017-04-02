@@ -12,6 +12,7 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>3.6.0.Final</version>
 			<scope>provided</scope>
+			
 		</dependency>
 	</dependencies>
 	<build>

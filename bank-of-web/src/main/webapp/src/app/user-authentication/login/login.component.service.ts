@@ -1,3 +1,6 @@
+
+
+import { setKey } from './../../global';
 import { Injectable } from "@angular/core";
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -14,7 +17,11 @@ export class LoginService {
   private extractData(res: Response) {
     let body;
 
-    // check if empty, before call json
+    if(res.status==200){
+        let authToken=res.headers.get("Authorization")
+        setKey(authToken.substring(7,authToken.length))
+
+    }
     if (res.text()) {
         body = res.json();
     }

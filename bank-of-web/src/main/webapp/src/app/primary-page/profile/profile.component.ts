@@ -1,5 +1,5 @@
 import { ProfileService } from './profile.component.service';
-import {  UserModel } from './models/userModel';
+import { UserModel } from './models/userModel';
 import { Component, OnInit } from '@angular/core';
 import { Lightbox, LightboxModule } from 'primeng/primeng';
 @Component({
@@ -42,6 +42,9 @@ export class ProfileComponent implements OnInit {
       () => console.log('Random Quote Complete')
     );
   }
+  customizeRequest(data) {
+    data["xhr"].setRequestHeader('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpYm1Vc2VyIiwiZXhwIjoxNDkxOTgxMjY3fQ.Nn0fGnJwqsFr27bFUIX3R-SbwiTE-iTt1NWvDJW0X0ctT9KROiQzHSN5SvqiTY55vWgLJthTJ9UpQMA8EjwXow');
+  }
 
   changePass() {
     if (this.newPass !== this.repPass) {
@@ -50,7 +53,7 @@ export class ProfileComponent implements OnInit {
     { this.message = ""; }
     this.profileService.changePassword(this.newPass, this.currPass).subscribe(
       data => {
-          this.message=data["data"];
+        this.message = data["data"];
       },
       err => console.log("error"),
       () => console.log('Random Quote Complete')

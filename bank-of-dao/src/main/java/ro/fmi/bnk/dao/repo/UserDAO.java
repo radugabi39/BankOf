@@ -73,7 +73,7 @@ public class UserDAO extends GenericDAO {
 	
 	public UserModel getCurrentUserData(String userName) {
 
-		Query q = em.createQuery("select new ro.fmi.bnk.models.UserModel(pers.firstName,pers.lastName,cust.phone,cust.address1,pers.CNP,us.email,ct.name,cnt.name) from Customer cust "
+		Query q = em.createQuery("select new ro.fmi.bnk.models.UserModel(pers.firstName,pers.lastName,cust.phone,cust.address1,pers.CNP,us.email,ct.name,cnt.name,pers.imageURL) from Customer cust "
 				+ " INNER JOIN cust.user us "
 				+ " INNER JOIN cust.person pers "
 				+ " INNER JOIN cust.city ct "
@@ -118,7 +118,7 @@ public class UserDAO extends GenericDAO {
 	
 	public UserModel getUserDataByCNP(String cnp) {
 
-		Query q = em.createQuery("select new ro.fmi.bnk.models.UserModel(pers.firstName,pers.lastName,cust.phone,cust.address1,pers.CNP,us.email,ct.name,cnt.name) from Customer cust "
+		Query q = em.createQuery("select new ro.fmi.bnk.models.UserModel(pers.firstName,pers.lastName,cust.phone,cust.address1,pers.CNP,us.email,ct.name,cnt.name,pers.imageURL) from Customer cust "
 				+ " INNER JOIN cust.user us "
 				+ " INNER JOIN cust.person pers "
 				+ " INNER JOIN cust.city ct "
@@ -147,5 +147,30 @@ public class UserDAO extends GenericDAO {
 		em.persist(cust);
 		em.persist(pers);
 		em.persist(user);
+	}
+	
+	public String getProfileImage(String userName) {
+		Query q = em.createQuery("select pers.imageURL from Customer cust "
+				+ " inner join cust.person pers"
+				+ " inner join cust.user u"
+				+ " where u.userName=:userName");
+		q.setParameter("userName", userName);
+		List<String> toReturn = q.getResultList();
+		if (toReturn != null && toReturn.size() > 0) {
+			return toReturn.get(0);
+		}
+		return null;
+	}
+	public Person getPersonByUserName(String userName) {
+		Query q = em.createQuery("select pers from Customer cust "
+				+ " inner join cust.person pers"
+				+ " inner join cust.user u"
+				+ " where u.userName=:userName");
+		q.setParameter("userName", userName);
+		List<Person> toReturn = q.getResultList();
+		if (toReturn != null && toReturn.size() > 0) {
+			return toReturn.get(0);
+		}
+		return null;
 	}
 }

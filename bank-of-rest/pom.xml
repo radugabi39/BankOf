@@ -19,7 +19,11 @@
 			<groupId>bank.of</groupId>
 			<artifactId>bank-of-spring</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency><dependency>
+   <groupId>commons-fileupload</groupId>
+   <artifactId>commons-fileupload</artifactId>
+   <version>1.3</version> <!-- makesure correct version here -->
+</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

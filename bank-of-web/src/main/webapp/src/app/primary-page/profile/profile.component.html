@@ -2,13 +2,13 @@
   <div class="vertical layout center-justified">
     <p-lightbox type="content">
       <a href="#">
-        <paper-icon-button src="assets/images/me.jpg" id="profileThumb"></paper-icon-button>
+        <paper-icon-button [style.background-image]="'url(http://localhost:8080/img/' + obj.imageURL + ')'" id="profileThumb"></paper-icon-button>
       </a>
-      <paper-icon-button src="assets/images/me.jpg" id="profileBig"></paper-icon-button>
+      <paper-icon-button [style.background-image]="'url(http://localhost:8080/img/' + obj.imageURL + ')'" id="profileBig"></paper-icon-button>
 
 
     </p-lightbox>
-    <p-fileUpload name="myfile[]" url="http://localhost:3000/upload" multiple="multiple" accept="image/*" auto="auto"></p-fileUpload>
+    <p-fileUpload name="myfile[]" url="http://localhost:8080/bank-of-rest/user/uploadProfileImage" multiple="multiple" accept="image/*" auto="auto" (onBeforeSend)="customizeRequest($event)"></p-fileUpload>
   </div>
   <div class="vertical layout center-justified">
     <div class="horizontal layout">
