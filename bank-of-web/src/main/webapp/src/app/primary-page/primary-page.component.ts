@@ -8,7 +8,7 @@ import { setKey } from './../global';
 })
 export class PrimaryPageComponent implements OnInit {
 
-  private customer:Boolean=false          ;
+  private customer:Boolean=true          ;
   private profileImage:String;
   constructor(private primaryPageService:PrimaryPageService) { }
 
