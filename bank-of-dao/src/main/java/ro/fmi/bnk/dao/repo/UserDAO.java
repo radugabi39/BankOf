@@ -173,4 +173,17 @@ public class UserDAO extends GenericDAO {
 		}
 		return null;
 	}
+	
+	public Boolean checkIfUserIsEmployee(String userName) {
+		Query q = em.createQuery("select emp.id from Employee emp"
+				+ "	INNER JOIN emp.user u "
+				+ " where u.userName=:userName");
+		q.setParameter("userName", userName);
+		List<Long> toReturn = q.getResultList();
+		if (toReturn != null && toReturn.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+	
 }

@@ -7,7 +7,7 @@ import { url } from './../global';
 
 @Injectable()
 export class PrimaryPageService {
-
+     userCustomer:Boolean;
     constructor(private http: Http, private globalService: GlobalService) {
 
     }
@@ -17,5 +17,11 @@ export class PrimaryPageService {
             .map(this.globalService.extractData);
     }
 
-  
+    setUserCustomer(val:Boolean){
+        this.userCustomer=val;
+    }
+
+    getUserCustomer(){
+        return !this.userCustomer;
+    }
 }

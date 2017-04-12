@@ -8,9 +8,12 @@ import { setKey } from './../global';
 })
 export class PrimaryPageComponent implements OnInit {
 
-  private customer:Boolean=true          ;
+  private customer:Boolean=false          ;
   private profileImage:String;
-  constructor(private primaryPageService:PrimaryPageService) { }
+  constructor(private primaryPageService:PrimaryPageService) {
+
+    this.customer=primaryPageService.getUserCustomer();
+   }
 
   ngOnInit() {
 

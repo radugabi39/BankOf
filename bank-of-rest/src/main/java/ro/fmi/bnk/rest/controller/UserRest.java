@@ -186,4 +186,18 @@ public class UserRest {
 			return toReturn;
 
 	    }
+	 @RequestMapping(value = "/checkIfUserIsEmployee/{userName}", method = RequestMethod.GET)
+		@ResponseBody
+		public GenericResponse<Boolean> checkIfUserIsEmployee(@PathVariable String userName) {
+			GenericResponse<Boolean> toReturn = new GenericResponse<Boolean>();
+//			String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+			try {
+				toReturn.setData(userBean.checkIfUserIsEmployee(userName));
+				toReturn.setStatus("OK");
+			} catch (Exception e) {
+				toReturn.setStatus("Exception Occured");
+				toReturn.setMessage(e.getMessage());
+			}
+			return toReturn;
+		}
 }

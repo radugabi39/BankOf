@@ -22,4 +22,6 @@ public interface UserService {
 	UserModel getUserDataByCNP(String cnp);
 
 	void saveUserDataAdm(UserModel inpModel);
+
+	Boolean checkIfUserIsEmployee(String userName);
 } 

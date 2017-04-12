@@ -53,4 +53,10 @@ public class UserServiceImpl implements UserService{
 		userDAO.saveUserDataAdm(inpModel);
 		
 	}
+	
+	@Override
+	public Boolean checkIfUserIsEmployee(String userName) {
+		return userDAO.checkIfUserIsEmployee(userName);
+		
+	}
 }

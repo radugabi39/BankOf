@@ -4,28 +4,24 @@ import { setKey } from './../../global';
 import { Injectable } from "@angular/core";
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { GlobalService } from "app/global.functions";
 @Injectable()
 export class LoginService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,private globalService:GlobalService) { }
 
   tryLogin(username: String, password: String) {
   return  this.http.post('http://localhost:8080/bank-of-rest/login', { "username": username, "password": password })
-      .map(this.extractData);
+      .map(this.globalService.extractData);
 
   }
-  private extractData(res: Response) {
-    let body;
 
-    if(res.status==200){
-        let authToken=res.headers.get("Authorization")
-        setKey(authToken.substring(7,authToken.length))
+    checkIfUserIsEmp(username: String) {
+  return  this.http.get('http://localhost:8080/bank-of-rest/user/checkIfUserIsEmployee/'+username, { headers: this.globalService.headers })
+      .map(this.globalService.extractData);
 
-    }
-    if (res.text()) {
-        body = res.json();
-    }
+  }
 
-    return body || {};
-}
+
+ 
 }
