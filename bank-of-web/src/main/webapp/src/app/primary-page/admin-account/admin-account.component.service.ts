@@ -18,19 +18,23 @@ export class AdminAccountService {
 
     getAccountByNo(accNo: String) {
         return this.http.get(url + 'account/getAccountByNo/' + accNo, { headers: this.globalService.headers })
-            .map(res => FullAccount.fromJSONObj(this.globalService.extractData(res)));
+            .map(res => FullAccount.fromJSONObj(this.globalService.extractData(res)))
+      .catch(err => this.globalService.handleError(err));
     }
     getNomData(nom: String) {
         return this.http.get(url + 'utils/getNomData/' + nom, { headers: this.globalService.headers })
-            .map(this.globalService.extractData);
+            .map(this.globalService.extractData)
+      .catch(err => this.globalService.handleError(err));
     }
     saveAccountDetails(inp: FullAccount) {
         return this.http.post(url + 'account/saveAccountDetails/', JSON.stringify(inp), { headers: this.globalService.headers })
-            .map(this.globalService.extractData);
+            .map(this.globalService.extractData)
+      .catch(err => this.globalService.handleError(err));
     }
 
        removeAccount(accNo: String) {
         return this.http.post(url + 'account/removeAccount/' ,accNo, { headers: this.globalService.headers })
-            .map(this.globalService.extractData);
+            .map(this.globalService.extractData)
+      .catch(err => this.globalService.handleError(err));
     }
 }

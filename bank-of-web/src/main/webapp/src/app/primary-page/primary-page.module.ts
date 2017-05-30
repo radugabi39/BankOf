@@ -45,6 +45,7 @@ import { FormsModule } from "@angular/forms";
     PolymerElement('paper-dialog'),
     PolymerElement('paper-slider'),
     PolymerElement('paper-listbox'),
+       PolymerElement('paper-material'),
     PolymerElement('paper-dropdown-menu'),
     PolymerElement('paper-item'),
         PolymerElement('paper-menu-button'),

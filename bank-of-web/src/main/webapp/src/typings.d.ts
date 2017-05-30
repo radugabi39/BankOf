@@ -2,3 +2,4 @@
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
 declare module 'stompjs';
 declare module 'sockjs-client';
+declare module 'google-maps';

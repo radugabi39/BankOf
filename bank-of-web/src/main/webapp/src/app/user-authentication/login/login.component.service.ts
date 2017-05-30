@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { GlobalService } from "app/global.functions";
+
 @Injectable()
 export class LoginService {
 
@@ -12,7 +13,7 @@ export class LoginService {
 
   tryLogin(username: String, password: String) {
   return  this.http.post('http://localhost:8080/bank-of-rest/login', { "username": username, "password": password })
-      .map(this.globalService.extractData);
+      .map(this.loginHeader);
 
   }
 
@@ -23,5 +24,17 @@ export class LoginService {
   }
 
 
+    public loginHeader(res: Response) {
+        let body;
+        let key:String=res.headers.get("Authorization")
+       setKey(key.substr(7,key.length))
+        // check if empty, before call json
+
+        if (res.text()) {
+            body = res.json();
+        }
+
+        return body || {};
+    }
  
 }

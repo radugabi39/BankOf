@@ -24,9 +24,11 @@
         .ui-steps.steps-custom .ui-steps-item .ui-steps-title {
             color: #555555;
         }
+
+ 
           paper-card{
+              width:500px;
             text-align: left!important;
           }
-        
- 
+
    

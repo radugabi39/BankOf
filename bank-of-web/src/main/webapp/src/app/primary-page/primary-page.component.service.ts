@@ -14,7 +14,8 @@ export class PrimaryPageService {
 
         getProfileImage() {
         return this.http.get(url + 'user/getProfileImage/' , { headers: this.globalService.headers })
-            .map(this.globalService.extractData);
+            .map(this.globalService.extractData)
+      .catch(err => this.globalService.handleError(err));
     }
 
     setUserCustomer(val:Boolean){

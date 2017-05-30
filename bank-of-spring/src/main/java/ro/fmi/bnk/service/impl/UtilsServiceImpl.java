@@ -90,7 +90,7 @@ public class UtilsServiceImpl implements UtilsService {
 
 	@Override
 	@Transactional
-	public void savePictureToDisk(MultipartFile file, String userName) {
+	public String savePictureToDisk(MultipartFile file, String userName) {
 		Person pers = userDAO.getPersonByUserName(userName);
 		String fileName = pers.getCNP() + "_" + new Timestamp(System.currentTimeMillis()).getTime() + "."
 				+ file.getOriginalFilename().split("\\.")[1];
@@ -99,6 +99,7 @@ public class UtilsServiceImpl implements UtilsService {
 
 		try {
 			file.transferTo(new File(System.getProperty("jboss.home.dir") + "\\images\\" + fileName));
+			return fileName;
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,7 +108,7 @@ public class UtilsServiceImpl implements UtilsService {
 			e.printStackTrace();
 		}
 
-		// return userDAO.getProfileImage(userName);
+		return null;
 	}
 
 	// ParsePropertyException, InvalidFormatException,

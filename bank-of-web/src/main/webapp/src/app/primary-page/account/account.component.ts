@@ -28,9 +28,8 @@ export class AccountComponent implements OnInit {
     this.accountService.getAccounts().subscribe(
       data => {
         this.items = data;
-      },
-      err => console.log("error"),
-      () => console.log('Random Quote Complete')
+      }
+ 
     );
     
        

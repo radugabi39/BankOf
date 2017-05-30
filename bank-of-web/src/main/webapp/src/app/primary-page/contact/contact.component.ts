@@ -1,31 +1,52 @@
+import { BranchLocationModel } from './../account/models/branchLocationModel';
 import { ContactService } from './contact.component.service';
 import { Component, OnInit } from '@angular/core';
 import { InputTextarea } from 'primeng/primeng';
+import { Message } from "primeng/components/common/api";
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  body: String = "tests";
+  body: String = "";
   subject: String = "";
-  openDialogTrigger: Boolean = false; 
-  options: any; 
+  openDialogTrigger: Boolean = false;
+  options: any;
   resetMap: Boolean = false;
+  overlays: any[] = [];
+  msgs: Message[] = [];
+  infoWindow: any;
+  constructor(private contactService: ContactService) {
 
-  constructor(private contactService:ContactService) { }
+  }
 
   ngOnInit() {
     this.options = {
-      center: { lat: 36.890257, lng: 30.707417 },
+      center: { lat: 44.426767, lng: 26.102538 },
       zoom: 8
     };
+
+
   }
   openLocationDialog() {
     this.openDialogTrigger = true;
+    this.infoWindow = new  window["google"].maps.InfoWindow();
     let context = this
+    this.contactService.getBranchLocation().subscribe(
+      data => {
+        for (let obj of data) {
+          context.overlays.push(new window["google"].maps.Marker({ position: { lat: obj["lat"], lng: obj["long"] }, title: obj["name"] }));
+        }
+      });
+
     window.setTimeout(function () {
+
       context.resetMap = true;
+
+
+
     }, 100)
   }
   closeDialog() {
@@ -33,13 +54,29 @@ export class ContactComponent implements OnInit {
     this.resetMap = false;
   }
 
-    sendEmail() {
-        this.contactService.sendEmail(this.subject,this.body).subscribe(
+  sendEmail() {
+    this.contactService.sendEmail(this.subject, this.body).subscribe(
       data => {
-        var c=1
+        var c = 1
       },
       err => console.log("error"),
       () => console.log('Random Quote Complete')
     );
+  }
+  handleOverlayClick(event) {
+    this.msgs = [];
+    let isMarker = event.overlay.getTitle != undefined;
+
+    if (isMarker) {
+      let title = event.overlay.getTitle();
+      this.infoWindow.setContent('' + title + '');
+      this.infoWindow.open(event.map, event.overlay);
+      event.map.setCenter(event.overlay.getPosition());
+
+      this.msgs.push({ severity: 'info', summary: 'Marker Selected', detail: title });
+    }
+    else {
+      this.msgs.push({ severity: 'info', summary: 'Shape Selected', detail: '' });
+    }
   }
 }

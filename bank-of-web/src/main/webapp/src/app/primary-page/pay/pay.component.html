@@ -1,89 +1,104 @@
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <app-drawer opened persistent="true">
   <div role="listbox">
     <paper-icon-item (click)="showTransfer()">
-      <iron-icon icon="inbox" item-icon></iron-icon>
+      <iron-icon icon="editor:attach-money" item-icon></iron-icon>
       Transfer
     </paper-icon-item>
     <paper-icon-item (click)="showBills()">
-      <iron-icon icon="star" item-icon></iron-icon>
+      <iron-icon icon="hardware:phonelink" item-icon></iron-icon>
       Pay Bills
     </paper-icon-item>
     <paper-icon-item (click)="showSchedules()">
-      <iron-icon icon="star" item-icon></iron-icon>
-     Schedules
+      <iron-icon icon="schedule" item-icon></iron-icon>
+      Schedules
     </paper-icon-item>
   </div>
 </app-drawer>
 
-<div *ngIf="!showSched "class="vertical layout center-justified" style="padding-top: 30px;">
+<div *ngIf="!showSched " class="vertical layout center-justified" style="padding-top: 30px;">
   <div class="horizontal layout center-justified">
     <p-steps [model]="items" [readonly]="true" styleClass="steps-custom" [(activeIndex)]="transIndex"></p-steps>
   </div>
-  <div class="horizontal layout center-justified">
-    <paper-card *ngIf="firstPage && donePage==false">
-      <div class="horizontal layout">
-        <p style="width:250px;">My Accounts: </p>
-        <p-dropdown [options]="accounts" (onChange)="accountChanged($event)" [(ngModel)]="selItem" placeholder="Select an account"
-          [style]="{'width':'150px'}" ngDefaultControl></p-dropdown>
-      </div>
-      <div class="horizontal layout" *ngIf="showTransf">
-        <p style="width:250px;padding-top:25px;">Destination Account: </p>
-        <paper-input [(value)]="destinationAcc"></paper-input>
-      </div>
-      <div class="horizontal layout" *ngIf="showBi">
-        <p style="width:250px;padding-top:25px;">Destination Provider: </p>
-        <paper-radio-group [(selected)]="provider">
-          <paper-radio-button name="voda">Vodafone</paper-radio-button>
-          <paper-radio-button name="rds">Rds</paper-radio-button>
-          <paper-radio-button name="enel">Enel</paper-radio-button>
-        </paper-radio-group>
-      </div>
-      <div class="horizontal layout" *ngIf="showBi">
-        <p style="width:250px;padding-top:25px;">Payment type: </p>
-        <paper-radio-group [(selected)]="monthlyPay">
-          <paper-radio-button name="one">One Time</paper-radio-button>
-          <paper-radio-button name="monthly">Monthly</paper-radio-button>
-        </paper-radio-group>
-      </div>
-      <div class="horizontal layout" *ngIf="showBi && monthlyPay=='monthly'">
-        <p style="width:250px;padding-top:25px;">Date of month: </p>
-        <p-calendar [(ngModel)]="monthlyDate" [locale]="en" dateFormat="dd.yy"></p-calendar>
-      </div>
-      <div class="horizontal layout">
-        <p style="width:250px;padding-top:25px;">Transaction Description: </p>
-        <paper-input [(value)]="transactionDescr"></paper-input>
-      </div>
-      <div class="horizontal layout">
-        <p style="width:250px;padding-top:25px;" type="number">Amount: </p>
-        <paper-input [(value)]="amount"></paper-input>
-      </div>
-    </paper-card>
-    <paper-card *ngIf="!firstPage && donePage==false">
-      <p *ngIf="showTransf">
-        You are about to transfer {{amount}} from your account ({{selItem}}) to {{destinationAcc}}.</p>
+  <div class="horizontal layout center-justified" style="padding-top:50px">
+    <paper-material elevation="3" animated=true>
+      <paper-card *ngIf="firstPage && donePage==false" style="margin-top:0px;padding:15px">
+        <div class="horizontal layout">
+          <p style="width:250px;">My Accounts: <iron-icon *ngIf="(selItem=='' || selItem==null) && notAll==true" style="fill:red" icon="warning" item-icon> ></iron-icon> </p>
+          <p-dropdown [options]="accounts" (onChange)="accountChanged($event)" [(ngModel)]="selItem" placeholder="Select an account"
+            [style]="{'width':'150px'}" ngDefaultControl></p-dropdown>
+        </div>
+        <div class="horizontal layout" *ngIf="showTransf">
+           
+          <p style="width:250px;padding-top:25px;">Destination Account:   </p>
+          <paper-input [(value)]="destinationAcc">
+             <iron-icon *ngIf="(destinationAcc=='' || destinationAcc==null) && notAll==true" style="fill:red" icon="warning" item-icon suffix> </iron-icon>
+          </paper-input>
+        </div>
+        <div class="horizontal layout" *ngIf="showBi">
+          <p style="width:250px;padding-top:25px;">Destination Provider: <iron-icon *ngIf="(provider=='' || provider==null) && notAll==true" style="fill:red" icon="warning" item-icon></iron-icon> </p>
+          <paper-radio-group [(selected)]="provider">
+            <paper-radio-button name="voda">Vodafone</paper-radio-button>
+            <paper-radio-button name="rds">Rds</paper-radio-button>
+            <paper-radio-button name="enel">Enel</paper-radio-button>
+          </paper-radio-group>
+        </div>
+        <div class="horizontal layout" *ngIf="showBi">
+          <p style="width:250px;padding-top:25px;">Payment type: </p>
+          <paper-radio-group [(selected)]="monthlyPay">
+            <paper-radio-button name="one">One Time</paper-radio-button>
+            <paper-radio-button name="monthly">Monthly</paper-radio-button>
+          </paper-radio-group>
+        </div>
+        <div class="horizontal layout" *ngIf="showBi && monthlyPay=='monthly'">
+          <p style="width:250px">Date of month:       <iron-icon *ngIf="(monthlyPay=='monthly' && monthlyDate==null) && notAll==true" style="fill:red" icon="warning" item-icon suffix></iron-icon> </p>
+          <p-calendar [(ngModel)]="monthlyDate" [locale]="en" dateFormat="dd.yy"></p-calendar>
+        </div>
+        <div class="horizontal layout">
+          <p  style="width:250px;padding-top:25px;">  Transaction Description: </p>
+          <paper-input  [(value)]="transactionDescr">
+             <iron-icon *ngIf="(transactionDescr=='' || transactionDescr==null) && notAll==true" style="fill:red" icon="warning" item-icon suffix></iron-icon>
+          </paper-input>
+     
+        </div>
+        <div class="horizontal layout">
+         
+          <p style="width:250px;padding-top:25px;" >Amount:   </p>
+          <paper-input   type="number" [(value)]="amount">
+            <iron-icon *ngIf="(amount=='' || amount==null)&& notAll==true" style="fill:red" icon="warning" item-icon suffix></iron-icon>
+          </paper-input>
+        </div>
+      </paper-card>
+    </paper-material>
+    <paper-material elevation="3" animated=true>
+      <paper-card *ngIf="!firstPage && donePage==false">
+        <p *ngIf="showTransf">
+          You are about to transfer {{amount}} from your account ({{selItem}}) to {{destinationAcc}}.</p>
 
-          <p *ngIf=" showBi && monthlyPay=='one'">
-        You are about to pay {{amount}} from your account ({{selItem}}) to {{provider}}.</p>
+        <p *ngIf=" showBi && monthlyPay=='one'">
+          You are about to pay {{amount}} from your account ({{selItem}}) to {{provider}}.</p>
 
-          <p *ngIf=" showBi && monthlyPay=='monthly'">
-        You are about to transfer {{amount}} from your account ({{selItem}}) to {{provider}} each {{monthlyDate}} of month.</p>
-      <p>
-        Description: {{transactionDescr}}
-      </p>
-      <p>
-        Please make sure this information are correct before proceed.
-      </p>
+        <p *ngIf=" showBi && monthlyPay=='monthly'">
+          You are about to transfer {{amount}} from your account ({{selItem}}) to {{provider}} each {{monthlyDate}} of month.</p>
+        <p>
+          Description: {{transactionDescr}}
+        </p>
+        <p>
+          Please make sure this information are correct before proceed.
+        </p>
 
-    </paper-card>
+      </paper-card>
+    </paper-material>
+    <paper-material elevation="3" animated=true>
+      <paper-card *ngIf="donePage">
+        <p>
+          Transaction status: {{status}}
+        </p>
 
-    <paper-card *ngIf="donePage">
-      <p>
-        Transaction status: {{status}}
-      </p>
-
-    </paper-card>
+      </paper-card>
+    </paper-material>
   </div>
-  <div class="horizontal layout center-justified">
+  <div class="horizontal layout center-justified" style="padding-top:10px">
     <paper-button *ngIf="firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="next()">Next</paper-button>
     <paper-button *ngIf="!firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="back()">Back</paper-button>
     <paper-button *ngIf="!firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="finish()">Finish</paper-button>
@@ -91,20 +106,21 @@
   </div>
 </div>
 
-<div *ngIf="showSched "class="vertical layout center-justified" style="padding-top: 30px;">
-<div class="horizontal layout center-justified">
+<div *ngIf="showSched " class="vertical layout center-justified" style="padding-left: 300px;padding-top: 30px;">
+  <div class="horizontal layout center-justified">
 
-  <p-dataTable [value]="tableData">
-    <p-column field="fromAccount" header="From Account"></p-column>
-    <p-column field="toAccount" header="To Account"></p-column>
-    <p-column field="nextPayment" header="Next payment"></p-column>
+    <p-dataTable [value]="tableData">
+      <p-column field="fromAccount" header="From Account"></p-column>
+      <p-column field="toAccount" header="To Account"></p-column>
+      <p-column field="nextPayment" header="Next payment"></p-column>
 
-       <p-column field="amount" header="Amount"></p-column>
-   <p-column field="" header="Actions">
-      <template let-col let-sc="rowData" pTemplate="body">
-        <paper-icon-button *ngIf="sc.active==true" icon="pageview" (click)="inactivateSchedule(sc)"></paper-icon-button>
-      </template></p-column>
-  </p-dataTable>
-</div>
+      <p-column field="amount" header="Amount"></p-column>
+      <p-column field="" header="Actions">
+        <template let-col let-sc="rowData" pTemplate="body">
+          <paper-icon-button *ngIf="sc.active==true" icon="cancel" (click)="inactivateSchedule(sc)"></paper-icon-button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
 
 </div>

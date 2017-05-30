@@ -1,6 +1,6 @@
 <div class="horizontal layout center-justified">
   <p-listbox [options]="accounts"  (onChange)="accountChanged($event)"></p-listbox>
-  <p-dataTable [value]="tableData">
+  <p-dataTable [value]="tableData" selectionMode="single" >
     <p-column field="fromAccount" header="From Account"></p-column>
     <p-column field="toAccount" header="To Account"></p-column>
     <p-column field="date" header="Date"></p-column>

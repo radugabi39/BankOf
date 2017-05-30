@@ -3,7 +3,7 @@
 
 export var url="http://localhost:8080/bank-of-rest/";
 export var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
- var jwtKEY = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpYm1Vc2VyIiwiZXhwIjoxNDkyMTAyODA0fQ.A7bKYke9XhRlrUoPYORuVjnycGeCa6CvFMZtvh038kPXpRtpOeoK14QmZF7VcIf9eTb1UZtgA9hnKQGa-cIi3g";
+ var jwtKEY = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpYm1Vc2VyIiwiZXhwIjoxNDk2OTQwMDc5fQ.WMV-xnM-FPpjx9D3fBHXAN78xDi-D58I8aERVf7TzM2KRmfQWwUeXVgq1nk0Dtru3Y-kjS4wYHmOGMlz2TuUyA";
  export let setKey=function(key:string){
    jwtKEY=key;
  }

@@ -1,7 +1,9 @@
+import { Observable } from 'rxjs/Observable';
 import { ProfileService } from './profile.component.service';
 import { UserModel } from './models/userModel';
 import { Component, OnInit } from '@angular/core';
 import { Lightbox, LightboxModule } from 'primeng/primeng';
+import { key } from './../../global';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -43,8 +45,14 @@ export class ProfileComponent implements OnInit {
     );
   }
   customizeRequest(data) {
-    data["xhr"].setRequestHeader('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpYm1Vc2VyIiwiZXhwIjoxNDkxOTgxMjY3fQ.Nn0fGnJwqsFr27bFUIX3R-SbwiTE-iTt1NWvDJW0X0ctT9KROiQzHSN5SvqiTY55vWgLJthTJ9UpQMA8EjwXow');
+    data["xhr"].setRequestHeader('Authorization', key());
   }
+    onComplete(data) {
+    this.obj["imageURL"]=JSON.parse(data["xhr"].responseText)["data"];
+  
+    this.profileService.subject.next( this.obj["imageURL"]); 
+  }
+
 
   changePass() {
     if (this.newPass !== this.repPass) {

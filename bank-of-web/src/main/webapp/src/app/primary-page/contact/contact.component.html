@@ -35,7 +35,8 @@
 
 
 <paper-dialog *ngIf="openDialogTrigger" id="locationDialog" modal [(opened)]="openDialogTrigger">
-  <p-gmap *ngIf="resetMap" [options]="options" [style]="{'width':'900px','height':'520px','margin': '0px','position':'absolute','right':'20px','left':'20px','top':'20px'}"></p-gmap>
+  <p-growl [value]="msgs"></p-growl>
+  <p-gmap *ngIf="resetMap" id="map" [options]="options" (onOverlayClick)="handleOverlayClick($event)"  [overlays]="overlays" [style]="{'width':'900px','height':'520px','margin': '0px','position':'absolute','right':'20px','left':'20px','top':'20px'}"></p-gmap>
     <div class="buttons" style="position:absolute;bottom: 10px;right:10px">
       <paper-button class="custom indigo" (click)="closeDialog()" autofocus raised>Close</paper-button>
     </div>

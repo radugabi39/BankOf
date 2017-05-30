@@ -27,13 +27,15 @@ public class Branch {
 	private Date creationDate;
 	private Date modificationDate;
 	private Boolean active;
+	private Double longitude;
+	private Double latitude;
 
 	public Branch() {
 		super();
 	}
 
 	public Branch(Long id, String name, City city, String address, String email, Employee manager, Date creationDate,
-			Date modificationDate, Boolean active) {
+			Date modificationDate, Boolean active, Double longitude, Double latitude) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -44,7 +46,11 @@ public class Branch {
 		this.creationDate = creationDate;
 		this.modificationDate = modificationDate;
 		this.active = active;
+		this.longitude = longitude;
+		this.latitude = latitude;
 	}
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -131,6 +137,22 @@ public class Branch {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	@Column(name = "LONGITUDE")
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	@Column(name = "LATITUDE")
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
 	}
 
 }

@@ -25,7 +25,7 @@ public interface UtilsService {
 
 
 
-	void savePictureToDisk(MultipartFile file, String userName);
+	String savePictureToDisk(MultipartFile file, String userName);
 ///, ParsePropertyException, InvalidFormatException,
 	InputStream getExcell(String records) throws Exception;
 }

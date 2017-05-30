@@ -171,12 +171,14 @@ public class UserRest {
 			GenericResponse<String> toReturn = new GenericResponse<String>();
 			String userName= SecurityContextHolder.getContext().getAuthentication().getName();
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			
 			//		     HttpServletRequest originalRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 //		     MultipartHttpServletRequest multiPartRequest = new DefaultMultipartHttpServletRequest(originalRequest);
 		       Iterator<String> iterator = multipartRequest.getFileNames();
 		     
 		     MultipartFile file = multipartRequest.getFile(iterator.next());
-		     utilsService.savePictureToDisk(file, userName);
+		    String fileName= utilsService.savePictureToDisk(file, userName);
+		     toReturn.setData(fileName);
 			try {
 				
 			} catch (Exception e) {

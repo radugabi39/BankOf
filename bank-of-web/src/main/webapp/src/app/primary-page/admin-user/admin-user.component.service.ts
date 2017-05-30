@@ -16,20 +16,24 @@ export class AdminUserService {
 
     getUserDataByCNP(cnp: String) {
         return this.http.get(url + 'user/getUserDataByCNP/' + cnp, { headers: this.globalService.headers })
-            .map(res => UserModel.fromJSONObj(this.globalService.extractData(res)));
+            .map(res => UserModel.fromJSONObj(this.globalService.extractData(res)))
+            .catch(err => this.globalService.handleError(err));
     }
 
     saveUserDataAdm(outObj: UserModel) {
         return this.http.post(url + 'user/saveUserDataAdm/', JSON.stringify(outObj), { headers: this.globalService.headers })
-            .map(this.globalService.extractData);
+            .map(this.globalService.extractData)
+            .catch(err => this.globalService.handleError(err));
     }
     resetPassword(cnp: String) {
         return this.http.get(url + 'user/resetPassword/' + cnp, { headers: this.globalService.headers })
-            .map(this.globalService.extractData);
+            .map(this.globalService.extractData)
+            .catch(err => this.globalService.handleError(err));
     }
 
-      getCountryCityMapping() {
+    getCountryCityMapping() {
         return this.http.get(url + 'utils/getCountryCityMapping/', { headers: this.globalService.headers })
-            .map(res => CountryCityModel.fromJSONArray(this.globalService.extractData(res)));
+            .map(res => CountryCityModel.fromJSONArray(this.globalService.extractData(res)))
+            .catch(err => this.globalService.handleError(err));
     }
 }

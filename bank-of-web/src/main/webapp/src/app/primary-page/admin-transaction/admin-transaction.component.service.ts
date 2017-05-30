@@ -19,10 +19,12 @@ export class AdminTransactionService {
     }
     getAdminTransactionsByAccNo(accNo: String) {
         return this.http.get(url + 'transaction/getAdminTransactionsByAccNo/' + accNo, { headers: this.globalService.headers })
-            .map(res => TransactionTableModel.fromJSONArray(this.globalService.extractData(res)));
+            .map(res => TransactionTableModel.fromJSONArray(this.globalService.extractData(res)))
+            .catch(err => this.globalService.handleError(err));
     }
     reverseTransaction(trans: TransactionTableModel) {
         return this.http.post(url + 'transaction/reverseTransaction/', JSON.stringify(trans), { headers: this.globalService.headers })
-            .map(this.globalService.extractData);
+            .map(this.globalService.extractData)
+            .catch(err => this.globalService.handleError(err));
     }
 }

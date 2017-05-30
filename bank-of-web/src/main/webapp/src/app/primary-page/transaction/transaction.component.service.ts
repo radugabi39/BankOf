@@ -16,10 +16,11 @@ export class TransactionService {
   }
   getTransactionsByAccNo(accNo:String) {
     return this.http.get(url + 'transaction/getTransactionsByAccNo/'+accNo, { headers: this.globalService.headers })
-      .map(res => TransactionTableModel.fromJSONArray(this.globalService.extractData(res)));
+      .map(res => TransactionTableModel.fromJSONArray(this.globalService.extractData(res)))
+      .catch(err => this.globalService.handleError(err));
   }
 
-    downloadExcell(accNo:String) : Observable<Object[] {
+    downloadExcell(accNo:String) : Observable<Object[]> {
         return Observable.create(observer => {
             let xhr = new XMLHttpRequest();
                   let formData: any = new FormData()
