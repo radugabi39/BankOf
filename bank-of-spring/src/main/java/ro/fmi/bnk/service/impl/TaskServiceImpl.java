@@ -51,7 +51,15 @@ public class TaskServiceImpl implements TaskService {
 		User usr = userDAO.getUserByUsername(userName);
 		taskDAO.claimTask(taskId, usr);
 	}
-
+	@Override
+	@Transactional
+	public String rejectTask(Long taskId) {
+		Task t = taskDAO.getByID(taskId);
+		t.setTaskStatus(taskDAO.getEntityByName(TaskStatus.class, TaskStatusEnum.REJECTED.toString()));
+		taskDAO.persist(t);
+		return "OK";
+	}
+	
 	@Override
 	@Transactional
 	public String approveTask(Long taskId) {

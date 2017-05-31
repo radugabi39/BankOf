@@ -13,4 +13,6 @@ public interface TaskService {
 
 	String approveTask(Long taskId);
 
+	String rejectTask(Long taskId);
+
 }

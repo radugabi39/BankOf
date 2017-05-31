@@ -19,12 +19,13 @@ export class LoginComponent implements OnInit {
   tryLogin() {
     this.loginService.tryLogin(this.email, this.password).subscribe(
       data => {
-        this.primaryPageService.setUserCustomer(data["data"])
+
         this.globalService.createAuthorizationHeader();
         this.loginService.checkIfUserIsEmp(this.email).subscribe(
           data => {
-
-            this.router.navigateByUrl('/primaryPage')
+                    this.primaryPageService.setUserCustomer(data["data"])
+     this.router.navigateByUrl('/primaryPage')
+       
           },
           err => console.log("error"),
           () => console.log('Random Quote Complete')

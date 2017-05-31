@@ -69,6 +69,20 @@ public class TaskRest {
 		return toReturn;
 	}
 	
+	@RequestMapping(value = "/rejectTask", method = RequestMethod.POST,produces = "application/json")
+	@ResponseBody
+	public GenericResponse<String> rejectTask(@RequestBody Long taskID) {
+		GenericResponse<String> toReturn = new GenericResponse<String>();
+
+		try {
+			toReturn.setData(taskBean.rejectTask(taskID)); 
+			toReturn.setStatus("OK");
+		} catch (Exception e) {
+			toReturn.setStatus("Exception Occured");
+			toReturn.setMessage(e.getMessage());
+		}
+		return toReturn;
+	}
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {

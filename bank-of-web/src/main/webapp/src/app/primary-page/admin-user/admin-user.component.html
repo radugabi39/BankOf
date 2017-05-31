@@ -1,10 +1,10 @@
-<div class="horizontal layout center-justified">
+<div class="horizontal layout center-justified" style="padding-top:20px">
   <paper-input style="width:200px" [(value)]="cnpToSearch" label="CNP to search"></paper-input>
-  <paper-button class="custom indigo" raised (click)="search()">Search</paper-button>
+  <paper-button class="custom indigo"  style="height:40px;margin-top:10px" raised (click)="search()">Search</paper-button>
 </div>
 
 <paper-dialog *ngIf="obj" id="dialogUserDetails" modal [(opened)]="dialogUserDetailsTrigger">
-<div class="vertical layout center-justified">
+<div class="vertical layout center-justified" style="padding-left: 30%;">
     <div class="horizontal layout">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Firstname: </div>
       <paper-input [(value)]="obj.firstName" ></paper-input>

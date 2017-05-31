@@ -20,14 +20,14 @@
   <paper-input [value]="openAccount.currency" disabled label="Currency"></paper-input>
   <paper-input [value]="openAccount.status" disabled label="Status"></paper-input>
   <paper-input [value]="openAccount.type" disabled label="Type"></paper-input>
-  <div class="paper-font-headline">Stats for last months</div>
+  <div class="paper-font-headline">Stats for last months:</div>
   <div class="paper-font-headline">{{sliderValue}} months:
     <paper-slider [(value)]="sliderValue" (change)="recalculateIncome()" pin snaps max="5" max-markers="5"
       step="1"></paper-slider>
   </div>
 
-  <div *ngIf="balanceModel" class="paper-font-headline">Income: {{balanceModel.income}}</div>
-  <div *ngIf="balanceModel" class="paper-font-headline">Outcome: {{balanceModel.outcome}}</div>
+  <div *ngIf="balanceModel" class="paper-font-headline">Income: {{balanceModel.income ? balanceModel.income: 0}} {{openAccount.currency}}</div>
+  <div *ngIf="balanceModel" class="paper-font-headline">Outcome: {{balanceModel.outcome ? balanceModel.outcome: 0}} {{openAccount.currency}}</div>
 
 
   <div class="buttons">
@@ -36,8 +36,15 @@
 </paper-dialog>
 
 <paper-dialog *ngIf="selectedAccToSave" id="accountSettingsDetails" modal [(opened)]="openSettingsDialogTrigger">
+ <div class="horizontal layout">
+       <p style="width:250px;padding-top:25px;">Limit Amount: </p>
   <paper-input label="Limit" [(value)]="selectedAccToSave.limit"></paper-input>
+        </div>
+ <div class="horizontal layout">
+    <p style="width:250px;padding-top:15px;">Sms Alert: </p>
   <paper-toggle-button checked [(active)]="selectedAccToSave.smsAlert"></paper-toggle-button>
+        </div>
+
 
   <div class="buttons">
     <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>

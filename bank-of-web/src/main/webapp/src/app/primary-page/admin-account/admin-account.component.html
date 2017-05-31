@@ -1,10 +1,10 @@
-<div class="horizontal layout center-justified">
+<div class="horizontal layout center-justified" style="padding-top:20px">
   <paper-input [(value)]="accNoToSearch" label="Account number to search"></paper-input>
-  <paper-button class="custom indigo" raised (click)="search()">Search</paper-button>
+  <paper-button class="custom indigo" style="height:40px;margin-top:10px" raised (click)="search()">Search</paper-button>
 </div>
 
-<paper-dialog *ngIf="obj" id="dialogAccountDetails" modal [(opened)]="dialogAccountDetailsTrigger">
-  <div class="vertical layout center-justified">
+<paper-dialog *ngIf="obj" id="dialogAccountDetails"  modal [(opened)]="dialogAccountDetailsTrigger">
+  <div class="vertical layout center-justified" style="padding-left: 30%;">
     <div class="horizontal layout">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Account number: </div>
       <paper-input [(value)]="obj.accountNo" disabled></paper-input>

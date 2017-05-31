@@ -37,6 +37,11 @@ export class AdminInboxService {
             .map(this.globalService.extractData)
             .catch(err => this.globalService.handleError(err));
     }
+    rejectTask(id: Number) {
+        return this.http.post(url + 'task/rejectTask/', id, { headers: this.globalService.headers })
+            .map(this.globalService.extractData)
+            .catch(err => this.globalService.handleError(err));
+    }
 
     getKey() {
         return this.globalService.getKey();

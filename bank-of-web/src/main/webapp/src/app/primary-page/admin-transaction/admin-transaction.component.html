@@ -1,6 +1,6 @@
-<div class="horizontal layout center-justified">
+<div class="horizontal layout center-justified" style="padding-top:20px">
   <paper-input [(value)]="accNoToSearch" label="Account number to search for transaction"></paper-input>
-  <paper-button class="custom indigo" raised (click)="search()">Search</paper-button>
+  <paper-button class="custom indigo" style="height:40px;margin-top:10px" raised (click)="search()">Search</paper-button>
 </div>
 
 <div *ngIf="dialogTransactionGridDetailsTrigger" class="horizontal layout center-justified">

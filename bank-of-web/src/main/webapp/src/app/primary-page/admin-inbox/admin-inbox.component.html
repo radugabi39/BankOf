@@ -9,8 +9,9 @@
        <p-column field="taskType" header="Task Type"></p-column>
    <p-column field="" header="Actions">
       <template let-col let-sc="rowData" pTemplate="body">
-        <paper-icon-button *ngIf="sc.taskStatus=='PENDING'" icon="pageview" (click)="claimTask(sc)"></paper-icon-button>
-         <paper-icon-button *ngIf="sc.taskStatus=='CLAIMED'" icon="search" (click)="approveTask(sc)"></paper-icon-button>
+        <paper-icon-button *ngIf="sc.taskStatus=='PENDING'" icon="arrow-downward" (click)="claimTask(sc)"></paper-icon-button>
+         <paper-icon-button *ngIf="sc.taskStatus=='CLAIMED'" icon="check"  style="color:limegreen"  (click)="approveTask(sc)"></paper-icon-button>
+            <paper-icon-button *ngIf="sc.taskStatus=='CLAIMED'" icon="close"  style="color:red"  (click)="rejectTask(sc)"></paper-icon-button>
       </template>
       </p-column>
   </p-dataTable>

@@ -82,4 +82,16 @@ export class AdminInboxComponent implements OnInit, OnDestroy {
     );
 
   }
+   rejectTask(obj: TaskModel) {
+    this.adminInboxService.rejectTask(obj.id).subscribe(
+      data => {
+
+        obj.taskStatus = "REJECTED";
+
+      },
+      err => console.log("error"),
+      () => console.log('Random Quote Complete')
+    );
+
+  }
 }

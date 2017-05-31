@@ -11,32 +11,36 @@
       }
     </style>
     <style is="custom-style">
-
-
-
-  paper-card.rate { @apply(--layout-horizontal); }
-  .rate-image {
-    width: 100px;
-    height: 170px;
-    background: url(assets/images/visa.png);
-    background-size: cover;
-  }
-  .rate-content {
-    @apply(--layout-flex);
-    float: left;
-  }
-  .rate-header { @apply(--paper-font-headline); }
-  .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
-  paper-icon-button.rate-icon {
-    --iron-icon-fill-color: white;
-    --iron-icon-stroke-color: var(--paper-grey-600);
-  }
-
-
-
-
-
-
+      paper-card.rate {
+        @apply(--layout-horizontal);
+      }
+      
+      .rate-image {
+        width: 100px;
+        height: 170px;
+        background: url(assets/images/visa.png);
+        background-size: cover;
+      }
+      
+      .rate-content {
+        @apply(--layout-flex);
+        float: left;
+      }
+      
+      .rate-header {
+        @apply(--paper-font-headline);
+      }
+      
+      .rate-name {
+        color: var(--paper-grey-600);
+        margin: 10px 0;
+      }
+      
+      paper-icon-button.rate-icon {
+        --iron-icon-fill-color: white;
+        --iron-icon-stroke-color: var(--paper-grey-600);
+      }
+      
       .flex-horizontal {
         @apply(--layout-horizontal);
       }
@@ -60,11 +64,25 @@
         @apply(--layout-horizontal);
       }
       
-      .type-image {
+      .Visa {
+        margin-left: 10px;
         width: 100px;
-        height: 170px;
+        height: 200px;
         background-image: url(assets/images/visa.png);
         background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+      }
+      
+      .MasterCard {
+        background-size: cover;
+        margin-left: 10px;
+        width: 100px;
+        height: 200px;
+        background-image: url(assets/images/mastercard.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
       }
       
       paper-input-container {
@@ -81,35 +99,46 @@
     <iron-list id="list" items="{{items}}" as="item" style="height:100%" grid>
 
       <template>
-       <paper-card class="rate">
-  <div class="rate-content">
-   <div class="card-content">
-              <paper-input label="Holder Name" value="[[item.holderName]]"></paper-input>
+        <div class="container flex-vertical">
+          <div class="container flex-horizontal">
+            <paper-card class="rate">
+              <div class="rate-content">
+                <div class="card-content">
+                  <div class="container flex-horizontal">
+                    <div>
+                      <paper-input label="Holder Name" value="[[item.holderName]]"></paper-input>
 
 
-              <div class="container flex-horizontal">
-                <div class="flexchild">
-                  <paper-input label="Expiry date" value="[[item.expiryDate]]"></paper-input>
+                      <div class="container flex-horizontal">
+                        <div class="flexchild">
+                          <paper-input label="Expiry date" value="[[item.expiryDate]]"></paper-input>
+                        </div>
+                        <div class="flexchild">
+                          <paper-input label="Linked account" value="[[item.accountLinked]]"></paper-input>
+                        </div>
+                      </div>
+                      <div class="container flex-horizontal" >
+                        <div class="flexchild">
+                          <gold-cc-input label="[[item.type]]" value="[[item.number]]" ></gold-cc-input>
+                        </div>
+                        <div class="flexchild">
+                          <gold-cc-cvc-input required card-type="amex" value="[[item.cvc]]" style="margin-top: 3px;"></gold-cc-cvc-input>
+                        </div>
+                      </div>
+                    </div>
+                    <div class$="[[item.type]]"></div>
+                  </div>
+
+
                 </div>
-                <div class="flexchild">
-                  <paper-input label="Linked account" value="[[item.accountLinked]]"></paper-input>
-                </div>
+
               </div>
-              <div class="container flex-horizontal">
-                <div class="flexchild">
-                  <gold-cc-input label="Visa" value="[[item.number]]"></gold-cc-input>
-                </div>
-                <div class="flexchild">
-                  <gold-cc-cvc-input required card-type="amex" value="[[item.cvc]]"></gold-cc-cvc-input></div>
-                </div>
 
-
-
-              </div>
-
-  </div>
-  <div class$="[[item.type]]"></div>
-</paper-card>
+            </paper-card>
+            <div style="width:20px;height:20px"></div>
+          </div>
+          <div style="height:20px;height:20px"></div>
+        </div>
       </template>
     </iron-list>
 
