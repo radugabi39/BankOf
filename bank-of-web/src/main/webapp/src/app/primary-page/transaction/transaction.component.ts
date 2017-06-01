@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { AccountService } from './../account/account.component.service';
 import { TransactionService } from './transaction.component.service';
 import { TransactionTableModel } from './model/transactionTableModel';
@@ -49,7 +50,7 @@ export class TransactionComponent implements OnInit {
  data => 
  this.downloadFile(data)),//console.log(data),
                   error =>
-                   console.log("Error downloading the file."),
+                  this.transactionService.popToast(new ToastModel("Failed to download file", true)),
                   () => console.log('Completed file download.');
   }
 }

@@ -1,3 +1,5 @@
+import { ToastModel } from './profile/models/toastModel';
+import { Observable } from 'rxjs/Observable';
 import { GlobalService } from './../global.functions';
 
 import { Injectable } from "@angular/core";
@@ -8,8 +10,10 @@ import { url } from './../global';
 @Injectable()
 export class PrimaryPageService {
      userCustomer:Boolean;
+     observ:Observable<ToastModel>;
     constructor(private http: Http, private globalService: GlobalService) {
-
+        this.observ=globalService.obs;
+        
     }
 
         getProfileImage() {
@@ -24,5 +28,8 @@ export class PrimaryPageService {
 
     getUserCustomer(){
         return !this.userCustomer;
+    }
+     popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
     }
 }

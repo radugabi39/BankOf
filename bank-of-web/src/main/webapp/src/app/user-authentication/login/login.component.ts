@@ -1,3 +1,4 @@
+import { ToastModel } from './../../primary-page/profile/models/toastModel';
 import { GlobalService } from './../../global.functions';
 import { LoginService } from './login.component.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +13,8 @@ export class LoginComponent implements OnInit {
 
   private email: String = "";
   private password: String = "";
+    private textToast: String;
+  private open: Boolean = false
   constructor(private loginService: LoginService, private router: Router, private globalService: GlobalService, private primaryPageService: PrimaryPageService) { }
 
   ngOnInit() {
@@ -23,18 +26,23 @@ export class LoginComponent implements OnInit {
         this.globalService.createAuthorizationHeader();
         this.loginService.checkIfUserIsEmp(this.email).subscribe(
           data => {
-                    this.primaryPageService.setUserCustomer(data["data"])
-     this.router.navigateByUrl('/primaryPage')
-       
+            this.primaryPageService.setUserCustomer(data["data"])
+            this.router.navigateByUrl('/primaryPage')
+
           },
-          err => console.log("error"),
+          err => this.primaryPageService.popToast(new ToastModel("Failed to check user role", true)),
           () => console.log('Random Quote Complete')
         );;
 
       },
-      err => console.log("error"),
+      err =>{
+
+        this.textToast = "Login failed! Please check the email and password!"
+        this.open = true;
+
+      },
       () => console.log('Random Quote Complete')
     );;
   }
-
+ 
 }

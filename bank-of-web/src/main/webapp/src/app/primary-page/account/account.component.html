@@ -31,7 +31,8 @@
 
 
   <div class="buttons">
-    <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+    <paper-button id="acClose2" class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+     <paper-tooltip for="acClose2" position="top">Close dialog</paper-tooltip>
   </div>
 </paper-dialog>
 
@@ -47,7 +48,12 @@
 
 
   <div class="buttons">
-    <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
-    <paper-button class="custom indigo" dialog-confirm autofocus raised (click)=saveAccount($event)>Save changes</paper-button>
+    <paper-button id="acClose" class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+    <paper-button id="acSave" class="custom indigo" dialog-confirm autofocus raised (click)=saveAccount($event)>Save changes</paper-button>
+        <paper-tooltip for="acClose" position="top">Close dialog</paper-tooltip>
+    <paper-tooltip for="acSave" position="top">Save current changes</paper-tooltip>
   </div>
 </paper-dialog>
+
+
+

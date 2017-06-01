@@ -18,7 +18,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AccountComponent } from './account/account.component';
 import { PayComponent } from './pay/pay.component';
 import { TransactionComponent } from './transaction/transaction.component';
-import { DataTableModule, SharedModule, ListboxModule, StepsModule, InputTextareaModule, DropdownModule,CalendarModule,LightboxModule, FileUploadModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, ListboxModule, StepsModule, InputTextareaModule, DropdownModule, CalendarModule, LightboxModule, FileUploadModule } from 'primeng/primeng';
 import { GMapModule } from 'primeng/primeng';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
@@ -28,7 +28,7 @@ import { AdminInboxComponent } from './admin-inbox/admin-inbox.component';
 import { FormsModule } from "@angular/forms";
 @NgModule({
   imports: [
-    CommonModule, routing,BrowserModule ,FormsModule, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule,CalendarModule ,LightboxModule, FileUploadModule
+    CommonModule, routing, BrowserModule, FormsModule, DataTableModule, ListboxModule, InputTextareaModule, GMapModule, StepsModule, DropdownModule, CalendarModule, LightboxModule, FileUploadModule
   ],
   declarations: [PrimaryPageComponent,
     PolymerElement('paper-input'),
@@ -45,10 +45,12 @@ import { FormsModule } from "@angular/forms";
     PolymerElement('paper-dialog'),
     PolymerElement('paper-slider'),
     PolymerElement('paper-listbox'),
-       PolymerElement('paper-material'),
+    PolymerElement('paper-material'),
+    PolymerElement('paper-toast'),
+    PolymerElement('paper-tooltip'),
     PolymerElement('paper-dropdown-menu'),
     PolymerElement('paper-item'),
-        PolymerElement('paper-menu-button'),
+    PolymerElement('paper-menu-button'),
     PolymerElement('paper-icon-item'), PolymerElement('paper-radio-button'),
     PolymerElement('paper-radio-group'), PolymerElement('gold-cc-cvc-input'), PolymerElement('gold-cc-input'), PolymerElement('paper-toggle-button'),
     ContactComponent,
@@ -60,6 +62,6 @@ import { FormsModule } from "@angular/forms";
     AdminAccountComponent,
     AdminTransactionComponent,
     AdminInboxComponent
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService,ProfileService,AdminUserService,AdminAccountService,AdminTransactionService,AdminInboxService,PrimaryPageService]
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA], providers: [AccountService, TransactionService, PayService, ContactService, ProfileService, AdminUserService, AdminAccountService, AdminTransactionService, AdminInboxService, PrimaryPageService]
 })
 export class PrimaryPageModule { }

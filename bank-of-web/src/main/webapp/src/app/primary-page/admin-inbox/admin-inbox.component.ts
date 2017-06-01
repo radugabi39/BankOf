@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { AdminInboxService } from './admin-inbox.component.service';
 import { TaskModel } from './models/taskModel';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -54,7 +55,7 @@ export class AdminInboxComponent implements OnInit, OnDestroy {
         this.tableData = data;
 
       },
-      err => console.log("error"),
+      err =>  this.adminInboxService.popToast(new ToastModel("Failed to get pending tasks", true)),
       () => console.log('Random Quote Complete')
     );
   }
@@ -63,9 +64,9 @@ export class AdminInboxComponent implements OnInit, OnDestroy {
       data => {
 
         obj.taskStatus = "CLAIMED";
-
+        this.adminInboxService.popToast(new ToastModel("Task claimed", false))
       },
-      err => console.log("error"),
+      err => this.adminInboxService.popToast(new ToastModel("Failed to claim the task", true)),
       () => console.log('Random Quote Complete')
     );
 
@@ -75,21 +76,21 @@ export class AdminInboxComponent implements OnInit, OnDestroy {
       data => {
 
         obj.taskStatus = "COMPLETED";
-
+        this.adminInboxService.popToast(new ToastModel("Task approved", false))
       },
-      err => console.log("error"),
+      err => this.adminInboxService.popToast(new ToastModel("Failed to approve the task", true)),
       () => console.log('Random Quote Complete')
     );
 
   }
-   rejectTask(obj: TaskModel) {
+  rejectTask(obj: TaskModel) {
     this.adminInboxService.rejectTask(obj.id).subscribe(
       data => {
 
         obj.taskStatus = "REJECTED";
-
+        this.adminInboxService.popToast(new ToastModel("Task rejected", false))
       },
-      err => console.log("error"),
+      err => this.adminInboxService.popToast(new ToastModel("Failed to reject the task", true)),
       () => console.log('Random Quote Complete')
     );
 

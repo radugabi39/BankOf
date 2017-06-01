@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { TaskModel } from './models/taskModel';
 
 import { Account } from '../account/models/accountModel';
@@ -46,5 +47,7 @@ export class AdminInboxService {
     getKey() {
         return this.globalService.getKey();
     }
-
+     popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
+    }
 }

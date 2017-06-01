@@ -10,28 +10,49 @@ import { setKey } from './../global';
 })
 export class PrimaryPageComponent implements OnInit {
 
-  private customer:Boolean=false          ;
-  private profileImage:String;
-  constructor(private primaryPageService:PrimaryPageService,private profileService:ProfileService) {
+  private customer: Boolean = false;
+  private profileImage: String;
+  private textToast: String;
+  private open: Boolean = false;
+  private textToastE: String;
+  private openE: Boolean = false;
 
-    this.customer=primaryPageService.getUserCustomer();
-   }
+  constructor(private primaryPageService: PrimaryPageService, private profileService: ProfileService) {
+
+    this.customer = primaryPageService.getUserCustomer();
+  }
 
   ngOnInit() {
-this.profileService.obs.subscribe(value=>{
-  this.profileImage=value;
-})
-         this.primaryPageService.getProfileImage().subscribe(
-        data => {
-     
-          this.profileImage = data["data"]; 
+    this.profileService.obs.subscribe(value => {
+      this.profileImage = value;
+    })
+    this.profileService.obs.subscribe(value => {
+      this.profileImage = value;
+    })
 
-        },
-        err => console.log("error"),
-        () => console.log('Random Quote Complete')
-      );
+    let context = this;
+    this.primaryPageService.observ.subscribe(value => {
+      if (value) {
+        if(value.error){
+        context.textToastE = value.text;
+        context.openE = true;
+        }else{
+        context.textToast = value.text;
+        context.open = true;
+        }
+      }
+    })
+    this.primaryPageService.getProfileImage().subscribe(
+      data => {
+
+        this.profileImage = data["data"];
+
+      },
+      err => console.log("error"),
+      () => console.log('Random Quote Complete')
+    );
   }
-logout(){
-  setKey("")
-}
+  logout() {
+    setKey("")
+  }
 }

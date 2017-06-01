@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { CountryCityModel } from './models/CountryCityModel';
 import { UserModel } from './../profile/models/userModel';
 import { GlobalService } from './../../global.functions';
@@ -35,5 +36,8 @@ export class AdminUserService {
         return this.http.get(url + 'utils/getCountryCityMapping/', { headers: this.globalService.headers })
             .map(res => CountryCityModel.fromJSONArray(this.globalService.extractData(res)))
             .catch(err => this.globalService.handleError(err));
+    }
+    popToast(toastm: ToastModel) {
+        this.globalService.popToast(toastm);
     }
 }

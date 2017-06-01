@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { BranchLocationModel } from './../account/models/branchLocationModel';
 import { ContactService } from './contact.component.service';
 import { Component, OnInit } from '@angular/core';
@@ -39,7 +40,9 @@ export class ContactComponent implements OnInit {
         for (let obj of data) {
           context.overlays.push(new window["google"].maps.Marker({ position: { lat: obj["lat"], lng: obj["long"] }, title: obj["name"] }));
         }
-      });
+      },
+      err =>    this.contactService.popToast(new ToastModel("Failed to get branch location", true)),
+      () => console.log('Random Quote Complete'));
 
     window.setTimeout(function () {
 
@@ -57,9 +60,9 @@ export class ContactComponent implements OnInit {
   sendEmail() {
     this.contactService.sendEmail(this.subject, this.body).subscribe(
       data => {
-        var c = 1
+        this.contactService.popToast(new ToastModel("Email sent", false))
       },
-      err => console.log("error"),
+      err =>    this.contactService.popToast(new ToastModel("Failed to send the email", true)),
       () => console.log('Random Quote Complete')
     );
   }

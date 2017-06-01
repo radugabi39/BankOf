@@ -71,7 +71,7 @@
       </paper-card>
     </paper-material>
     <paper-material elevation="3" animated=true>
-      <paper-card *ngIf="!firstPage && donePage==false">
+      <paper-card *ngIf="!firstPage && donePage==false" style="padding: 20px;">
         <p *ngIf="showTransf">
           You are about to transfer {{amount}} from your account ({{selItem}}) to {{destinationAcc}}.</p>
 
@@ -79,7 +79,7 @@
           You are about to pay {{amount}} from your account ({{selItem}}) to {{provider}}.</p>
 
         <p *ngIf=" showBi && monthlyPay=='monthly'">
-          You are about to transfer {{amount}} from your account ({{selItem}}) to {{provider}} each {{monthlyDate}} of month.</p>
+          You are about to transfer {{amount}} from your account ({{selItem}}) to {{provider}} each {{monthlyDate.getUTCDate()+1}} of month.</p>
         <p>
           Description: {{transactionDescr}}
         </p>
@@ -103,6 +103,7 @@
     <paper-button *ngIf="!firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="back()">Back</paper-button>
     <paper-button *ngIf="!firstPage && donePage==false" style="width:50px" class="custom indigo" raised (click)="finish()">Finish</paper-button>
     <paper-button *ngIf="donePage" style="width:50px" class="custom indigo" raised (click)="done()">Done</paper-button>
+
   </div>
 </div>
 
@@ -117,7 +118,8 @@
       <p-column field="amount" header="Amount"></p-column>
       <p-column field="" header="Actions">
         <template let-col let-sc="rowData" pTemplate="body">
-          <paper-icon-button *ngIf="sc.active==true" icon="cancel" (click)="inactivateSchedule(sc)"></paper-icon-button>
+          <paper-icon-button id="scInactivate" style="color:red" *ngIf="sc.active==true" icon="cancel" (click)="inactivateSchedule(sc)"></paper-icon-button>
+           <paper-tooltip for="scInactivate" position="left">Inactivate schedule</paper-tooltip>
         </template>
       </p-column>
     </p-dataTable>

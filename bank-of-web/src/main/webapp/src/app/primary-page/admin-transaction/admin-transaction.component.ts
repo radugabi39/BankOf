@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { AdminTransactionService } from './admin-transaction.component.service';
 import { TransactionTableModel } from './../transaction/model/transactionTableModel';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +24,7 @@ export class AdminTransactionComponent implements OnInit {
             this.tableData = data;
         this.dialogTransactionGridDetailsTrigger = true;
       },
-      err => console.log("error"),
+      err =>this.adminTransactionService.popToast(new ToastModel("Failed to get transactions", true)),
       () => console.log('Random Quote Complete')
     );
   }
@@ -33,9 +34,9 @@ export class AdminTransactionComponent implements OnInit {
 
     this.adminTransactionService.reverseTransaction(    data).subscribe(
       data => {
-
+              this.adminTransactionService.popToast(new ToastModel("Transaction reversed", false))
       },
-      err => console.log("error"),
+      err =>  this.adminTransactionService.popToast(new ToastModel("Failed to reserve the transaction", true)),
       () => console.log('Random Quote Complete')
     );
     // after search wait 1 sec with background image

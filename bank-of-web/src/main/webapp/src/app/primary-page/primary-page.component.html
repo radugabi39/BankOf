@@ -6,9 +6,10 @@
   </app-toolbar>
     
 <paper-menu-button id="menuIcon">
-  <paper-icon-button  class="dropdown-trigger" id="profileIcon" [style.background-image]="'url(http://localhost:8080/img/' + profileImage + ')'"></paper-icon-button>
+  <paper-icon-button  *ngIf="customer" class="dropdown-trigger" id="profileIcon" [style.background-image]="'url(http://localhost:8080/img/' + profileImage + ')'"></paper-icon-button>
+    <paper-icon-button  *ngIf="!customer" class="dropdown-trigger" id="profileIcon" [style.background-image]="'url(assets/images/default.jpg)'"></paper-icon-button>
   <paper-menu class="dropdown-content">
-     <paper-item  [routerLink]="['/primaryPage/profile']">View Profile</paper-item>
+     <paper-item  *ngIf="customer" [routerLink]="['/primaryPage/profile']">View Profile</paper-item>
     <paper-item  [routerLink]="['/user/login']" (click)=logout()>Log out</paper-item>
 
   </paper-menu>
@@ -33,3 +34,6 @@
 </div>
 <paper-fab icon="star"></paper-fab>
 <sample-content size="100"></sample-content>
+
+<paper-toast class="greenToast" duration="3000" id="toast1" [(opened)]="open" [text]="textToast"></paper-toast>
+<paper-toast class="redToast" duration="3000" id="toast1" [(opened)]="openE" [text]="textToastE"></paper-toast>

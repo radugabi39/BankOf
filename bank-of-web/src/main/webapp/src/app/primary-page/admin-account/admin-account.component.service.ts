@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { FullAccount } from './models/fullAccountModel';
 import { Account } from '../account/models/accountModel';
 
@@ -19,22 +20,25 @@ export class AdminAccountService {
     getAccountByNo(accNo: String) {
         return this.http.get(url + 'account/getAccountByNo/' + accNo, { headers: this.globalService.headers })
             .map(res => FullAccount.fromJSONObj(this.globalService.extractData(res)))
-      .catch(err => this.globalService.handleError(err));
+            .catch(err => this.globalService.handleError(err));
     }
     getNomData(nom: String) {
         return this.http.get(url + 'utils/getNomData/' + nom, { headers: this.globalService.headers })
             .map(this.globalService.extractData)
-      .catch(err => this.globalService.handleError(err));
+            .catch(err => this.globalService.handleError(err));
     }
     saveAccountDetails(inp: FullAccount) {
         return this.http.post(url + 'account/saveAccountDetails/', JSON.stringify(inp), { headers: this.globalService.headers })
             .map(this.globalService.extractData)
-      .catch(err => this.globalService.handleError(err));
+            .catch(err => this.globalService.handleError(err));
     }
 
-       removeAccount(accNo: String) {
-        return this.http.post(url + 'account/removeAccount/' ,accNo, { headers: this.globalService.headers })
+    removeAccount(accNo: String) {
+        return this.http.post(url + 'account/removeAccount/', accNo, { headers: this.globalService.headers })
             .map(this.globalService.extractData)
-      .catch(err => this.globalService.handleError(err));
+            .catch(err => this.globalService.handleError(err));
+    }
+    popToast(toastm: ToastModel) {
+        this.globalService.popToast(toastm);
     }
 }

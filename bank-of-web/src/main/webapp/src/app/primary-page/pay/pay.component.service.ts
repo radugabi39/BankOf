@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { SchedulerModel } from './models/schedulerModel';
 import { GlobalService } from './../../global.functions';
 import { Injectable } from "@angular/core";
@@ -28,4 +29,7 @@ export class PayService {
             .map(this.globalService.extractData)
       .catch(err => this.globalService.handleError(err));
   }
+       popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
+    }
 }

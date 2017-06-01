@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { TransactionTableModel } from './../transaction/model/transactionTableModel';
 import { AdminAccountService } from './admin-account.component.service';
 import { FullAccount } from './models/fullAccountModel';
@@ -98,8 +99,9 @@ export class AdminAccountComponent implements OnInit {
    
     this.adminAccountService.saveAccountDetails(this.obj).subscribe(
       data => {
+           this.adminAccountService.popToast(new ToastModel("Account saved",false))
       },
-      err => console.log("error"),
+      err =>    this.adminAccountService.popToast(new ToastModel("Failed to save account",true)),
       () => console.log('Random Quote Complete')
     );
   }
@@ -108,8 +110,9 @@ export class AdminAccountComponent implements OnInit {
    
     this.adminAccountService.removeAccount(this.accNoToSearch).subscribe(
       data => {
+        this.adminAccountService.popToast(new ToastModel("Account removed",false))
       },
-      err => console.log("error"),
+      err => this.adminAccountService.popToast(new ToastModel("Failed to remove account",true)),
       () => console.log('Random Quote Complete')
     );
   }

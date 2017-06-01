@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { CardModel } from './models/cardModel';
 import { BalanceModel } from './models/balance.model';
 import { GlobalService } from './../../global.functions';
@@ -56,5 +57,7 @@ export class AccountService {
         .map(this.globalService.extractData)
       .catch(err => this.globalService.handleError(err));
   }
-  
+     popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
+    }
 }

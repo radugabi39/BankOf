@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { TransactionTableAdminModel } from './model/transactionTableModel';
 import { TransactionTableModel } from './../transaction/model/transactionTableModel';
 
@@ -26,5 +27,8 @@ export class AdminTransactionService {
         return this.http.post(url + 'transaction/reverseTransaction/', JSON.stringify(trans), { headers: this.globalService.headers })
             .map(this.globalService.extractData)
             .catch(err => this.globalService.handleError(err));
+    }    
+     popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
     }
 }

@@ -1,3 +1,6 @@
+import { ToastModel } from './primary-page/profile/models/toastModel';
+import { TaskModel } from './primary-page/admin-inbox/models/taskModel';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { key } from './global';
@@ -8,6 +11,10 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class GlobalService {
     public headers: Headers = new Headers();
+    subject = new BehaviorSubject<ToastModel>(null);
+     obs = this.subject
+              .asObservable()
+              .do(changes => {}); 
     constructor(private http: Http, private router: Router) {
         this.createAuthorizationHeader()
     }
@@ -38,5 +45,10 @@ export class GlobalService {
     }
     getKey():string{
         return key();
+    }
+
+
+    popToast(toastm:ToastModel){
+           this.subject.next(toastm); 
     }
 }

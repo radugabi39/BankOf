@@ -1,3 +1,4 @@
+import { ToastModel } from './models/toastModel';
 import { Observable } from 'rxjs/Observable';
 import { UserModel } from './models/userModel';
 import { GlobalService } from './../../global.functions';
@@ -34,5 +35,8 @@ subject = new BehaviorSubject<String>("");
         return this.http.post(url + 'user/changePassword/', { "newPass": newPass, "oldPass": oldPass }, { headers: this.globalService.headers })
             .map(this.globalService.extractData)
       .catch(err => this.globalService.handleError(err));
+    }
+         popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
     }
 }

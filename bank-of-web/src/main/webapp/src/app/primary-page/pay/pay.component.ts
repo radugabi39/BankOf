@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { SchedulerModel } from './models/schedulerModel';
 import { TransactionTableModel } from './../transaction/model/transactionTableModel';
 import { Router } from '@angular/router';
@@ -53,7 +54,7 @@ export class PayComponent implements OnInit {
         }
 
       },
-      err => console.log("error"),
+      err => this.payService.popToast(new ToastModel("Failed to get accounts", true)),
       () => console.log('Random Quote Complete')
     );
   }
@@ -97,7 +98,7 @@ export class PayComponent implements OnInit {
           this.done()
 
         },
-        err => console.log("error"),
+        err => this.payService.popToast(new ToastModel("Failed to get schedules", true)),
         () => console.log('Random Quote Complete')
       );
     }
@@ -109,8 +110,9 @@ export class PayComponent implements OnInit {
     this.payService.inactiveSchedule(sc.id).subscribe(
       data => {
         sc["active"] = false;
+        this.payService.popToast(new ToastModel("Schedule disabled", false))
       },
-      err => console.log("error"),
+      err => this.payService.popToast(new ToastModel("Failed inactivate schedule", true)),
       () => console.log('Random Quote Complete')
     );
   }
@@ -149,11 +151,12 @@ export class PayComponent implements OnInit {
       data => {
         this.donePage = true;
         this.status = data["data"];
+        this.payService.popToast(new ToastModel("Transfer completed", false))
       },
       err => {
         this.donePage = true;
         this.status = "Error while transfering";
-        console.log("error")
+       this.payService.popToast(new ToastModel("Failed to complete thej transfer", true))
       },
       () =>
         console.log('Random Quote Complete')

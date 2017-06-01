@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { CountryCityModel } from './models/CountryCityModel';
 import { BalanceModel } from './../account/models/balance.model';
 import { AdminUserService } from './admin-user.component.service';
@@ -55,15 +56,16 @@ export class AdminUserComponent implements OnInit {
           () => console.log('Random Quote Complete')
         );
       },
-      err => console.log("error"),
+      err => this.adminUserService.popToast(new ToastModel("Failed to get user details", true)),
       () => console.log('Random Quote Complete')
     );
   }
   saveChanges() {
     this.adminUserService.saveUserDataAdm(this.obj).subscribe(
       data => {
+        this.adminUserService.popToast(new ToastModel("User details saved", false))
       },
-      err => console.log("error"),
+      err => this.adminUserService.popToast(new ToastModel("Failed to save user details", true)),
       () => console.log('Random Quote Complete')
     );
   }
@@ -71,8 +73,9 @@ export class AdminUserComponent implements OnInit {
   resetPassword() {
     this.adminUserService.resetPassword(this.cnpToSearch).subscribe(
       data => {
+                this.adminUserService.popToast(new ToastModel("User password reseted", false))
       },
-      err => console.log("error"),
+      err => this.adminUserService.popToast(new ToastModel("Failed to reset user password", true)),
       () => console.log('Random Quote Complete')
     );
   } deepClone(oldArray: Object[]) {

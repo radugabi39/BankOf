@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { Observable } from 'rxjs/Observable';
 import { TransactionTableModel } from './model/transactionTableModel';
 import { Injectable } from '@angular/core';
@@ -48,5 +49,7 @@ export class TransactionService {
       
   }
 
-
+         popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
+    }
 }

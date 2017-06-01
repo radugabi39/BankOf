@@ -1,3 +1,4 @@
+import { ToastModel } from './models/toastModel';
 import { Observable } from 'rxjs/Observable';
 import { ProfileService } from './profile.component.service';
 import { UserModel } from './models/userModel';
@@ -38,32 +39,34 @@ export class ProfileComponent implements OnInit {
   saveUserData() {
     this.profileService.saveUserData(this.obj.address, this.obj.phone).subscribe(
       data => {
-
+          this.profileService.popToast(new ToastModel("User details saved", false))
       },
-      err => console.log("error"),
+      err => this.profileService.popToast(new ToastModel("Failed to save user details", true)),
       () => console.log('Random Quote Complete')
     );
   }
   customizeRequest(data) {
     data["xhr"].setRequestHeader('Authorization', key());
+          this.profileService.popToast(new ToastModel("Failed to change profiel picture", false))
   }
     onComplete(data) {
     this.obj["imageURL"]=JSON.parse(data["xhr"].responseText)["data"];
-  
     this.profileService.subject.next( this.obj["imageURL"]); 
+      this.profileService.popToast(new ToastModel("Profile picture changed", false))
   }
 
 
   changePass() {
     if (this.newPass !== this.repPass) {
-      this.message = "Passwords dosen't match";
+            this.profileService.popToast(new ToastModel("Passwords dosen't match", true))
     } else
     { this.message = ""; }
     this.profileService.changePassword(this.newPass, this.currPass).subscribe(
       data => {
         this.message = data["data"];
+        this.profileService.popToast(new ToastModel("Password changed", false))
       },
-      err => console.log("error"),
+      err =>      this.profileService.popToast(new ToastModel("Failed to change the password", true)),
       () => console.log('Random Quote Complete')
     );
   }

@@ -22,11 +22,13 @@
   <link rel="import" href="bower_components/paper-card/paper-card.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
   <link rel="import" href="bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="bower_components/paper-toast/paper-toast.html">
   <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
   <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
   <link rel="import" href="bower_components/paper-tabs/paper-tab.html">
   <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
   <link rel="import" href="bower_components/paper-material/paper-material.html">
+  <link rel="import" href="bower_components/paper-tooltip/paper-tooltip.html">
   <link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
   <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
   <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout-classes.html">
@@ -70,7 +72,12 @@
     google-map {
       height: 600px;
     }
-    
+    .redToast{
+      --paper-toast-background-color:  #cc0000;
+}
+    .greenToast{
+      --paper-toast-background-color:#028900;
+}
     .paper-font-body1 {
       color: #545454;
       font-family: 'Signika', sans-serif;

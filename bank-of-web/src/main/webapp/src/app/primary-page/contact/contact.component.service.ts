@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { BranchLocationModel } from './../account/models/branchLocationModel';
 
 import { Injectable } from '@angular/core';
@@ -24,4 +25,7 @@ export class ContactService {
           .map(res => BranchLocationModel.fromJSONArray(this.globalService.extractData(res)))
       .catch(err => this.globalService.handleError(err));
   }
+  popToast(toastm:ToastModel){
+           this.globalService.popToast(toastm); 
+    }
 }

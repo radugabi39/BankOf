@@ -1,21 +1,23 @@
 <div class="vertical layout center-justified" style="padding-top: 30px;">
-<div class="horizontal layout center-justified">
+  <div class="horizontal layout center-justified">
 
-  <p-dataTable [value]="tableData">
-    <p-column field="description" header="Description"></p-column>
-    <p-column field="creationDate" header="Creation Date"></p-column>
-    <p-column field="taskStatus" header="Task Status"></p-column>
+    <p-dataTable [value]="tableData">
+      <p-column field="description" header="Description"></p-column>
+      <p-column field="creationDate" header="Creation Date"></p-column>
+      <p-column field="taskStatus" header="Task Status"></p-column>
 
-       <p-column field="taskType" header="Task Type"></p-column>
-   <p-column field="" header="Actions">
-      <template let-col let-sc="rowData" pTemplate="body">
-        <paper-icon-button *ngIf="sc.taskStatus=='PENDING'" icon="arrow-downward" (click)="claimTask(sc)"></paper-icon-button>
-         <paper-icon-button *ngIf="sc.taskStatus=='CLAIMED'" icon="check"  style="color:limegreen"  (click)="approveTask(sc)"></paper-icon-button>
-            <paper-icon-button *ngIf="sc.taskStatus=='CLAIMED'" icon="close"  style="color:red"  (click)="rejectTask(sc)"></paper-icon-button>
-      </template>
+      <p-column field="taskType" header="Task Type"></p-column>
+      <p-column field="" header="Actions">
+        <template let-col let-sc="rowData" pTemplate="body">
+          <paper-icon-button id="inClaim" *ngIf="sc.taskStatus=='PENDING'" icon="arrow-downward" (click)="claimTask(sc)"></paper-icon-button>
+          <paper-icon-button id="inApprove" *ngIf="sc.taskStatus=='CLAIMED'" icon="check" style="color:limegreen" (click)="approveTask(sc)"></paper-icon-button>
+          <paper-icon-button id="inReject" *ngIf="sc.taskStatus=='CLAIMED'" icon="close" style="color:red" (click)="rejectTask(sc)"></paper-icon-button>
+           <paper-tooltip for="inClaim" position="left">Claim task</paper-tooltip>
+            <paper-tooltip for="inApprove" position="left">Approve task</paper-tooltip>
+             <paper-tooltip for="inReject" position="left">Reject task</paper-tooltip>
+        </template>
       </p-column>
-  </p-dataTable>
-</div>
+    </p-dataTable>
+  </div>
 
 </div>
-

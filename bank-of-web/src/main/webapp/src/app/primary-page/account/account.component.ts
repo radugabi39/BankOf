@@ -1,3 +1,4 @@
+import { ToastModel } from './../profile/models/toastModel';
 import { CardModel } from './models/cardModel';
 import { BalanceModel } from './models/balance.model';
 import { AccountService } from './account.component.service';
@@ -43,11 +44,12 @@ export class AccountComponent implements OnInit {
         let clone = this.deepClone(this.items);
         let itemFound: Account = clone.filter(obj => acc.number === obj["number"])[0];
         let indexFound = clone.indexOf(itemFound);
-
+           this.accountService.popToast(new ToastModel("Account refreshed",false));
         clone[indexFound] = data[0]
         this.items = clone;
+     
       },
-      err => console.log("error"),
+      err => this.accountService.popToast(new ToastModel("Failed to refresh account",true)),
       () => console.log('Random Quote Complete')
     );
 
@@ -63,8 +65,9 @@ saveAccount(data){
     this.accountService.saveAccount(this.selectedAccToSave.number,this.selectedAccToSave.limit,this.selectedAccToSave.smsAlert).subscribe(
       data => {
           this.openSettingsDialogTrigger=false;
+          this.accountService.popToast(new ToastModel("Account saved",false))
       },
-      err => console.log("error"),
+      err => this.accountService.popToast(new ToastModel("Failed to save account",true)),
       () => console.log('Random Quote Complete')
     );
 }
@@ -76,9 +79,9 @@ saveAccount(data){
     this.accountService.getInOutcomeFromLastMonths(1, acc.number).subscribe(
       data => {
         this.balanceModel = data;
-        this.openDialogTrigger = true;
+        this.openDialogTrigger = true;        
       },
-      err => console.log("error"),
+      err => this.accountService.popToast(new ToastModel("Failed to get account income details",true)),
       () => console.log('Random Quote Complete')
     );
 
@@ -89,7 +92,7 @@ saveAccount(data){
         data => {
           this.balanceModel = data;
         },
-        err => console.log("error"),
+        err =>  this.accountService.popToast(new ToastModel("Failed to get account income details",true)),
         () => console.log('Random Quote Complete')
       );
     } else {
@@ -119,7 +122,7 @@ saveAccount(data){
       data => {
         this.cardItems = data;
       },
-      err => console.log("error"),
+      err =>  this.accountService.popToast(new ToastModel("Failed to get cards",true)),
       () => console.log('Random Quote Complete')
     );
     
