@@ -188,7 +188,7 @@ public class UserRest {
 			return toReturn;
 
 	    }
-	 @RequestMapping(value = "/checkIfUserIsEmployee/{userName}", method = RequestMethod.GET)
+	 @RequestMapping(value = "/checkIfUserIsEmployee/{userName:.+}", method = RequestMethod.GET)
 		@ResponseBody
 		public GenericResponse<Boolean> checkIfUserIsEmployee(@PathVariable String userName) {
 			GenericResponse<Boolean> toReturn = new GenericResponse<Boolean>();

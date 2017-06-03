@@ -6,8 +6,8 @@
   </app-toolbar>
     
 <paper-menu-button id="menuIcon">
-  <paper-icon-button  *ngIf="customer" class="dropdown-trigger" id="profileIcon" [style.background-image]="'url(http://localhost:8080/img/' + profileImage + ')'"></paper-icon-button>
-    <paper-icon-button  *ngIf="!customer" class="dropdown-trigger" id="profileIcon" [style.background-image]="'url(assets/images/default.jpg)'"></paper-icon-button>
+  <paper-icon-button  *ngIf="profileImage!=null && profileImage!=''" class="dropdown-trigger" id="profileIcon" [style.background-image]="'url(http://localhost:8080/img/' + profileImage + ')'"></paper-icon-button>
+    <paper-icon-button  *ngIf="profileImage==null || profileImage==''" [ngClass]="['dropdown-trigger','noImage']" id="profileIcon" ></paper-icon-button>
   <paper-menu class="dropdown-content">
      <paper-item  *ngIf="customer" [routerLink]="['/primaryPage/profile']">View Profile</paper-item>
     <paper-item  [routerLink]="['/user/login']" (click)=logout()>Log out</paper-item>

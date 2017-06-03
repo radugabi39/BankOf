@@ -15,6 +15,12 @@
         background-image: url(assets/images/logoBanner.png);
         background-repeat:no-repeat;
       }
+
+       .noImage {
+     background-repeat:no-repeat;
+        background-image: url(assets/images/default.jpg);
+
+      }
 .primaryPageContent{
     position: absolute;
     left: 0;
