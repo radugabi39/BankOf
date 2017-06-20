@@ -34,6 +34,7 @@ import ro.fmi.bnk.enitites.User;
 import ro.fmi.bnk.models.CountryCityMapping;
 import ro.fmi.bnk.models.SendMailInputModel;
 import ro.fmi.bnk.models.TransactionTableModel;
+import ro.fmi.bnk.models.UserModel;
 import ro.fmi.bnk.service.UtilsService;
 
 @Service("utilsService")
@@ -50,13 +51,16 @@ public class UtilsServiceImpl implements UtilsService {
 	@Override
 	public void sendEmail(SendMailInputModel inp, String userName) {
 
-		User currentUser = userDAO.getUserByUsername(userName);
+		UserModel currentUser = userDAO.getCurrentUserData(userName);
 		SimpleMailMessage message = new SimpleMailMessage();
-
+		StringBuilder msgFooter=new StringBuilder("\n");
 		message.setFrom("bankoflic@gmail.com");
-		message.setTo(currentUser.getEmail());
+		message.setTo("bankoflic@gmail.com");
 		message.setSubject(inp.getSubject());
-		message.setText(inp.getBody());
+		msgFooter.append("Sender: "+currentUser.getFirstName()+" "+currentUser.getLastName()+"\n");
+		msgFooter.append("Email: "+currentUser.getEmail()+"\n");
+		msgFooter.append("Number: "+currentUser.getPhone()+"\n");
+		message.setText(msgFooter.toString()+inp.getBody());
 		mailSender.send(message);
 	}
 

@@ -4,7 +4,7 @@ export class SchedulerModel {
   	id:Number;
     toAccount:String;
 	fromAccount:String;
-	nextPayment:Date;
+	nextPayment:String;
 	active:Boolean;
 	amount:Number;
 
@@ -14,13 +14,13 @@ export class SchedulerModel {
         this.id = id;
         this.toAccount = toAccount;
         this.fromAccount = fromAccount;
-        this.nextPayment = nextPayment;
+        this.nextPayment =  nextPayment.getFullYear()+"-"+(nextPayment.getMonth()+1)+"-"+nextPayment.getDate()+" ";
         this.active = active;
                 this.amount = amount;
 
     }
 
 static fromJSONArray(array: Array<Object>): SchedulerModel[] {
-        return array["data"].map(obj => new SchedulerModel(obj['id'], obj['toAccount'], obj['fromAccount'], obj['nextPayment'], obj['active'], obj['amount']));
+        return array["data"].map(obj => new SchedulerModel(obj['id'], obj['toAccount'], obj['fromAccount'], new Date(obj['nextPayment']), obj['active'], obj['amount']));
     }
 }

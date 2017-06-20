@@ -55,9 +55,32 @@ public class TaskServiceImpl implements TaskService {
 	@Transactional
 	public String rejectTask(Long taskId) {
 		Task t = taskDAO.getByID(taskId);
-		t.setTaskStatus(taskDAO.getEntityByName(TaskStatus.class, TaskStatusEnum.REJECTED.toString()));
-		taskDAO.persist(t);
-		return "OK";
+		JAXBContext jaxbContext;
+		try {
+			jaxbContext = JAXBContext.newInstance(TransferInputModel.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		
+			StringReader reader = new StringReader(t.getTransactionModifications());
+			TransferInputModel obj = (TransferInputModel) unmarshaller.unmarshal(reader);
+			Account myAcc = accountDAO.getAccountENTByNo(obj.getFromAccount());
+			Account destAcc = accountDAO.getAccountENTByNo(obj.getDestAccount());
+			t.setTaskStatus(taskDAO.getEntityByName(TaskStatus.class, TaskStatusEnum.REJECTED.toString()));
+			Transaction newTrans = new Transaction();
+			newTrans.setAccount(myAcc);
+			newTrans.setDescription(obj.getTransDescription());
+			newTrans.setDestinationAccount(destAcc);
+			newTrans.setAmount(obj.getAmount());
+			newTrans.setTransactionType(taskDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
+			newTrans.setTransactionStatus(taskDAO.getEntityByName(TransactionStatus.class, "REJECTED"));
+			newTrans.setCreationDate(new Date());
+			taskDAO.persist(newTrans);
+			taskDAO.persist(t);
+			return "OK";
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Override
@@ -107,7 +130,8 @@ public class TaskServiceImpl implements TaskService {
 				newTrans.setTransactionType(taskDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
 				newTrans.setTransactionStatus(taskDAO.getEntityByName(TransactionStatus.class, "SUCCESS"));
 				newTrans.setCreationDate(new Date());
-
+				myAcc.setBalance(myAcc.getBalance().subtract(obj.getAmount()));
+				destAcc.setBalance(destAcc.getBalance().add(obj.getAmount()));
 				taskDAO.persist(destAcc);
 				taskDAO.persist(myAcc);
 				taskDAO.persist(newTrans);

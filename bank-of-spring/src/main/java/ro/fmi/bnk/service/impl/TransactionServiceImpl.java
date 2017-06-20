@@ -36,9 +36,9 @@ import ro.fmi.bnk.service.TransactionService;
 @Service("transactionService")
 public class TransactionServiceImpl implements TransactionService {
 
-	final String vodaNo="1";
-	final String rdsNo="2";
-	final String enelNo="3";
+	final String vodaNo = "10000001";
+	final String rdsNo = "10000002";
+	final String enelNo = "10000003";
 	@Autowired
 	private TransactionDAO transactionDAO;
 
@@ -49,98 +49,97 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<TransactionTableModel> getTransactionsByAccNo(String accNo) {
 		return transactionDAO.getTransactionsByAccNo(accNo);
 	}
+
 	@Override
 	public List<TransactionTableModel> getAdminTransactionsByAccNo(String accNo) {
 		return transactionDAO.getAdminTransactionsByAccNo(accNo);
 	}
-	
-	@Override	
+
+	@Override
 	@Transactional
 	public String reverseTransaction(TransactionTableModel inpModel) {
 		try {
 			Account myAcc = accountDAO.getAccountENTByNo(inpModel.getToAccount());
-			if (myAcc.getBalance()!= null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
+			if (myAcc.getBalance() != null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
 				return "No funds";
 			}
- 
-			
-			
-				Account destAcc = accountDAO.getAccountENTByNo(inpModel.getFromAccount());
-				if (!destAcc.getAccountStatus().getName().equals("OPEN")) {
-					return "Destination account is not active";
-				}
-				myAcc.setBalance(myAcc.getBalance().subtract(inpModel.getAmount()));
-				destAcc.setBalance(destAcc.getBalance().add(inpModel.getAmount()));
-				Transaction newTrans = new Transaction();
-				newTrans.setAccount(myAcc);
-				newTrans.setDescription("Reversed transaction");
-				newTrans.setDestinationAccount(destAcc);
-				newTrans.setAmount(inpModel.getAmount());
-				newTrans.setTransactionType(transactionDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
-				newTrans.setTransactionStatus(transactionDAO.getEntityByName(TransactionStatus.class, "SUCCESS"));
-				newTrans.setCreationDate(new Date());
-				transactionDAO.persist(destAcc);
-				transactionDAO.persist(myAcc);
-				transactionDAO.persist(newTrans);
-				return "OK";
-			
+
+			Account destAcc = accountDAO.getAccountENTByNo(inpModel.getFromAccount());
+			if (!destAcc.getAccountStatus().getName().equals("OPEN")) {
+				return "Destination account is not active";
+			}
+			myAcc.setBalance(myAcc.getBalance().subtract(inpModel.getAmount()));
+			destAcc.setBalance(destAcc.getBalance().add(inpModel.getAmount()));
+			Transaction newTrans = new Transaction();
+			newTrans.setAccount(myAcc);
+			newTrans.setDescription("Reversed transaction");
+			newTrans.setDestinationAccount(destAcc);
+			newTrans.setAmount(inpModel.getAmount());
+			newTrans.setTransactionType(transactionDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
+			newTrans.setTransactionStatus(transactionDAO.getEntityByName(TransactionStatus.class, "SUCCESS"));
+			newTrans.setCreationDate(new Date());
+			transactionDAO.persist(destAcc);
+			transactionDAO.persist(myAcc);
+			transactionDAO.persist(newTrans);
+			return "OK";
+
 		} catch (Exception e) {
 			return e.getMessage();
 		}
 	}
+
 	@Override
 	@Transactional
 	public String tryTransaction(TransferInputModel inpModel) {
 		try {
 			Account myAcc = accountDAO.getAccountENTByNo(inpModel.getFromAccount());
-	
-			String accNoF="";
-			if (myAcc.getBalance()!= null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
+
+			String accNoF = "";
+			if (myAcc.getBalance() != null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
 				return "No funds";
 			}
-			if(inpModel.getProvider()!=null && !inpModel.getProvider().equals("")){
-				if(inpModel.getProvider().equals("voda")){
-					accNoF=vodaNo;
-				}else 	if(inpModel.getProvider().equals("rds")){
-					accNoF=rdsNo;
-				}else 	if(inpModel.getProvider().equals("enel")){
-					accNoF=enelNo;
+			if (inpModel.getProvider() != null && !inpModel.getProvider().equals("")) {
+				if (inpModel.getProvider().equals("voda")) {
+					accNoF = vodaNo;
+				} else if (inpModel.getProvider().equals("rds")) {
+					accNoF = rdsNo;
+				} else if (inpModel.getProvider().equals("enel")) {
+					accNoF = enelNo;
 				}
-			}else {
-				accNoF=inpModel.getDestAccount();
+			} else {
+				accNoF = inpModel.getDestAccount();
 			}
 			Account destAcc = accountDAO.getAccountENTByNo(accNoF);
+			if (destAcc.getCurrency() == null || myAcc.getCurrency() == null
+					|| !destAcc.getCurrency().getName().equals(myAcc.getCurrency().getName())) {
+				return "Not the same currency";
+			}
 			if (inpModel.getDateToPay() != null && !inpModel.getDateToPay().equals("")) {
-				Scheduler newSc= new Scheduler();
+				Scheduler newSc = new Scheduler();
 				newSc.setActive(true);
 				newSc.setAmount(inpModel.getAmount());
 				newSc.setFromAccount(myAcc);
 				newSc.setToAccount(destAcc);
-				Calendar cal = Calendar.getInstance(); 
+				Calendar cal = Calendar.getInstance();
 				cal.setTime(inpModel.getDateToPay());
-			
-				cal.add(Calendar.MONTH, 1);
-				newSc.setNextPayment(new Date().before(inpModel.getDateToPay())?inpModel.getDateToPay():cal.getTime());
+				Date now = new Date();
+
+				if (now.getDate()>inpModel.getDateToPay().getDate()) {
+					cal.add(Calendar.MONTH, 1);
+				}
+
+				newSc.setNextPayment(
+						new Date().before(inpModel.getDateToPay()) ? inpModel.getDateToPay() : cal.getTime());
 				newSc.setCustomer(myAcc.getCustomer());
 				transactionDAO.persist(newSc);
 				return "OK";
 			} else {
-				
-			
+
 				if (!destAcc.getAccountStatus().getName().equals("OPEN")) {
 					return "Destination account is not active";
 				}
-				myAcc.setBalance(myAcc.getBalance().subtract(inpModel.getAmount()));
-				destAcc.setBalance(destAcc.getBalance().add(inpModel.getAmount()));
-				Transaction newTrans = new Transaction();
-				newTrans.setAccount(myAcc);
-				newTrans.setDescription(inpModel.getTransDescription());
-				newTrans.setDestinationAccount(destAcc);
-				newTrans.setAmount(inpModel.getAmount());
-				newTrans.setTransactionType(transactionDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
-				newTrans.setTransactionStatus(transactionDAO.getEntityByName(TransactionStatus.class, "SUCCESS"));
-				newTrans.setCreationDate(new Date());
-				if(myAcc.getLimitAmount().compareTo(inpModel.getAmount())==-1){
+
+				if (myAcc.getLimitAmount().compareTo(inpModel.getAmount()) == -1) {
 					String xmlString = "";
 
 					try {
@@ -153,9 +152,11 @@ public class TransactionServiceImpl implements TransactionService {
 						StringWriter sw = new StringWriter();
 						m.marshal(inpModel, sw);
 						xmlString = sw.toString();
-						Task newT= new Task();
-						TaskStatus ts= transactionDAO.getEntityByName(TaskStatus.class, TaskStatusEnum.PENDING.toString());
-						TaskType tt= transactionDAO.getEntityByName(TaskType.class, TaskTypeEnum.TRANSFER_HIGH_AMOUNT.toString());
+						Task newT = new Task();
+						TaskStatus ts = transactionDAO.getEntityByName(TaskStatus.class,
+								TaskStatusEnum.PENDING.toString());
+						TaskType tt = transactionDAO.getEntityByName(TaskType.class,
+								TaskTypeEnum.TRANSFER_HIGH_AMOUNT.toString());
 						newT.setActive(true);
 						newT.setDescription("High amount transfer");
 						newT.setTaskStatus(ts);
@@ -167,41 +168,54 @@ public class TransactionServiceImpl implements TransactionService {
 						e.printStackTrace();
 					}
 					return "transaction need to be approved";
-				}else{
-				transactionDAO.persist(destAcc);
-				transactionDAO.persist(myAcc);
-				transactionDAO.persist(newTrans);
-				return "OK";}
+				} else {
+					myAcc.setBalance(myAcc.getBalance().subtract(inpModel.getAmount()));
+					destAcc.setBalance(destAcc.getBalance().add(inpModel.getAmount()));
+					Transaction newTrans = new Transaction();
+					newTrans.setAccount(myAcc);
+					newTrans.setDescription(inpModel.getTransDescription());
+					newTrans.setDestinationAccount(destAcc);
+					newTrans.setAmount(inpModel.getAmount());
+					newTrans.setTransactionType(transactionDAO.getEntityByName(TransactionType.class, "TRANSACTION"));
+					newTrans.setTransactionStatus(transactionDAO.getEntityByName(TransactionStatus.class, "SUCCESS"));
+					newTrans.setCreationDate(new Date());
+					transactionDAO.persist(destAcc);
+					transactionDAO.persist(myAcc);
+					transactionDAO.persist(newTrans);
+					return "OK";
+				}
 			}
 		} catch (Exception e) {
-			return e.getMessage();
+			throw e;
 		}
 	}
-	
+
 	@Override
 	public List<SchedulerModel> getSchedulers(String userName) {
 		return transactionDAO.getSchedulers(userName);
 	}
+
 	@Override
 	public Boolean inactiveSchedule(Long id) {
 		return transactionDAO.inactiveSchedule(id);
 	}
+
 	@Override
-//	@Scheduled(fixedDelay=5000)
+	@Scheduled(fixedDelay = 5000)
 	@Transactional
 	public void checkShcedulerTask() {
-	    List<Scheduler> asd=transactionDAO.getAllSchedulers();
-	    Date now= new Date();
-	    for(Scheduler obj :asd){
-	    	if(now.after(obj.getNextPayment())){
-	    		Calendar cal = Calendar.getInstance(); 
+		List<Scheduler> asd = transactionDAO.getAllSchedulers();
+		Date now = new Date();
+		for (Scheduler obj : asd) {
+			if (now.after(obj.getNextPayment())) {
+				Calendar cal = Calendar.getInstance();
 				cal.setTime(obj.getNextPayment());
 				cal.add(Calendar.MONTH, 1);
-	    		transactionDAO.persist(cal.getTime());
-	    		Transaction newTrans = new Transaction();
-	    		Account myAcc=obj.getFromAccount();
-	    		Account destAcc=obj.getToAccount();
-	    		myAcc.setBalance(myAcc.getBalance().subtract(obj.getAmount()));
+				obj.setNextPayment(cal.getTime());
+				Transaction newTrans = new Transaction();
+				Account myAcc = obj.getFromAccount();
+				Account destAcc = obj.getToAccount();
+				myAcc.setBalance(myAcc.getBalance().subtract(obj.getAmount()));
 				destAcc.setBalance(destAcc.getBalance().add(obj.getAmount()));
 				newTrans.setAccount(myAcc);
 				newTrans.setDescription("provider paymnent");
@@ -213,10 +227,9 @@ public class TransactionServiceImpl implements TransactionService {
 				transactionDAO.persist(destAcc);
 				transactionDAO.persist(myAcc);
 				transactionDAO.persist(newTrans);
-	    	}
-	    }
-	    
-	    
-	    
+				transactionDAO.persist(obj);
+			}
+		}
+
 	}
 }

@@ -5,7 +5,7 @@
   </div>
   <div class="horizontal layout" style="margin-top: 20px">
     <div class="paper-font-headline" style="min-width: 100px">Body: </div>
-    <textarea [(ngModel)]="body" rows="10" cols="100" pInputTextarea></textarea>
+    <textarea [(ngModel)]="body" maxlength=1000 rows="10" cols="100" pInputTextarea></textarea>
   </div>
   <div class="horizontal layout" style="margin-top: 20px">
     <paper-button class="custom indigo" raised (click)="sendEmail()">Send</paper-button>
