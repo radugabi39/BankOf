@@ -49,6 +49,7 @@ public class TransactionRest {
 			toReturn.setData(transactionBean.tryTransaction(inpModel));
 			toReturn.setStatus("OK");
 		} catch (Exception e) {
+			toReturn.setData(e.getMessage());
 			toReturn.setStatus("Exception Occured");
 			toReturn.setMessage(e.getMessage());
 		}

@@ -151,12 +151,17 @@ export class PayComponent implements OnInit {
       data => {
         this.donePage = true;
         this.status = data["data"];
-        this.payService.popToast(new ToastModel("Transfer completed", false))
+        if(data["status"]=="OK"){
+            this.payService.popToast(new ToastModel("Transfer completed", false)) 
+        }else{
+            this.payService.popToast(new ToastModel("Failed to complete the transfer", true))
+        }
+        
       },
       err => {
         this.donePage = true;
-        this.status = "Error while transfering";
-       this.payService.popToast(new ToastModel("Failed to complete thej transfer", true))
+        
+      
       },
       () =>
         console.log('Random Quote Complete')

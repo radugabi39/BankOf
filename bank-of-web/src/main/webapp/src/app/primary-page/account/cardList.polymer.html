@@ -90,9 +90,31 @@
         padding-bottom: 0px;
       }
       
+      paper-input {
+        --paper-input-container-disabled: {
+          opacity: 1;
+        }
+        ;
+      }
+      
       gold-cc-cvc-input #container {
         padding-top: 11px;
         padding-bottom: 0px;
+        --paper-input-container-disabled: {
+          opacity: 1;
+        }
+      }
+      
+      gold-cc-cvc-input {
+        --paper-input-container-disabled: {
+          opacity: 1;
+        }
+      }
+      
+      gold-cc-input {
+        --paper-input-container-disabled: {
+          opacity: 1;
+        }
       }
     </style>
 
@@ -106,23 +128,23 @@
                 <div class="card-content">
                   <div class="container flex-horizontal">
                     <div>
-                      <paper-input label="Holder Name" value="[[item.holderName]]"></paper-input>
+                      <paper-input label="Holder Name" disabled value="[[item.holderName]]"></paper-input>
 
 
                       <div class="container flex-horizontal">
                         <div class="flexchild">
-                          <paper-input label="Expiry date" value="[[item.expiryDate]]"></paper-input>
+                          <paper-input label="Expiry date" disabled value="[[item.expiryDate]]"></paper-input>
                         </div>
                         <div class="flexchild">
-                          <paper-input label="Linked account" value="[[item.accountLinked]]"></paper-input>
+                          <paper-input label="Linked account" disabled value="[[item.accountLinked]]"></paper-input>
                         </div>
                       </div>
-                      <div class="container flex-horizontal" >
+                      <div class="container flex-horizontal">
                         <div class="flexchild">
-                          <gold-cc-input label="[[item.type]]" value="[[item.number]]" ></gold-cc-input>
+                          <gold-cc-input label="[[item.type]]" disabled value="[[item.number]]"></gold-cc-input>
                         </div>
                         <div class="flexchild">
-                          <gold-cc-cvc-input required card-type="amex" value="[[item.cvc]]" style="margin-top: 3px;"></gold-cc-cvc-input>
+                          <gold-cc-cvc-input required card-type="amex" disabled value="[[item.cvc]]" style="margin-top: 3px;"></gold-cc-cvc-input>
                         </div>
                       </div>
                     </div>

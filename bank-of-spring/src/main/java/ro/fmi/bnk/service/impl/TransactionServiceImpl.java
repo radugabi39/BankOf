@@ -90,13 +90,13 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	@Transactional
-	public String tryTransaction(TransferInputModel inpModel) {
+	public String tryTransaction(TransferInputModel inpModel) throws Exception {
 		try {
 			Account myAcc = accountDAO.getAccountENTByNo(inpModel.getFromAccount());
 
 			String accNoF = "";
 			if (myAcc.getBalance() != null && myAcc.getBalance().compareTo(inpModel.getAmount()) == -1) {
-				return "No funds";
+				throw new Exception("No funds");
 			}
 			if (inpModel.getProvider() != null && !inpModel.getProvider().equals("")) {
 				if (inpModel.getProvider().equals("voda")) {
@@ -110,9 +110,12 @@ public class TransactionServiceImpl implements TransactionService {
 				accNoF = inpModel.getDestAccount();
 			}
 			Account destAcc = accountDAO.getAccountENTByNo(accNoF);
+			if(destAcc==null){
+				throw new Exception("Destination account dosen't exist");
+			}
 			if (destAcc.getCurrency() == null || myAcc.getCurrency() == null
 					|| !destAcc.getCurrency().getName().equals(myAcc.getCurrency().getName())) {
-				return "Not the same currency";
+				throw new Exception("Not the same currency");
 			}
 			if (inpModel.getDateToPay() != null && !inpModel.getDateToPay().equals("")) {
 				Scheduler newSc = new Scheduler();
@@ -136,7 +139,7 @@ public class TransactionServiceImpl implements TransactionService {
 			} else {
 
 				if (!destAcc.getAccountStatus().getName().equals("OPEN")) {
-					return "Destination account is not active";
+					throw new Exception("Destination account is not active");	
 				}
 
 				if (myAcc.getLimitAmount().compareTo(inpModel.getAmount()) == -1) {
@@ -167,7 +170,7 @@ public class TransactionServiceImpl implements TransactionService {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					return "transaction need to be approved";
+					return "Transaction need to be approved";
 				} else {
 					myAcc.setBalance(myAcc.getBalance().subtract(inpModel.getAmount()));
 					destAcc.setBalance(destAcc.getBalance().add(inpModel.getAmount()));

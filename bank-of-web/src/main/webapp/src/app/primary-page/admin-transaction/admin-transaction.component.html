@@ -14,7 +14,7 @@
     <p-column field="amount" header="Amount"></p-column>
     <p-column header="Actions">
       <template let-col let-trans="rowData" pTemplate="body">
-        <paper-icon-button *ngIf="trans.transactionStatus=='SUCCESS'" icon="pageview" (click)="reverseTransaction(trans)"></paper-icon-button>
+        <paper-icon-button *ngIf="trans.transactionStatus=='SUCCESS'" icon="swap-horiz" (click)="reverseTransaction(trans)"></paper-icon-button>
       </template>
     </p-column>
   </p-dataTable>

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   private email: String = "";
   private password: String = "";
-    private textToast: String;
+  private textToast: String;
   private open: Boolean = false
   constructor(private loginService: LoginService, private router: Router, private globalService: GlobalService, private primaryPageService: PrimaryPageService) { }
 
@@ -27,7 +27,11 @@ export class LoginComponent implements OnInit {
         this.loginService.checkIfUserIsEmp(this.email).subscribe(
           data => {
             this.primaryPageService.setUserCustomer(data["data"])
-            this.router.navigateByUrl('/primaryPage')
+            if (data["data"] == false) {
+              this.router.navigateByUrl('/primaryPage/account')
+            } else {
+              this.router.navigateByUrl('/primaryPage/adminUser')
+            }
 
           },
           err => this.primaryPageService.popToast(new ToastModel("Failed to check user role", true)),
@@ -35,7 +39,7 @@ export class LoginComponent implements OnInit {
         );;
 
       },
-      err =>{
+      err => {
 
         this.textToast = "Login failed! Please check the email and password!"
         this.open = true;
@@ -44,5 +48,5 @@ export class LoginComponent implements OnInit {
       () => console.log('Random Quote Complete')
     );;
   }
- 
+
 }

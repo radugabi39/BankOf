@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   saveUserData() {
     this.profileService.saveUserData(this.obj.address, this.obj.phone).subscribe(
       data => {
-          this.profileService.popToast(new ToastModel("User details saved", false))
+        this.profileService.popToast(new ToastModel("User details saved", false))
       },
       err => this.profileService.popToast(new ToastModel("Failed to save user details", true)),
       () => console.log('Random Quote Complete')
@@ -47,26 +47,31 @@ export class ProfileComponent implements OnInit {
   }
   customizeRequest(data) {
     data["xhr"].setRequestHeader('Authorization', key());
-          this.profileService.popToast(new ToastModel("Failed to change profiel picture", false))
+    this.profileService.popToast(new ToastModel("Failed to change profiel picture", false))
   }
-    onComplete(data) {
-    this.obj["imageURL"]=JSON.parse(data["xhr"].responseText)["data"];
-    this.profileService.subject.next( this.obj["imageURL"]); 
-      this.profileService.popToast(new ToastModel("Profile picture changed", false))
+  onComplete(data) {
+    this.obj["imageURL"] = JSON.parse(data["xhr"].responseText)["data"];
+    this.profileService.subject.next(this.obj["imageURL"]);
+    this.profileService.popToast(new ToastModel("Profile picture changed", false))
   }
 
 
   changePass() {
     if (this.newPass !== this.repPass) {
-            this.profileService.popToast(new ToastModel("Passwords dosen't match", true))
+      this.profileService.popToast(new ToastModel("Passwords dosen't match", true))
     } else
     { this.message = ""; }
     this.profileService.changePassword(this.newPass, this.currPass).subscribe(
       data => {
         this.message = data["data"];
-        this.profileService.popToast(new ToastModel("Password changed", false))
+        if (data["data"] == "") {
+          this.profileService.popToast(new ToastModel("Password changed", false))
+        }
+        else {
+          this.profileService.popToast(new ToastModel("Failed to change the password", true))
+        }
       },
-      err =>      this.profileService.popToast(new ToastModel("Failed to change the password", true)),
+      err => this.profileService.popToast(new ToastModel("Failed to change the password", true)),
       () => console.log('Random Quote Complete')
     );
   }

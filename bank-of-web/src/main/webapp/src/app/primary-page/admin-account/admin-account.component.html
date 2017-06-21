@@ -14,8 +14,8 @@
       <custom-dropdown [items]="currencyItems" [(selected)]="obj.currency" (selectedItem)="setCurrency($event)"></custom-dropdown>
        </div>
       <div class="horizontal layout" style="margin-top: 20px">
-        <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Balance: </div>
-        <paper-input [(value)]="obj.balance"></paper-input>
+        <div class="paper-font-headline"   style="min-width: 130px;padding-top:25px">Balance: </div>
+        <paper-input type="number" [(value)]="obj.balance"></paper-input>
       </div>
       <div class="horizontal layout" style="margin-top: 20px">
         <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Account type: </div>
@@ -31,8 +31,8 @@
         <custom-dropdown [items]="accountStatusItems" [(selected)]="obj.status" (selectedItem)="setStatus($event)"></custom-dropdown>
       </div>
       <div class="horizontal layout" style="margin-top: 20px">
-        <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Limit amount: </div>
-        <paper-input [(value)]="obj.limit"></paper-input>
+        <div class="paper-font-headline"   style="min-width: 130px;padding-top:25px">Limit amount: </div>
+        <paper-input type="number" [(value)]="obj.limit"></paper-input>
       </div>
 
       <div class="horizontal layout" style="margin-top: 20px">

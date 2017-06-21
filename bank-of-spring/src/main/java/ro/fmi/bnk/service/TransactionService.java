@@ -9,7 +9,7 @@ import ro.fmi.bnk.models.TransferInputModel;
 public interface TransactionService {
 
 	List<TransactionTableModel> getTransactionsByAccNo(String accNo);
-	String tryTransaction(TransferInputModel inpModel);
+	String tryTransaction(TransferInputModel inpModel) throws Exception;
 	List<TransactionTableModel> getAdminTransactionsByAccNo(String accNo);
 
 	String reverseTransaction(TransactionTableModel inp);
