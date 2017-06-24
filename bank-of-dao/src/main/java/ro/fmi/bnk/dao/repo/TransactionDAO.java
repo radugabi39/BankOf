@@ -42,7 +42,7 @@ public class TransactionDAO extends GenericDAO {
 
 	public List<SchedulerModel> getSchedulers(String userName) {
 		Query q = em.createQuery(
-				"select new ro.fmi.bnk.models.SchedulerModel(sc.id,fa.accountNo,da.accountNo,sc.nextPayment,sc.active,sc.amount) from Scheduler sc"
+				"select new ro.fmi.bnk.models.SchedulerModel(sc.id,da.accountNo,fa.accountNo,sc.nextPayment,sc.active,sc.amount) from Scheduler sc"
 						+ " INNER JOIN sc.fromAccount fa" + " INNER JOIN sc.toAccount da"
 						+ " INNER JOIN sc.customer cust" + " INNER JOIN cust.user us"
 

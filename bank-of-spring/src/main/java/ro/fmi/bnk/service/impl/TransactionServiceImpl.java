@@ -161,9 +161,10 @@ public class TransactionServiceImpl implements TransactionService {
 						TaskType tt = transactionDAO.getEntityByName(TaskType.class,
 								TaskTypeEnum.TRANSFER_HIGH_AMOUNT.toString());
 						newT.setActive(true);
-						newT.setDescription("High amount transfer");
+						newT.setDescription("High amount transfer from "+inpModel.getFromAccount() +" to " + inpModel.getDestAccount()+". Amount: "+inpModel.getAmount());
 						newT.setTaskStatus(ts);
 						newT.setTaskType(tt);
+						newT.setCreationDate(new Date());
 						newT.setTransactionModifications(xmlString);
 						transactionDAO.persist(newT);
 					} catch (JAXBException e) {

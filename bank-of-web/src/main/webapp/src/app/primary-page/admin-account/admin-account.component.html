@@ -3,8 +3,16 @@
   <paper-button class="custom indigo" style="height:40px;margin-top:10px" raised (click)="search()">Search</paper-button>
 </div>
 
-<paper-dialog *ngIf="obj" id="dialogAccountDetails"  modal [(opened)]="dialogAccountDetailsTrigger">
+<paper-dialog *ngIf="obj" id="dialogAccountDetails" modal [(opened)]="dialogAccountDetailsTrigger">
   <div class="vertical layout center-justified" style="padding-left: 30%;">
+    <div class="horizontal layout">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Owner name: </div>
+      <paper-input [(value)]="obj.ownerName" disabled></paper-input>
+    </div>
+    <div class="horizontal layout">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Owner CNP: </div>
+      <paper-input [(value)]="obj.ownerCNP" disabled></paper-input>
+    </div>
     <div class="horizontal layout">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Account number: </div>
       <paper-input [(value)]="obj.accountNo" disabled></paper-input>
@@ -12,35 +20,35 @@
     <div class="horizontal layout" style="margin-top: 20px">
       <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Currency: </div>
       <custom-dropdown [items]="currencyItems" [(selected)]="obj.currency" (selectedItem)="setCurrency($event)"></custom-dropdown>
-       </div>
-      <div class="horizontal layout" style="margin-top: 20px">
-        <div class="paper-font-headline"   style="min-width: 130px;padding-top:25px">Balance: </div>
-        <paper-input type="number" [(value)]="obj.balance"></paper-input>
-      </div>
-      <div class="horizontal layout" style="margin-top: 20px">
-        <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Account type: </div>
-        <custom-dropdown [items]="accountTypeItems" [(selected)]="obj.type" (selectedItem)="setType($event)"></custom-dropdown>
-      </div>
-      <div class="horizontal layout" style="margin-top: 20px">
-        <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Overdraft: </div>
-
-         <paper-toggle-button checked [(active)]="obj.overdraft"></paper-toggle-button>
-      </div>
-      <div class="horizontal layout" style="margin-top: 20px">
-        <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Account status: </div>
-        <custom-dropdown [items]="accountStatusItems" [(selected)]="obj.status" (selectedItem)="setStatus($event)"></custom-dropdown>
-      </div>
-      <div class="horizontal layout" style="margin-top: 20px">
-        <div class="paper-font-headline"   style="min-width: 130px;padding-top:25px">Limit amount: </div>
-        <paper-input type="number" [(value)]="obj.limit"></paper-input>
-      </div>
-
-      <div class="horizontal layout" style="margin-top: 20px">
-        <paper-button class="custom indigo" raised (click)="saveChanges()">Save changes</paper-button>
-        <paper-button class="custom indigo" raised (click)="removeAccount()">Remove Account</paper-button>
-        <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
-      </div>
     </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Balance: </div>
+      <paper-input type="number" [(value)]="obj.balance"></paper-input>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Account type: </div>
+      <custom-dropdown [items]="accountTypeItems" [(selected)]="obj.type" (selectedItem)="setType($event)"></custom-dropdown>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Overdraft: </div>
+
+      <paper-toggle-button checked [(active)]="obj.overdraft"></paper-toggle-button>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Account status: </div>
+      <custom-dropdown [items]="accountStatusItems" [(selected)]="obj.status" (selectedItem)="setStatus($event)"></custom-dropdown>
+    </div>
+    <div class="horizontal layout" style="margin-top: 20px">
+      <div class="paper-font-headline" style="min-width: 130px;padding-top:25px">Limit amount: </div>
+      <paper-input type="number" [(value)]="obj.limit"></paper-input>
+    </div>
+
+    <div class="horizontal layout" style="margin-top: 20px">
+      <paper-button class="custom indigo" raised (click)="saveChanges()">Save changes</paper-button>
+      <paper-button class="custom indigo" raised (click)="removeAccount()">Remove Account</paper-button>
+      <paper-button class="custom indigo" dialog-confirm autofocus raised>Close</paper-button>
+    </div>
+  </div>
 
 
 </paper-dialog>

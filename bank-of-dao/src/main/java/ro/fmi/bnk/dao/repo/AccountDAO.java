@@ -35,8 +35,10 @@ public class AccountDAO extends GenericDAO {
 
 	public List<AccountModel> getAccounts(String userName) {
 		Query q = em.createQuery(
-				"select new ro.fmi.bnk.models.AccountModel(acc.accountNo,cur.name,acc.balance,accType.name,acc.overDraft,accStat.name,acc.limitAmount,acc.smsAlert) from Account acc "
+				"select new ro.fmi.bnk.models.AccountModel(acc.accountNo,cur.name,acc.balance,accType.name,acc.overDraft,accStat.name,acc.limitAmount,acc.smsAlert,CONCAT(pers.firstName,' ',pers.lastName),pers.CNP) from Account acc "
 						+ " INNER JOIN acc.currency cur" + " INNER JOIN acc.customer cust" + " INNER JOIN cust.user u"
+						+" INNER JOIN acc.customer cust "
+						+ " INNER JOIN cust.person pers"
 						+ " INNER JOIN acc.accountType accType" + " INNER JOIN acc.accountStatus accStat"
 						+ " where u.userName=:userName");
 		q.setParameter("userName", userName);
@@ -46,8 +48,10 @@ public class AccountDAO extends GenericDAO {
 
 	public List<AccountModel> getAccountByNo(String accNo) {
 		Query q = em.createQuery(
-				"select new ro.fmi.bnk.models.AccountModel(acc.accountNo,cur.name,acc.balance,accType.name,acc.overDraft,accStat.name,acc.limitAmount,acc.smsAlert) from Account acc "
+				"select new ro.fmi.bnk.models.AccountModel(acc.accountNo,cur.name,acc.balance,accType.name,acc.overDraft,accStat.name,acc.limitAmount,acc.smsAlert,CONCAT(pers.firstName,' ',pers.lastName),pers.CNP) from Account acc "
 						+ " INNER JOIN acc.currency cur" + " INNER JOIN acc.accountType accType"
+						+" INNER JOIN acc.customer cust "
+						+ " INNER JOIN cust.person pers"
 						+ " INNER JOIN acc.accountStatus accStat" + " where acc.accountNo=:accNo");
 		q.setParameter("accNo", accNo);
 		List<AccountModel> toReturn = q.getResultList();
@@ -110,9 +114,10 @@ public class AccountDAO extends GenericDAO {
 		Account toModify = getAccountENTByNo(inpModel.getAccNo());
 		toModify.setSmsAlert(inpModel.getSmsAlert());
 		em.persist(toModify);
-			String xmlString = "";
+		String xmlString = "";
 
-			try {
+		try {
+			if (toModify.getLimitAmount().compareTo(inpModel.getLimit())!=0) {
 				JAXBContext context = JAXBContext.newInstance(AccountSaveModel.class);
 
 				Marshaller m = context.createMarshaller();
@@ -122,20 +127,21 @@ public class AccountDAO extends GenericDAO {
 				StringWriter sw = new StringWriter();
 				m.marshal(inpModel, sw);
 				xmlString = sw.toString();
-				Task newT= new Task();
-				TaskStatus ts= getEntityByName(TaskStatus.class, TaskStatusEnum.PENDING.toString());
-				TaskType tt= getEntityByName(TaskType.class, TaskTypeEnum.LIMIT_ACCOUNT.toString());
+				Task newT = new Task();
+				TaskStatus ts = getEntityByName(TaskStatus.class, TaskStatusEnum.PENDING.toString());
+				TaskType tt = getEntityByName(TaskType.class, TaskTypeEnum.LIMIT_ACCOUNT.toString());
 				newT.setActive(true);
-				newT.setDescription("New limit");
+
+				newT.setDescription("New limit amount to account " +inpModel.getAccNo()+". From "+toModify.getLimitAmount() +" to " +inpModel.getLimit());
 				newT.setTaskStatus(ts);
 				newT.setTaskType(tt);
 				newT.setTransactionModifications(xmlString);
 				em.persist(newT);
-			} catch (JAXBException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return null;
 	}

@@ -12,11 +12,13 @@ public class AccountModel {
 	private String status;
 	private BigDecimal limit;
 	private Boolean smsAlert;
+	private String ownerName;
+	private String ownerCNP;
 	public AccountModel(){
 		super();
 	}
 	public AccountModel(String accountNo, String currency, BigDecimal balance, String type, Boolean overdraft,
-			String status,BigDecimal limit,Boolean smsAlert) {
+			String status,BigDecimal limit,Boolean smsAlert,String ownerName,String ownerCNP) {
 		super();
 		this.accountNo = accountNo;
 		this.currency = currency;
@@ -26,6 +28,8 @@ public class AccountModel {
 		this.status = status;
 		this.limit = limit;
 		this.smsAlert = smsAlert;
+		this.ownerName = ownerName;
+		this.ownerCNP = ownerCNP;
 
 	}
 
@@ -91,6 +95,18 @@ public class AccountModel {
 
 	public void setSmsAlert(Boolean smsAlert) {
 		this.smsAlert = smsAlert;
+	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+	public String getOwnerCNP() {
+		return ownerCNP;
+	}
+	public void setOwnerCNP(String ownerCNP) {
+		this.ownerCNP = ownerCNP;
 	}
 
 }
